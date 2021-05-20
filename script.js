@@ -118,8 +118,8 @@ function load() {
                 <div class='nav-btn-title'>Resources +</div>
                     <div class="nav-dropdown">
                         <div id="nav-handbook" class="drop-btn" onclick="page('../resources/handbook.html')">handbook</div>
-                        <div id="nav-cad" class="drop-btn" onclick="page('../resources/cad.html')">CAD</div>
-                        <div id="nav-code" class="drop-btn" onclick="page('../resources/code.html')">code</div>
+                        <div id="nav-cad" class="drop-btn" onclick="page('https://drive.google.com/drive/folders/1ATOVMiWe1gzM9hSd882fIrN3rH25tqjJ?usp=sharing')">CAD</div>
+                        <div id="nav-code" class="drop-btn" onclick="page('https://github.com/FRC-Team-5669-Techmen')">code</div>
                         <div id="nav-videos" class="drop-btn" onclick="page('../resources/videos.html')">videos</div>
                         <div id="nav-commentary" class="drop-btn" onclick="page('../resources/commentary.html')">commentary</div>
                     </div>
