@@ -78,7 +78,7 @@ function load() {
             col_height += grid_item._el.offsetHeight + grid.gap;
             grid.col_heights.set(grid_item.off, col_height);
         })
-        return "cum"
+        return "aa"
     }
     
     if (document.querySelector('.pic-grid')) {
@@ -104,7 +104,7 @@ function load() {
     document.getElementById('navbar').innerHTML = `
     <div class='nav-logo'><img src="../FRC_Logo.png" alt="Logo"></div>
     <div id="nav-open" onclick="openNav()"><i class="ri-menu-line"></i></div>
-    <div id="nav-cont" class="nav-cont closed">
+    <div id="nav-cont" class="nav-cont">
         <div id="nav-close" onclick="closeNav()"><i class="ri-close-fill"></i></div>
         <div class='nav-logo-text'>Techmen Robotics</div>
         <div class="nav-buttons">
@@ -115,7 +115,7 @@ function load() {
                 <div class='nav-btn-title'>about</div>
             </div>
             <div id="nav-resources" class="nav-btn dropdown unselect">
-                <div class='nav-btn-title'>Resources +</div>
+                <div class='nav-btn-title' onclick="openNavDrop()">Resources +</div>
                     <div class="nav-dropdown">
                         <div id="nav-handbook" class="drop-btn" onclick="page('../resources/handbook.html')">handbook</div>
                         <div id="nav-cad" class="drop-btn" onclick="page('https://drive.google.com/drive/folders/1ATOVMiWe1gzM9hSd882fIrN3rH25tqjJ?usp=sharing')">CAD</div>
@@ -125,7 +125,7 @@ function load() {
                     </div>
             </div>
             <div id="nav-outreach" class="nav-btn dropdown unselect">
-                <div class='nav-btn-title'>Outreach +</div>
+                <div class='nav-btn-title' onclick="openNavDrop()">Outreach +</div>
                 <div class="nav-dropdown">
                     <div id="nav-contact" class="drop-btn" onclick="page('../outreach/contact.html')">Contact</div>
                     <div id="nav-pictures" class="drop-btn" onclick="page('../outreach/pictures.html')">Pictures</div>
@@ -156,7 +156,6 @@ function load() {
         }, 301)
     } else if (1000 - t1 + t0 > 0) {
         let interval = 1000 - elapsed
-        console.timeEnd("cum")
         setTimeout(() => {
             document.getElementById('loader').style.opacity = "0";
             document.getElementById('main').classList.remove('hidden');
@@ -179,3 +178,6 @@ var t0 = performance.now();
 console.log(t0)
 
 
+function openNavDrop() {
+    console.log("drop")
+}
