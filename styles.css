@@ -6,16 +6,15 @@
     --dark: black;
     --yel: #ffe629;
     --light: white;
+    --mid: rgb(116, 116, 116);
 }
 
 body, html {
     margin: 0;
     padding: 0;
     background: var(--dark);
-    color:var(--light)
+    color: var(--light)
 }
-
-
 
 .nav-logo {
     color: var(--yel);
@@ -40,53 +39,15 @@ body, html {
     box-shadow: 0px 33px inset var(--dark), 0 0 inset var(--yel);
 }
 
-
 .nav-btn-title {
     width: fit-content;
     text-align: center;
     margin: auto;
 }
 
-.nav-btn .nav-btn-title {
-    transition: color 300ms cubic-bezier(0.385, 0.005, 0, 1), box-shadow 300ms cubic-bezier(0.385, 0.005, 0, 1);
-    box-shadow: 0px 33px inset var(--dark), 0 0 inset var(--yel);
-}
 
-.nav-btn:hover .nav-btn-title, .nav-btn.active .nav-btn-title {
-    color: var(--yel);
-    box-shadow: 0px 33px inset var(--dark), -25px 0 inset var(--yel);
-}
 
-.nav-btn.dropdown:hover .nav-dropdown {
-    transform: translateX(-25%) translateY(15px);
-    opacity: 1;
-}
 
-.nav-btn.dropdown .nav-dropdown {
-    background: var(--dark);
-    transition: transform 300ms cubic-bezier(0.385, 0.005, 0, 1), opacity 300ms cubic-bezier(0.385, 0.005, 0, 1);
-    opacity: 0;
-    position: absolute;
-    transform: translateX(-25%) translateY(0px);
-}
-
-.drop-btn {
-    padding-bottom: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
-    overflow-wrap: break-word;
-    transition: color 300ms cubic-bezier(0.385, 0.005, 0, 1), box-shadow 300ms cubic-bezier(0.385, 0.005, 0, 1);
-    box-shadow: 0px 33px inset var(--dark), 0px -10px inset var(--dark), 30px 0 inset var(--dark), 30px 0 inset var(--yel);
-}
-
-.drop-btn:last-of-type {
-    margin-bottom: 10px
-}
-
-.drop-btn:hover, .drop-btn.active {
-    color: var(--yel);
-    box-shadow: 0px 33px inset var(--dark), 0px -10px inset var(--dark), 30px 0 inset var(--dark), 55px 0 inset var(--yel);
-}
 
 .nav-btn:after {
     display: block;
@@ -109,12 +70,14 @@ body, html {
     position: fixed;
     z-index: 1000000;
 }
+
 .nav-logo-text {
     color: var(--yel);
     font-weight: 700;
     display: inline-block;
     line-height: 35px;
 }
+
 .nav-btn {
     position: relative;
     width: fit-content;
@@ -123,8 +86,8 @@ body, html {
     font-weight: 700;
     line-height: 35px;
     cursor: pointer;
-
 }
+
 .home-span-gradient {
     position: absolute;
     width: 100vw;
@@ -134,16 +97,17 @@ body, html {
     transform: translateX(-50%);
     z-index: -100000;
 }
+
 @media only screen and (min-width: 1200px) {
     #navbar {
         background: var(--dark);
     }
     .nav-btn {
         display: inline-block;
-        margin-right:50px;
+        margin-right: 50px;
     }
     .nav-btn:last-of-type {
-        margin-right:30px;
+        margin-right: 30px;
     }
     .nav-buttons {
         display: inline-block;
@@ -166,10 +130,81 @@ body, html {
     .home-span-gradient {
         background: linear-gradient(130deg, rgba(0, 0, 0, .75) 30%, rgba(0, 0, 0, 0) 75%);
     }
-
+    .nav-btn.dropdown:hover .nav-dropdown {
+        transform: translateX(-25%) translateY(15px);
+        opacity: 1;
+    }
+    .nav-btn.dropdown .nav-dropdown {
+        background: var(--dark);
+        transition: transform 300ms cubic-bezier(0.385, 0.005, 0, 1), opacity 300ms cubic-bezier(0.385, 0.005, 0, 1);
+        opacity: 0;
+        position: absolute;
+        transform: translateX(-25%) translateY(0px);
+    }
+    
+    .drop-btn {
+        padding-bottom: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
+        overflow-wrap: break-word;
+        transition: color 300ms cubic-bezier(0.385, 0.005, 0, 1), box-shadow 300ms cubic-bezier(0.385, 0.005, 0, 1);
+        box-shadow: 0px 33px inset var(--dark), 0px -10px inset var(--dark), 30px 0 inset var(--dark), 30px 0 inset var(--yel);
+    }
+    
+    .drop-btn:last-of-type {
+        margin-bottom: 10px
+    }
+    
+    .drop-btn:hover, .drop-btn.active {
+        color: var(--yel);
+        box-shadow: 0px 33px inset var(--dark), 0px -10px inset var(--dark), 30px 0 inset var(--dark), 55px 0 inset var(--yel);
+    }
+    .nav-btn .nav-btn-title {
+        transition: color 300ms cubic-bezier(0.385, 0.005, 0, 1), box-shadow 300ms cubic-bezier(0.385, 0.005, 0, 1);
+        box-shadow: 0px 33px inset var(--dark), 0 0 inset var(--yel);
+    }
+    
+    .nav-btn:hover .nav-btn-title, .nav-btn.active .nav-btn-title {
+        color: var(--yel);
+        box-shadow: 0px 33px inset var(--dark), -25px 0 inset var(--yel);
+    }
 }
 
 @media only screen and (max-width: 1200px) {
+    .nav-dropdown {
+        --transHeight: 100px;
+        background: var(--dark);
+        transition: max-height 300ms cubic-bezier(0.385, 0.005, 0, 1);
+        position:relative; 
+        max-height:0;
+        height: auto;
+        width: fit-content;
+        overflow: hidden;
+    }
+    
+    .drop-btn {
+        width:200px;
+        max-width:140px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        padding-left: 30px;
+        padding-right: 30px;
+        overflow-wrap: break-word;
+        transition: color 300ms cubic-bezier(0.385, 0.005, 0, 1), box-shadow 300ms cubic-bezier(0.385, 0.005, 0, 1);
+        border-bottom: 1px solid var(--mid);
+        box-shadow: 0px 33px inset var(--dark), 0px -10px inset var(--dark), 30px 0 inset var(--dark), 30px 0 inset var(--yel);
+    }
+    .drop-btn:last-child {
+        margin-bottom: 10px;
+    }
+
+    .drop-btn:hover, .drop-btn.active {
+        color: var(--yel);
+        box-shadow: 0px 33px inset var(--dark), 0px -10px inset var(--dark), 30px 0 inset var(--dark), 55px 0 inset var(--yel);
+    }
+    .nav-dropdown-vis {
+        max-height: var(--transHeight) !important;
+    }
     .home-span-gradient {
         background: linear-gradient(130deg, rgba(0, 0, 0, .85) 15%, rgba(0, 0, 0, .1) 100%);
     }
@@ -179,35 +214,48 @@ body, html {
         display: block;
         float: none;
         margin: auto;
-        margin-top:50px;
-        margin-bottom:20px;
+        margin-top: 50px;
+        margin-bottom: 20px;
     }
     .nav-btn:first {
-        margin-top:20px;
-    } 
+        margin-top: 20px;
+    }
     .nav-btn {
         display: block;
         float: none;
         margin: auto;
+        width:200px;
+    }
+    .nav-btn-title {
+        text-align: left;
+        margin:0;
+    }
+    .nav-btn .nav-btn-title {
+        transition: color 300ms cubic-bezier(0.385, 0.005, 0, 1), box-shadow 300ms cubic-bezier(0.385, 0.005, 0, 1);
+        box-shadow: 0px 33px inset var(--dark), 0 0 inset var(--yel);
+    }
+    
+    .nav-btn:hover .nav-btn-title, .nav-btn.active .nav-btn-title {
+        color: var(--yel);
+        box-shadow: 0px 33px inset var(--dark), 25px 0 inset var(--yel);
     }
     .nav-cont {
-        background:black;
-        height:100vh;
-        margin:0;
+        background: black;
+        height: 100vh;
+        margin: 0;
         position: fixed;
-        top:0;
+        top: 0;
         transition: left 300ms cubic-bezier(.64, .13, .39, .92);
-    
     }
     #nav-close {
         position: absolute;
-        right:10px;
-        top:10px;
+        right: 10px;
+        top: 10px;
         cursor: pointer;
     }
     #nav-close i {
         font-size: 40px;
-        color:var(--yel);
+        color: var(--yel);
     }
     #nav-open {
         cursor: pointer;
@@ -215,7 +263,7 @@ body, html {
     }
     #nav-open i {
         font-size: 30px;
-        color:var(--yel);
+        color: var(--yel);
     }
 }
 
@@ -224,18 +272,22 @@ body, html {
         font-size: 25px;
     }
     .nav-btn {
+        font-size: 18px;
+    }
+    .nav-dropdown {
         font-size: 15px;
     }
     .nav-cont {
-        width:300px;
+        width: 300px;
     }
     .nav-cont:not(closed) {
-        left:0px;
+        left: 0px;
     }
     .nav-cont.closed {
-        left:-300px;
+        left: -300px;
     }
 }
+
 @media only screen and (max-width: 600px) {
     .nav-logo-text {
         font-size: 30px;
@@ -243,14 +295,17 @@ body, html {
     .nav-btn {
         font-size: 20px;
     }
+    .nav-dropdown {
+        font-size: 16px;
+    }
     .nav-cont {
-        width:100vw;
+        width: 100vw;
     }
     .nav-cont:not(closed) {
-        left:0px;
+        left: 0px;
     }
     .nav-cont.closed {
-        left:-100vw;
+        left: -100vw;
     }
 }
 
@@ -271,8 +326,6 @@ body, html {
     left: 50%;
     transform: translateX(-50%);
 }
-
-
 
 .home-span-wrap {
     position: absolute;
@@ -622,43 +675,48 @@ a {
 a:hover {
     background-size: 100% 2px;
 }
+
 .a-about-imp {
-    color:var(--yel);
+    color: var(--yel);
     font-size: 25px;
-    display:flex;
+    display: flex;
     align-items: center;
-    font-weight:900;
+    font-weight: 900;
     font-style: italic;
     width: fit-content;
     background-image: linear-gradient(var(--yel), var(--yel));
-    margin-top:10px;
+    margin-top: 10px;
     cursor: pointer;
 }
+
 .a-about-imp i {
     font-size: 25px;
-    padding-left:5px;
+    padding-left: 5px;
 }
+
 .abt-img {
     position: relative;
-    max-width:650px;
-    width:100%;
-    left:50%;
+    max-width: 650px;
+    width: 100%;
+    left: 50%;
     transform: translate(-50%);
-    margin-top:25px;
+    margin-top: 25px;
 }
-.kwes-form *{
-    font-size: 17px;
 
+.kwes-form * {
+    font-size: 17px;
     box-sizing: border-box;
 }
-.kwes-form{
+
+.kwes-form {
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-input[type="text"], input[type="email"], textarea{
-    background:transparent;
+
+input[type="text"], input[type="email"], textarea {
+    background: transparent;
     border: none;
     border: 2px solid var(--light);
     color: var(--light);
@@ -667,28 +725,31 @@ input[type="text"], input[type="email"], textarea{
     width: 100%;
     display: block;
     border-width: 2px !important;
-    padding:15px;
+    padding: 15px;
 }
+
 textarea {
     position: relative;
     width: 100%;
     max-width: 100%;
-    margin:15px auto;
-    margin-bottom:0;
-    
+    margin: 15px auto;
+    margin-bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     word-wrap: break-word;
     word-break: break-all;
 }
-input[type="text"]:focus, input[type="email"]:focus, textarea:focus{
+
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     border: 2px solid var(--yel);
 }
+
 input[type="email"] {
     margin-top: 15px;
 }
-button[type="submit"]{
-    background:transparent;
+
+button[type="submit"] {
+    background: transparent;
     border: none;
     border: 2px solid var(--yel);
     color: var(--yel);
@@ -705,44 +766,49 @@ button[type="submit"]{
     border-radius: 5px;
     cursor: pointer;
 }
+
 .form-inline {
     z-index: 1000;
     position: relative;
     margin: 15px 0;
-    margin-bottom:0;
+    margin-bottom: 0;
     word-wrap: break-word;
     word-break: break-all;
 }
+
 .kw-alert.kw-alert-error {
     border: 2px solid #FF3852;
     color: #ff3852;
     border-radius: 0px;
-    background:none;
+    background: none;
 }
+
 .kw-alert.kw-alert-warning {
     border: 2px solid var(--yel);
     color: var(--yel);
     border-radius: 0px;
-    background:none;
-    margin-bottom:0;
+    background: none;
+    margin-bottom: 0;
 }
-@media only screen and (min-width: 1000px) {
 
+@media only screen and (min-width: 1000px) {
     .form-inline {
-        max-width:50%;
+        max-width: 50%;
         max-width: 49%;
         flex: 50%;
         display: inline-block;
     }
 }
+
 @media only screen and (max-width: 1000px) {
     .form-inline {
-        max-width:100%;
+        max-width: 100%;
         max-width: 100%;
         flex: 100%;
         display: inline-block;
-    }    
+    }
 }
+
 .pic-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, Min(380px, 100%));
@@ -751,18 +817,21 @@ button[type="submit"]{
     padding: .5rem;
     transition: 0.3s opacity;
     opacity: 0;
-  }
-  .pic-grid > * {
+}
+
+.pic-grid>* {
     width: Min(380px, 100%);
-  }
-  .spon-grid {
+}
+
+.spon-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, Min(350px, 100%));
     justify-content: center;
     grid-gap: 2rem;
     padding: 2rem;
     transition: 0.3s opacity;
-  }
-  .spon-grid > * {
+}
+
+.spon-grid>* {
     width: Min(350px, 100%);
-  }
+}

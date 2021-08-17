@@ -39,9 +39,9 @@ function closeNav() {
 let grid
 function load() {
 
-    if(document.querySelector('.pic-grid'))document.querySelector('.pic-grid').style.opacity = 1;
-    else if(document.querySelector('.spon-grid'))document.querySelector('.spon-grid').style.opacity = 1;
-    
+    if (document.querySelector('.pic-grid')) document.querySelector('.pic-grid').style.opacity = 1;
+    else if (document.querySelector('.spon-grid')) document.querySelector('.spon-grid').style.opacity = 1;
+
     function layout() {
         /* keep track of column heights */
         let initial_height = grid.items[0]._el.getBoundingClientRect().top;
@@ -52,22 +52,22 @@ function load() {
             c.off = rect.left;
             grid.col_heights.set(c.off, initial_height);
         });
-    
+
         /* if the number of columns has changed */
         if (grid.ncol === grid.col_heights.size) {
             return "fuck"
         }
         /* update number of columns */
         grid.ncol = grid.col_heights.size;
-    
+
         /* revert to initial positioning, no margin */
         grid.items.forEach(c => c._el.style.removeProperty('margin-top'));
-    
+
         if (grid.ncol === 1) {
             return "me"
         }
         /* if we have more than one column */
-    
+
         grid.items.forEach(grid_item => {
             let rect = grid_item._el.getBoundingClientRect();
             /* get height of masonry-ed column */
@@ -80,7 +80,7 @@ function load() {
         })
         return "aa"
     }
-    
+
     if (document.querySelector('.pic-grid')) {
         grid = { _el: document.querySelector('.pic-grid'), ncol: 0 };
 
@@ -90,7 +90,7 @@ function load() {
 
         layout(); /* initial load */
         addEventListener('resize', layout, false) /* on resize */
-    }else if (document.querySelector('.spon-grid')) {
+    } else if (document.querySelector('.spon-grid')) {
         grid = { _el: document.querySelector('.spon-grid'), ncol: 0 };
 
         grid.items = [...grid._el.childNodes].filter(c => c.nodeType === 1).map(c => ({ _el: c }));
@@ -115,8 +115,8 @@ function load() {
                 <div class='nav-btn-title'>about</div>
             </div>
             <div id="nav-resources" class="nav-btn dropdown unselect">
-                <div class='nav-btn-title' onclick="openNavDrop()">Resources +</div>
-                    <div class="nav-dropdown">
+                <div class='nav-btn-title' onclick="openNavDrop(this)">Resources +</div>
+                    <div class="nav-dropdown" data-dropdown>
                         <div id="nav-handbook" class="drop-btn" onclick="page('../resources/handbook.html')">handbook</div>
                         <div id="nav-cad" class="drop-btn" onclick="page('https://drive.google.com/drive/folders/1ATOVMiWe1gzM9hSd882fIrN3rH25tqjJ?usp=sharing')">CAD</div>
                         <div id="nav-code" class="drop-btn" onclick="page('https://github.com/FRC-Team-5669-Techmen')">code</div>
@@ -125,8 +125,8 @@ function load() {
                     </div>
             </div>
             <div id="nav-outreach" class="nav-btn dropdown unselect">
-                <div class='nav-btn-title' onclick="openNavDrop()">Outreach +</div>
-                <div class="nav-dropdown">
+                <div class='nav-btn-title' onclick="openNavDrop(this)">Outreach +</div>
+                <div class="nav-dropdown" data-dropdown>
                     <div id="nav-contact" class="drop-btn" onclick="page('../outreach/contact.html')">Contact</div>
                     <div id="nav-pictures" class="drop-btn" onclick="page('../outreach/pictures.html')">Pictures</div>
                     <div id="nav-sponsors" class="drop-btn" onclick="page('../outreach/sponsors.html')">Sponsors</div>
@@ -140,33 +140,35 @@ function load() {
     if (window.location.pathname.split("/").length > 2) {
         document.getElementById("nav-" + window.location.pathname.split("/")[2].replace('.html', '')).classList.add('active')
     }
+
+
     //clearInterval(interv)
     //load loader
     var t1 = performance.now();
     console.log(1000 - t1 + t0)
-    if (1000 - t1 + t0 <= 0) {
+    function handleLoad() {
         document.getElementById('loader').style.opacity = "0";
         document.getElementById('main').classList.remove('hidden');
+        document.querySelectorAll('[data-dropdown]').forEach((e) => {
+
+            let height = (e.scrollHeight + "px")
+            console.log(height)
+            e.style.setProperty("--transHeight", height)
+        })
         setTimeout(() => {
             document.getElementById('loader-cont').style.opacity = "0";
             layout()
-            if(document.querySelector('.pic-grid'))document.querySelector('.pic-grid').style.opacity = 1;
-            else if(document.querySelector('.spon-grid'))document.querySelector('.spon-grid').style.opacity = 1;
-            if(AOS) AOS.init()
+            if (document.querySelector('.pic-grid')) document.querySelector('.pic-grid').style.opacity = 1;
+            else if (document.querySelector('.spon-grid')) document.querySelector('.spon-grid').style.opacity = 1;
+            if (AOS) AOS.init()
         }, 301)
+    }
+    if (1000 - t1 + t0 <= 0) {
+        handleLoad()
     } else if (1000 - t1 + t0 > 0) {
         let interval = 1000 - elapsed
         setTimeout(() => {
-            document.getElementById('loader').style.opacity = "0";
-            document.getElementById('main').classList.remove('hidden');
-            console.log(interval)
-            setTimeout(() => {
-                document.getElementById('loader-cont').style.opacity = "0";
-                layout()
-                if(document.querySelector('.pic-grid'))document.querySelector('.pic-grid').style.opacity = 1;
-                else if(document.querySelector('.spon-grid'))document.querySelector('.spon-grid').style.opacity = 1;
-                if(AOS) AOS.init()
-            }, 301)
+            handleLoad()
         }, 1000 - t1 + t0)
     }
 
@@ -178,6 +180,11 @@ var t0 = performance.now();
 console.log(t0)
 
 
-function openNavDrop() {
-    console.log("drop")
+function openNavDrop(e) {
+    if(e.nextElementSibling.classList.contains("nav-dropdown-vis")) {
+        e.nextElementSibling.classList.remove("nav-dropdown-vis")
+        e.nextElementSibling.classList.remove("nav-dropdown-vis")
+    }else {
+        e.nextElementSibling.classList.add("nav-dropdown-vis")
+    }
 }
