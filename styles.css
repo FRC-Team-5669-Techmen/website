@@ -6,7 +6,7 @@
     --dark: black;
     --yel: #ffe629;
     --light: white;
-    --mid: rgb(116, 116, 116);
+    --mid: #747474;
 }
 
 body, html {
@@ -14,15 +14,6 @@ body, html {
     padding: 0;
     background: var(--dark);
     color: var(--light)
-}
-
-.nav-logo {
-    color: var(--yel);
-    display: inline-block;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .nav-cont {
@@ -45,10 +36,6 @@ body, html {
     margin: auto;
 }
 
-
-
-
-
 .nav-btn:after {
     display: block;
     content: "";
@@ -65,7 +52,8 @@ body, html {
     padding-right: 30px;
     height: 35px;
     max-height: 35px;
-    width: 99%;
+    width:100vw;
+    max-width:100%;  /* added */
     top: 0;
     position: fixed;
     z-index: 1000000;
@@ -101,6 +89,14 @@ body, html {
 @media only screen and (min-width: 1200px) {
     #navbar {
         background: var(--dark);
+    }
+    .nav-logo {
+        color: var(--yel);
+        display: inline-block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
     }
     .nav-btn {
         display: inline-block;
@@ -141,7 +137,6 @@ body, html {
         position: absolute;
         transform: translateX(-25%) translateY(0px);
     }
-    
     .drop-btn {
         padding-bottom: 10px;
         padding-left: 30px;
@@ -150,11 +145,9 @@ body, html {
         transition: color 300ms cubic-bezier(0.385, 0.005, 0, 1), box-shadow 300ms cubic-bezier(0.385, 0.005, 0, 1);
         box-shadow: 0px 33px inset var(--dark), 0px -10px inset var(--dark), 30px 0 inset var(--dark), 30px 0 inset var(--yel);
     }
-    
     .drop-btn:last-of-type {
         margin-bottom: 10px
     }
-    
     .drop-btn:hover, .drop-btn.active {
         color: var(--yel);
         box-shadow: 0px 33px inset var(--dark), 0px -10px inset var(--dark), 30px 0 inset var(--dark), 55px 0 inset var(--yel);
@@ -163,7 +156,6 @@ body, html {
         transition: color 300ms cubic-bezier(0.385, 0.005, 0, 1), box-shadow 300ms cubic-bezier(0.385, 0.005, 0, 1);
         box-shadow: 0px 33px inset var(--dark), 0 0 inset var(--yel);
     }
-    
     .nav-btn:hover .nav-btn-title, .nav-btn.active .nav-btn-title {
         color: var(--yel);
         box-shadow: 0px 33px inset var(--dark), -25px 0 inset var(--yel);
@@ -171,20 +163,30 @@ body, html {
 }
 
 @media only screen and (max-width: 1200px) {
+    #navbar {
+        padding-right:0;
+        padding-left:0;
+    }
+    .nav-logo {
+        color: var(--yel);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
     .nav-dropdown {
         --transHeight: 100px;
         background: var(--dark);
         transition: max-height 300ms cubic-bezier(0.385, 0.005, 0, 1);
-        position:relative; 
-        max-height:0;
+        position: relative;
+        max-height: 0;
         height: auto;
         width: fit-content;
         overflow: hidden;
     }
-    
     .drop-btn {
-        width:200px;
-        max-width:140px;
+        width: 200px;
+        max-width: 140px;
         padding-bottom: 5px;
         padding-top: 5px;
         padding-left: 30px;
@@ -197,7 +199,6 @@ body, html {
     .drop-btn:last-child {
         margin-bottom: 10px;
     }
-
     .drop-btn:hover, .drop-btn.active {
         color: var(--yel);
         box-shadow: 0px 33px inset var(--dark), 0px -10px inset var(--dark), 30px 0 inset var(--dark), 55px 0 inset var(--yel);
@@ -224,17 +225,16 @@ body, html {
         display: block;
         float: none;
         margin: auto;
-        width:200px;
+        width: 200px;
     }
     .nav-btn-title {
         text-align: left;
-        margin:0;
+        margin: 0;
     }
     .nav-btn .nav-btn-title {
         transition: color 300ms cubic-bezier(0.385, 0.005, 0, 1), box-shadow 300ms cubic-bezier(0.385, 0.005, 0, 1);
         box-shadow: 0px 33px inset var(--dark), 0 0 inset var(--yel);
     }
-    
     .nav-btn:hover .nav-btn-title, .nav-btn.active .nav-btn-title {
         color: var(--yel);
         box-shadow: 0px 33px inset var(--dark), 25px 0 inset var(--yel);
@@ -260,6 +260,9 @@ body, html {
     #nav-open {
         cursor: pointer;
         width: fit-content;
+        position: absolute;
+        top: 15px;
+        left:15px;
     }
     #nav-open i {
         font-size: 30px;

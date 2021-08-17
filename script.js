@@ -102,9 +102,9 @@ function load() {
     }
     //populate navbar
     document.getElementById('navbar').innerHTML = `
-    <div class='nav-logo'><img src="../FRC_Logo.png" alt="Logo"></div>
+    <div class='nav-logo'><img src="../logo.svg" alt="Logo"></div>
     <div id="nav-open" onclick="openNav()"><i class="ri-menu-line"></i></div>
-    <div id="nav-cont" class="nav-cont">
+    <div id="nav-cont" class="nav-cont closed">
         <div id="nav-close" onclick="closeNav()"><i class="ri-close-fill"></i></div>
         <div class='nav-logo-text'>Techmen Robotics</div>
         <div class="nav-buttons">
@@ -182,7 +182,6 @@ console.log(t0)
 
 function openNavDrop(e) {
     if(e.nextElementSibling.classList.contains("nav-dropdown-vis")) {
-        e.nextElementSibling.classList.remove("nav-dropdown-vis")
         e.nextElementSibling.classList.remove("nav-dropdown-vis")
     }else {
         e.nextElementSibling.classList.add("nav-dropdown-vis")
