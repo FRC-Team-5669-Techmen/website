@@ -92,10 +92,10 @@ body, html {
     }
     .nav-logo {
         color: var(--yel);
-        display: inline-block;
         position: absolute;
         left: 50%;
         top: 50%;
+        margin:0 -15px;
         transform: translate(-50%, -50%);
     }
     .nav-btn {
@@ -427,8 +427,8 @@ body, html {
 }
 
 #loader-cont {
-    width: 250px;
-    height: 100px;
+    width: min(284px, 65vw);
+    height: fit-content;
     top: 50%;
     left: 50%;
     position: absolute;
@@ -437,6 +437,10 @@ body, html {
     align-items: center;
     justify-content: space-between;
     animation: fadeIn 0.5s linear;
+}
+#loader-cont iframe { 
+    width: 100%;
+    height: 500px;
 }
 
 @keyframes fadeIn {
