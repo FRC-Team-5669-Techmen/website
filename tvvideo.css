@@ -1,0 +1,104 @@
+
+:root {
+    --dark: black;
+    --yel: #ffe629;
+    --light: white;
+    --mid: #747474;
+}
+
+* {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+body {
+    overflow: hidden;
+}
+.tv-video-wrap {
+    width: 100vw;
+    height: 100vh; overflow: hidden;
+}
+
+.tv-video-wrap video {
+    position: absolute;
+    pointer-events: none; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%; 
+    min-height: 100%;
+    overflow: hidden;
+    z-index: -10000000;
+}
+
+.bottom-left {
+    z-index: 1000000;
+    color: var(--yel);
+    position: absolute;
+    background: var(--dark);
+    bottom:25px;
+    padding: 15px 30px;
+    left:25px;
+    clip-path: polygon(
+      0 15px,
+      15px 0,
+      100% 0,
+      100% calc(100% - 15px),
+      calc(100% - 15px) 100%,
+      0% 100%
+    );
+    font-weight: 700;
+}
+
+
+.bottom-right {
+    z-index: 1000000;
+    color: var(--yel);
+    position: absolute;
+    background: var(--dark);
+    bottom:25px;
+    padding: 15px 30px;
+    right:25px;
+    clip-path: polygon(
+      0 15px,
+      15px 0,
+      100% 0,
+      100% calc(100% - 15px),
+      calc(100% - 15px) 100%,
+      0% 100%
+    );
+    font-weight: 700;
+    text-align: right;
+}
+
+.nav-logo img {
+    width:100px;
+}
+.nav-logo {
+    max-width: 50%;
+    color: var(--blck);
+    font-weight: 700;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.nav-logo *{ 
+    display: inline-block;
+}
+
+.nav-logo span { 
+    /*
+    --shadowsize: 3px;
+    --shadowcolor: #000000;
+    color:red;
+    text-shadow:
+    calc( -1 * var(--shadowsize)) calc( -1 * var(--shadowsize)) 0 var(--shadowcolor),
+     0   calc( -1 * var(--shadowsize)) 0 var(--shadowcolor),
+     var(--shadowsize) calc( -1 * var(--shadowsize)) 0 var(--shadowcolor),
+     var(--shadowsize)  0   0 var(--shadowcolor),
+     var(--shadowsize)  var(--shadowsize) 0 var(--shadowcolor),
+     0    var(--shadowsize) 0 var(--shadowcolor),
+    calc( -1 * var(--shadowsize))  var(--shadowsize) 0 var(--shadowcolor),
+    calc( -1 * var(--shadowsize))  0   0 var(--shadowcolor);*/
+   paint-order: stroke fill;
+}
