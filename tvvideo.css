@@ -48,6 +48,10 @@ body {
     );
     font-weight: 700;
 }
+.bottom-right, .bottom-left {
+    font-size: 18px;
+    padding-bottom: 22px;
+}
 
 
 .bottom-right {
