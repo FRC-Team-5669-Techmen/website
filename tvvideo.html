@@ -15,11 +15,30 @@
             rel="stylesheet">
     </head>
     <body>
-        <div class='nav-logo'><img src="../logo.svg" alt="Logo"><span>Techmen
-                Robotics</span></div>
+        <div class='nav-logo'><img src="../logo.svg" alt="Logo"><div class="svg"><svg viewBox="0 0 545 50" style='padding-left:5px;' xmlns="http://www.w3.org/2000/svg">
+            <style>
+                .smalsl {
+                    font-family: 'Space Grotesk', sans-serif;
+                    color: #ffe629;
+                    font-weight: 700;
+                    font-size: 30px;
+                    z-index:-100;
+                }
+            .small {
+                font-family: 'Space Grotesk', sans-serif;
+                fill: #ffe629;
+                font-weight: 700;
+                font-size: 30px;
+                z-index:100;
+            }
+            </style>
+            <text x="6" y="35" class="smalsl" stroke="black" stroke-width="6"
+                stroke-location="outside">Techmen Robotics</text>
+            <text x="6" y="35" class="small">Techmen Robotics</text>
+        </svg></div>
+    </div>
         <div class="tv-video-wrap">
-            <video autoplay muted loop style="pointer-events: none; visibility:
-                hidden;">
+            <video autoplay muted loop style="pointer-events: none;">
                 <source
                     src="https://res.cloudinary.com/frcteam5669/video/upload/v1629757856/FRC_Team_5669_Techmen_-_Trailer_oi2ctj.mp4"
                     type="video/mp4">
@@ -27,31 +46,13 @@
             </video>
         </div>
         <div class='bottom-left'> Visit our website: <br>
-            <span style="color:white;">frcteam5669.com</span></div>
+            <span style="color:white;">frcteam5669.com</span>
+            <div class="underline"></div>
+        </div>
         <div class='bottom-right'> Follow us on Instagram: <br>
             <span style="color:white;">@frcteam5669</span>
+            <div class="underline"></div>
         </div>
-        <svg viewBox="0 0 540 50" style='position:absolute; top:0; left:0;
-            height:50px; top:0;' xmlns="http://www.w3.org/2000/svg">
-            <style>
-                .smalsl {
-                    font-family: 'Space Grotesk', sans-serif;
-                    color: #ffe629;
-                    font-weight: 700;
-                    font-size: 40px;
-                    z-index:-100;
-                }
-            .small {
-                font-family: 'Space Grotesk', sans-serif;
-                color: #ffe629;
-                font-weight: 700;
-                font-size: 40px;
-                z-index:100;
-            }
-            </style>
-            <text x="1" y="40" class="smalsl" stroke="black" stroke-width="20"
-                stroke-location="outside">Techmen Robotics</text>
-            <text x="1" y="40" class="small">Techmen Robotics</text>
-        </svg>
+        
     </body>
 </html>
