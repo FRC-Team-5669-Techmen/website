@@ -634,11 +634,10 @@ body, html {
 #main-cont ul.officers {
     color: var(--light);
     font-size: 17px;
-    width: 100%;
     margin-top: 15px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    grid-gap: .75rem;
     padding: 0rem;
 }
 
@@ -647,13 +646,45 @@ body, html {
     font-size: 17px;
     margin: auto;
     text-align: left;
-    width: 220px;
+    min-width: 260px;
+    flex: 0 0 calc(25% - 20px);
+    flex-wrap: wrap;
     display: block;
     margin-top: 15px;
     list-style: disc;
     text-align: center;
 }
+#main-cont ul.officers li a {
+    color: var(--yel);
+    font-size: 17px;
+    margin: 0;
+    text-align: left;
+    width: fit-content;
+    max-width: 150px;
+    word-wrap: break-word;
+    display: block;
+    list-style: disc;
+    text-align: center;
+    font-weight: 900;
+    margin: auto;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  
+}
 
+#main-cont ul.officers li a i {
+    color: var(--light);
+    font-size: 16px;
+    margin: 0;
+    text-align: left;
+    width: fit-content;
+    text-align: center;
+    font-weight: 900;
+    margin: auto;
+    cursor: pointer;
+    padding-left:7px;
+}
 #main-cont ul.officers li h4 {
     color: var(--yel);
     font-size: 17px;
@@ -663,6 +694,73 @@ body, html {
     list-style: disc;
     text-align: center;
 }
+
+#main-cont .contact-link {
+    color: var(--light);
+    font-size: 17px;
+    margin-top: 15px;
+    list-style: disc;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin: auto;
+}
+#main-cont .contact-link *{
+    display: inline-flex;
+    flex-direction: row;
+    margin:0;
+}
+#main-cont .contact-link a {
+    color: var(--yel);
+    font-size: 17px;
+    margin: 0;
+    text-align: left;
+    width: fit-content;
+    word-wrap: break-word;
+    list-style: disc;
+    text-align: center;
+    font-weight: 900;
+    margin: auto;
+    cursor: pointer;
+    padding-left:7px;
+  
+}
+
+#main-cont .contact-link a i {
+    color: var(--light);
+    font-size: 16px;
+    margin: 0;
+    text-align: left;
+    width: fit-content;
+    text-align: center;
+    font-weight: 900;
+    margin: auto;
+    cursor: pointer;
+    padding-left:7px;
+}
+#main-cont .contact-link h4 {
+    color: var(--yel);
+    font-size: 17px;
+    margin: 0;
+    width: 100%;
+    display: block;
+    list-style: disc;
+    text-align: center;
+}
+#main-cont ul.mentors li a i {
+    color: var(--light);
+    font-size: 16px;
+    margin: 0;
+    text-align: left;
+    width: fit-content;
+    text-align: center;
+    font-weight: 900;
+    margin: auto;
+    cursor: pointer;
+    padding-left:7px;
+}
+
 
 #main-cont ul.mentors {
     color: var(--light);
@@ -700,6 +798,8 @@ body, html {
     font-weight: 900;
     margin: auto;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 a {
