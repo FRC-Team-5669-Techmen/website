@@ -586,7 +586,7 @@ body, html {
     margin-top: 15px;
 }
 
-#main-cont ul:not(.members) {
+#main-cont ul:not(.members):not(.officers):not(.mentors) {
     color: var(--yel);
     font-size: 17px;
     margin: 0;
