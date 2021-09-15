@@ -1,125 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>FRC Team 5669 - Techmen</title>
-        <link rel="icon" href="/logo.svg" type="image/x-icon">
-        <link rel="stylesheet" href="../styles.css">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link
-            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap"
-            rel="stylesheet">
-        <link
-            href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
-            rel="stylesheet">
-        <script src="../script.js"></script>
-        <meta property="og:title" content="FRC Team 5669 - About" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://frcteam5669.com/about" />
-        <meta property="og:image" content="https://frcteam5669.com/embed.png" />
-        <meta property="og:description" content="FRC Team 5669 is a FIRST Robotics Competition Team that aims to innovate and create amazing robots." />
-        <meta name="theme-color" content="#FEE624">
-    </head>
-    <body onload="load()">
-        <div id="loader">
-            <div id="loader-cont">
-                <iframe src="../loader.html" frameborder="0"></iframe>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FRC Team 5669 - Techmen</title>
+    <link rel="icon" href="/logo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../player.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <script src="../script.js"></script>
+    <script src="../player.js" defer></script>
+    <meta property="og:title" content="FRC Team 5669 - About" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://frcteam5669.com/about" />
+    <meta property="og:image" content="https://frcteam5669.com/embed.png" />
+    <meta property="og:description" content="FRC Team 5669 is a FIRST Robotics Competition Team that aims to innovate and create amazing robots." />
+    <meta name="theme-color" content="#FEE624">
+  </head>
+  <body onload="load()">
+    <div id="loader">
+      <div id="loader-cont">
+        <iframe src="../loader.html" frameborder="0"></iframe>
+      </div>
+    </div>
+    <div id="main" class="hidden">
+      <div id="navbar"></div>
+      <div id="main-cont">
+        <h1>About</h1>
+        <div class="container">
+            <div class="video-container" id="video-container">
+              <div class="playback-animation" id="playback-animation">
+                <svg class="playback-icons">
+                  <use class="hidden" href="#play-icon"></use>
+                  <use href="#pause"></use>
+                </svg>
+              </div>
+        
+              <video controls class="video" id="video" preload="metadata" poster="../thumb.jpg">
+                <source src="https://res.cloudinary.com/frcteam5669/video/upload/v1629757856/FRC_Team_5669_Techmen_-_Trailer_oi2ctj.mp4"
+                type="video/mp4"></source>
+              </video>
+        
+              <div class="video-controls hidden" id="video-controls">
+                <div class="video-progress">
+                  <progress id="progress-bar" value="0" min="0"></progress>
+                  <input class="seek" id="seek" value="0" min="0" type="range" step="1">
+                  <div class="seek-tooltip" id="seek-tooltip">00:00</div>
+                </div>
+        
+                <div class="bottom-controls">
+                  <div class="left-controls">
+                    <button data-title="Play (k)" id="play">
+                        <i class="ri-pause-line hidden" id="pause-i"></i>
+                        <i class="ri-play-line" id="play-i"></i>
+                    </button>
+        
+                    <div class="volume-controls">
+                      <button data-title="Mute (m)" class="volume-button" id="volume-button">
+                        <i class="ri-volume-mute-line hidden" id="volume-mute-i"></i>
+                        <i class="ri-volume-down-line hidden" id="volume-down-i"></i>
+                        <i class="ri-volume-up-line" id="volume-up-i"></i>
+                      </button>
+        
+                      <input class="volume" id="volume" value="1"
+                      data-mute="0.5" type="range" max="1" min="0" step="0.01">
+                    </div>
+        
+                    <div class="time">
+                      <time id="time-elapsed">00:00</time>
+                      <span> / </span>
+                      <time id="duration">00:00</time>
+                    </div>
+                  </div>
+        
+                  <div class="right-controls">
+                    <!--<button data-title="PIP (p)" class="pip-button" id="pip-button">
+                      <svg>
+                        <use href="#pip"></use>
+                      </svg>
+                    </button>-->
+                    <button data-title="Full screen (f)" class="fullscreen-button" id="fullscreen-button">
+                        <i class="ri-fullscreen-line"></i>
+                        <i class="ri-fullscreen-exit-line hidden"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
-        <div id="main" class="hidden">
-            <div id="navbar">
-            </div>
-            <div id="main-cont">
-                <h1>About</h1>
-                <h2>Team History</h2>
-                <p>The team began as a rookie in 2015 by Luis Garza, a alumni
-                    and current teacher at Don Bosco Technical Institute. The
-                    school educates the students in different engineering
-                    professions such as civil engineering, mechanical
-                    engineering, material science, media arts, computer science,
-                    electrical engineering, and biomedical engineering. He and a
-                    group of devoted students formed the first iteration of the
-                    team who first competed in 2015 Los Angeles Regional and
-                    ranked 30 out of 66 teams. He devised a plan that guarantees
-                    that the team will consistently improve in the course of 5
-                    years and will eventually lead the team to participate in a
-                    Regional Final. In three years we achieved this goal and a
-                    year later we went even further.</p>
-                <a class="a-about-imp" target="_blank"
-                    href="https://www.firstinspires.org/robotics/frc/">FIRST <i
-                        class="ri-arrow-right-line"></i></a>
-                <img class='abt-img clip-path'
-                    src="https://res.cloudinary.com/di3ah3itq/image/upload/v1619114651/IMG_2038-edited-min_flkdbm.png">
-                <h2>Achievements</h2>
-                <ul>
-                    <li><p>2015 Los Angeles Regional- Qualification Matches
-                            30/66</p></li>
-                    <li><p>2016 Los Angeles Regional- Qualification Matches
-                            64/66</p></li>
-                    <li><p>2017 Los Angeles Regional- Qualification Matches
-                            52/60</p></li>
-                    <li><p>2018 Los Angeles Regional- Qualification Matches
-                            35/54</p></li>
-                    <li><p>2018 Ventura Regional- Qualification Matches 11/42,
-                            Playoff Team</p></li>
-                    <li><p>2019 Los Angeles Regional- Qualification Matches
-                            37/56</p></li>
-                    <li><p>2019 Orange County Regional- Qualification Matches
-                            8/49, Playoff Team</p></li>
-                    <li><p>2020 Los Angeles Regional- Qualification Matches
-                            36/44</p></li>
-                </ul>
+          </div>
+        
+          <svg style="display: none">
+            <defs>
+              <symbol id="pause" viewBox="0 0 24 24">
+                <path d="M14.016 5.016h3.984v13.969h-3.984v-13.969zM6 18.984v-13.969h3.984v13.969h-3.984z"></path>
+              </symbol>
+        
+              <symbol id="play-icon" viewBox="0 0 24 24">
+                <path d="M8.016 5.016l10.969 6.984-10.969 6.984v-13.969z"></path>
+              </symbol>
+        
+              <symbol id="volume-high" viewBox="0 0 24 24">
+              <path d="M14.016 3.234q3.047 0.656 5.016 3.117t1.969 5.648-1.969 5.648-5.016 3.117v-2.063q2.203-0.656 3.586-2.484t1.383-4.219-1.383-4.219-3.586-2.484v-2.063zM16.5 12q0 2.813-2.484 4.031v-8.063q1.031 0.516 1.758 1.688t0.727 2.344zM3 9h3.984l5.016-5.016v16.031l-5.016-5.016h-3.984v-6z"></path>
+              </symbol>
+        
+              <symbol id="volume-low" viewBox="0 0 24 24">
+              <path d="M5.016 9h3.984l5.016-5.016v16.031l-5.016-5.016h-3.984v-6zM18.516 12q0 2.766-2.531 4.031v-8.063q1.031 0.516 1.781 1.711t0.75 2.32z"></path>
+              </symbol>
+        
+              <symbol id="volume-mute" viewBox="0 0 24 24">
+              <path d="M12 3.984v4.219l-2.109-2.109zM4.266 3l16.734 16.734-1.266 1.266-2.063-2.063q-1.547 1.313-3.656 1.828v-2.063q1.172-0.328 2.25-1.172l-4.266-4.266v6.75l-5.016-5.016h-3.984v-6h4.734l-4.734-4.734zM18.984 12q0-2.391-1.383-4.219t-3.586-2.484v-2.063q3.047 0.656 5.016 3.117t1.969 5.648q0 2.203-1.031 4.172l-1.5-1.547q0.516-1.266 0.516-2.625zM16.5 12q0 0.422-0.047 0.609l-2.438-2.438v-2.203q1.031 0.516 1.758 1.688t0.727 2.344z"></path>
+              </symbol>
+        
+              <symbol id="fullscreen" viewBox="0 0 24 24">
+              <path d="M14.016 5.016h4.969v4.969h-1.969v-3h-3v-1.969zM17.016 17.016v-3h1.969v4.969h-4.969v-1.969h3zM5.016 9.984v-4.969h4.969v1.969h-3v3h-1.969zM6.984 14.016v3h3v1.969h-4.969v-4.969h1.969z"></path>
+              </symbol>
+        
+              <symbol id="fullscreen-exit" viewBox="0 0 24 24">
+              <path d="M15.984 8.016h3v1.969h-4.969v-4.969h1.969v3zM14.016 18.984v-4.969h4.969v1.969h-3v3h-1.969zM8.016 8.016v-3h1.969v4.969h-4.969v-1.969h3zM5.016 15.984v-1.969h4.969v4.969h-1.969v-3h-3z"></path>
+              </symbol>
+        
+              <symbol id="pip" viewBox="0 0 24 24">
+              <path d="M21 19.031v-14.063h-18v14.063h18zM23.016 18.984q0 0.797-0.609 1.406t-1.406 0.609h-18q-0.797 0-1.406-0.609t-0.609-1.406v-14.016q0-0.797 0.609-1.383t1.406-0.586h18q0.797 0 1.406 0.586t0.609 1.383v14.016zM18.984 11.016v6h-7.969v-6h7.969z"></path>
+              </symbol>
+            </defs>
+          </svg>
+        <h2>Team History</h2>
+        <p>
+          The team began as a rookie in 2015 by Luis Garza, a alumni and current
+          teacher at Don Bosco Technical Institute. The school educates the
+          students in different engineering professions such as civil
+          engineering, mechanical engineering, material science, media arts,
+          computer science, electrical engineering, and biomedical engineering.
+          He and a group of devoted students formed the first iteration of the
+          team who first competed in 2015 Los Angeles Regional and ranked 30 out
+          of 66 teams. He devised a plan that guarantees that the team will
+          consistently improve in the course of 5 years and will eventually lead
+          the team to participate in a Regional Final. In three years we
+          achieved this goal and a year later we went even further.
+        </p>
+        <a
+          class="a-about-imp"
+          target="_blank"
+          href="https://www.firstinspires.org/robotics/frc/"
+          >FIRST <i class="ri-arrow-right-line"></i
+        ></a>
+        <img
+          class="abt-img clip-path"
+          src="https://res.cloudinary.com/di3ah3itq/image/upload/v1619114651/IMG_2038-edited-min_flkdbm.png"
+        />
+        <h2>Achievements</h2>
+        <ul>
+          <li><p>2015 Los Angeles Regional- Qualification Matches 30/66</p></li>
+          <li><p>2016 Los Angeles Regional- Qualification Matches 64/66</p></li>
+          <li><p>2017 Los Angeles Regional- Qualification Matches 52/60</p></li>
+          <li><p>2018 Los Angeles Regional- Qualification Matches 35/54</p></li>
+          <li>
+            <p>
+              2018 Ventura Regional- Qualification Matches 11/42, Playoff Team
+            </p>
+          </li>
+          <li><p>2019 Los Angeles Regional- Qualification Matches 37/56</p></li>
+          <li>
+            <p>
+              2019 Orange County Regional- Qualification Matches 8/49, Playoff
+              Team
+            </p>
+          </li>
+          <li><p>2020 Los Angeles Regional- Qualification Matches 36/44</p></li>
+        </ul>
 
-                <img class='abt-img clip-path'
-                    src="https://res.cloudinary.com/di3ah3itq/image/upload/v1619114482/IMG_2019-EDITED-min_drcrpb.png">
-                <h2>Officers</h2>
-                <ul class="officers">
-                    <li>Taylor Engquist<h4>President & Captain</h4> <a
-                            href="mailto:tengquist.2022@boscotech.edu">Email
-                            <i class="ri-share-box-line"></i></a></li>
-                    <li>Dereck Barajas <h4>Vice President</h4> <a
-                            href="mailto:dbarajas.2023@boscotech.edu">Email
-                            <i class="ri-share-box-line"></i></a></li>
-                    <li>Walter Kennedy <h4>Mechanical & Design Officer</h4> <a
-                            href="mailto:wkennedy.2022@boscotech.net">Email
-                            <i class="ri-share-box-line"></i></a></li>
-                    <li>Noah Pinales<h4>Software & Electrical Officer</h4> <a
-                            href="mailto:npinales.2023@boscotech.edu">Email
-                            <i class="ri-share-box-line"></i></a></li>
-                    <li>Ian Kalvinskas<h4>Publicity & Media Officer</h4> <a
-                            href="mailto:ikalvinskas.2023@boscotech.edu">Email
-                            <i class="ri-share-box-line"></i></a></li>
-                </ul>
+        <img
+          class="abt-img clip-path"
+          src="https://res.cloudinary.com/di3ah3itq/image/upload/v1619114482/IMG_2019-EDITED-min_drcrpb.png"
+        />
+        <h2>Officers</h2>
+        <ul class="officers">
+          <li>
+            Taylor Engquist
+            <h4>President & Captain</h4>
+            <a href="mailto:tengquist.2022@boscotech.edu"
+              >Email <i class="ri-share-box-line"></i
+            ></a>
+          </li>
+          <li>
+            Dereck Barajas
+            <h4>Vice President</h4>
+            <a href="mailto:dbarajas.2023@boscotech.edu"
+              >Email <i class="ri-share-box-line"></i
+            ></a>
+          </li>
+          <li>
+            Walter Kennedy
+            <h4>Mechanical & Design Officer</h4>
+            <a href="mailto:wkennedy.2022@boscotech.net"
+              >Email <i class="ri-share-box-line"></i
+            ></a>
+          </li>
+          <li>
+            Noah Pinales
+            <h4>Software & Electrical Officer</h4>
+            <a href="mailto:npinales.2023@boscotech.edu"
+              >Email <i class="ri-share-box-line"></i
+            ></a>
+          </li>
+          <li>
+            Ian Kalvinskas
+            <h4>Publicity & Media Officer</h4>
+            <a href="mailto:ikalvinskas.2023@boscotech.edu"
+              >Email <i class="ri-share-box-line"></i
+            ></a>
+          </li>
+        </ul>
 
-                <h2>Members</h2>
-                <ul class="members">
-                    <li>Byrn Balangauan<h4>Mechanical & Design</h4></li>
-                    <li>Christian Figueroa<h4>Mechanical & Design</h4></li>
-                    <li>Ethan Corona<h4>Mechanical & Design</h4></li>
-                    <li>Joe Mora<h4>Mechanical & Design</h4></li>
-                    <li>Victor Perez<h4>Mechanical & Design</h4></li>
-                    <li>Wesley Bulthuis<h4>Mechanical & Design</h4></li>
-                    <li>Caleb Glassow<h4>Software & Electrical</h4></li>
-                    <li>Joshua Ardon<h4>Software & Electrical</h4></li>
-                    <li>Saif Halari<h4>Software & Electrical</h4></li>
-                    <li>Brenton Dunn<h4>Software & Electrical</h4></li>
-                    <li>Efraim Salama<h4>Publicity/Media</h4></li>
-                </ul>
+        <h2>Members</h2>
+        <ul class="members">
+          <li>
+            Byrn Balangauan
+            <h4>Mechanical & Design</h4>
+          </li>
+          <li>
+            Christian Figueroa
+            <h4>Mechanical & Design</h4>
+          </li>
+          <li>
+            Ethan Corona
+            <h4>Mechanical & Design</h4>
+          </li>
+          <li>
+            Theodore Truong
+            <h4>Mechanical & Design</h4>
+          </li>
+          <li>
+            Joe Mora
+            <h4>Mechanical & Design</h4>
+          </li>
+          <li>
+            Victor Perez
+            <h4>Mechanical & Design</h4>
+          </li>
+          <li>
+            Wesley Bulthuis
+            <h4>Mechanical & Design</h4>
+          </li>
+          <li>
+            Caleb Glassow
+            <h4>Software & Electrical</h4>
+          </li>
+          <li>
+            Joshua Ardon
+            <h4>Software & Electrical</h4>
+          </li>
+          <li>
+            Saif Halari
+            <h4>Software & Electrical</h4>
+          </li>
+          <li>
+            Brenton Dunn
+            <h4>Software & Electrical</h4>
+          </li>
+          <li>
+            Efraim Salama
+            <h4>Publicity/Media</h4>
+          </li>
+        </ul>
 
-                <h2>Mentors</h2>
-                <ul class="mentors">
-                    <li>Luis Garza <a href="mailto:garzajr@gmail.com">garzajr@gmail.com <i class="ri-share-box-line"></i></a></li>
-                </ul>
-                <h2>School Info</h2>
-                <p>Don Bosco Technical Institute is an all-boy Catholic High
-                    School whose goal is to create the next generation of
-                    engineers. Having six different engineering courses from
-                    Biomedical to Material Science.
-                </p>
-                <div style="height:250px;"></div>
-            </div>
-        </div>
-    </body>
+        <h2>Mentors</h2>
+        <ul class="mentors">
+          <li>
+            Luis Garza
+            <a href="mailto:garzajr@gmail.com"
+              >garzajr@gmail.com <i class="ri-share-box-line"></i
+            ></a>
+          </li>
+        </ul>
+        <h2>School Info</h2>
+        <p>
+          Don Bosco Technical Institute is an all-boy Catholic High School whose
+          goal is to create the next generation of engineers. Having six
+          different engineering courses from Biomedical to Material Science.
+        </p>
+        <div style="height: 250px"></div>
+      </div>
+    </div>
+  </body>
 </html>

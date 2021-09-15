@@ -181,9 +181,9 @@ console.log(t0)
 
 
 function openNavDrop(e) {
-    if(e.nextElementSibling.classList.contains("nav-dropdown-vis")) {
+    if (e.nextElementSibling.classList.contains("nav-dropdown-vis")) {
         e.nextElementSibling.classList.remove("nav-dropdown-vis")
-    }else {
+    } else {
         e.nextElementSibling.classList.add("nav-dropdown-vis")
     }
 }
