@@ -314,8 +314,10 @@ function updateFullscreenButton() {
 
     if (document.fullscreenElement) {
         if (!isMobile) fullscreenButton.setAttribute('data-title', 'Full screen (f)');
+        progressBar.classList.remove("fix-progress-fullscreen")
     } else {
         if (!isMobile) fullscreenButton.setAttribute('data-title', 'Exit full screen (f)');
+        progressBar.classList.add("fix-progress-fullscreen")
     }
 }
 

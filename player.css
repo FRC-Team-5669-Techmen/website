@@ -332,6 +332,11 @@ button:hover::before {
     width: calc(100% - 4px);
 }
 
+.fix-progress-fullscreen {
+    width: 100% !important;
+    transform: translateY(5px) !important;
+}
+
 progress::-webkit-progress-bar {
     background: rgba(0, 0, 0, 0.288);
 }
