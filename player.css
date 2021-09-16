@@ -188,7 +188,7 @@ button * {
     pointer-events: none;
 }
 
-button:not(.title-hide)::before {
+button::before {
     content: attr(data-title);
     position: absolute;
     display: none;
@@ -200,6 +200,14 @@ button:not(.title-hide)::before {
     padding: 4px 6px;
     word-break: keep-all;
     white-space: pre;
+}
+
+.title-hide::before {
+    content: '' !important;
+    position: absolute;
+    display: none !important;
+    background-color: transparent  !important;
+    color: transparent !important;
 }
 
 button:hover::before {

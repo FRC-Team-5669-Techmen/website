@@ -278,7 +278,7 @@ function setupTitles() {
 
     }
 
-    if (isMobile) {
+    if (!isMobile) {
         playButton.classList.add("title-hide")
         volumeButton.classList.add("title-hide")
         fullscreenButton.classList.add("title-hide")
