@@ -58,11 +58,11 @@ function updatePlayButton() {
     });
 
     if (video.paused) {
-        playButton.setAttribute('data-title', 'Play (k)');
+        if(!isMobile) playButton.setAttribute('data-title', 'Play (k)');
         document.getElementById("pause-i").classList.toggle("hidden")
         document.getElementById("play-i").classList.toggle("hidden")
     } else {
-        playButton.setAttribute('data-title', 'Pause (k)');
+        if(!isMobile) playButton.setAttribute('data-title', 'Pause (k)');
         document.getElementById("pause-i").classList.toggle("hidden")
         document.getElementById("play-i").classList.toggle("hidden")
     }
@@ -407,6 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isMobile = true
         video.addEventListener('click', toggleControls);
         volumeControls.classList.add("vol-hidden")
+        seekTooltip.classList.add("vol-hidden")
       }else{
         // false for not mobile device
         isMobile = false
