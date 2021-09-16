@@ -22,6 +22,8 @@ const videoContainer = document.getElementById('video-container');
 const fullscreenIcons = fullscreenButton.querySelectorAll('i');
 //const pipButton = document.getElementById('pip-button');
 
+var isMobile = false
+
 const videoWorks = !!document.createElement('video').canPlayType;
 if (videoWorks) {
     video.controls = false;
@@ -337,6 +339,14 @@ function showControls() {
     videoControls.classList.remove('hide');
 }
 
+function toggleControls() {
+    if(videoControls.classList.contains('hide')) {
+        showControls()
+    } else {
+        hideControls()
+    }
+}
+
 // keyboardShortcuts executes the relevant functions for
 // each supported shortcut key
 function keyboardShortcuts(event) {
@@ -376,8 +386,6 @@ video.addEventListener('timeupdate', updateTimeElapsed);
 video.addEventListener('timeupdate', updateProgress);
 video.addEventListener('ended', videoEnded);
 video.addEventListener('volumechange', updateVolumeIcon);
-video.addEventListener('click', togglePlay);
-video.addEventListener('click', animatePlayback);
 video.addEventListener('mouseenter', showControls);
 video.addEventListener('mouseleave', hideControls);
 videoControls.addEventListener('mouseenter', showControls);
@@ -393,6 +401,16 @@ videoContainer.addEventListener('fullscreenchange', updateFullscreenButton);
 //pipButton.addEventListener('click', togglePip);
 
 document.addEventListener('DOMContentLoaded', () => {
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+        // true for mobile device
+        isMobile = true
+        video.addEventListener('click', togglePlay);
+      }else{
+        // false for not mobile device
+        isMobile = false
+        video.addEventListener('click', togglePlay);
+        video.addEventListener('click', animatePlayback);
+      }
     if (!('pictureInPictureEnabled' in document)) {
         //pipButton.classList.add('hidden');
     }
