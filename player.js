@@ -202,11 +202,11 @@ function updateVolumeIcon() {
 
 
 
-    volumeButton.setAttribute('data-title', 'Mute (m)');
+    if(!isMobile) volumeButton.setAttribute('data-title', 'Mute (m)');
 
     if (video.muted || video.volume === 0) {
         volumeMute.classList.remove('hidden');
-        volumeButton.setAttribute('data-title', 'Unmute (m)');
+        if(!isMobile) volumeButton.setAttribute('data-title', 'Unmute (m)');
     } else if (video.volume > 0 && video.volume <= 0.5) {
         volumeLow.classList.remove('hidden');
     } else {
@@ -221,7 +221,7 @@ function toggleMute() {
     video.muted = !video.muted;
 
     if (video.muted) {
-        volume.setAttribute('data-volume', volume.value);
+        if(!isMobile) volume.setAttribute('data-volume', volume.value);
         volume.value = 0;
         updateVolBar(0);
     } else {
@@ -297,9 +297,9 @@ function updateFullscreenButton() {
 
 
     if (document.fullscreenElement) {
-        fullscreenButton.setAttribute('data-title', 'Full screen (f)');
+        if(!isMobile) fullscreenButton.setAttribute('data-title', 'Full screen (f)');
     } else {
-        fullscreenButton.setAttribute('data-title', 'Exit full screen (f)');
+        if(!isMobile) fullscreenButton.setAttribute('data-title', 'Exit full screen (f)');
     }
 }
 
