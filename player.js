@@ -404,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
         // true for mobile device
         isMobile = true
-        video.addEventListener('click', togglePlay);
+        video.addEventListener('click', toggleControls);
       }else{
         // false for not mobile device
         isMobile = false
