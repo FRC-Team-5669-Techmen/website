@@ -58,11 +58,11 @@ function updatePlayButton() {
     });
 
     if (video.paused) {
-        if(!isMobile) playButton.setAttribute('data-title', 'Play (k)');
+        if (!isMobile) playButton.setAttribute('data-title', 'Play (k)');
         document.getElementById("pause-i").classList.toggle("hidden")
         document.getElementById("play-i").classList.toggle("hidden")
     } else {
-        if(!isMobile) playButton.setAttribute('data-title', 'Pause (k)');
+        if (!isMobile) playButton.setAttribute('data-title', 'Pause (k)');
         document.getElementById("pause-i").classList.toggle("hidden")
         document.getElementById("play-i").classList.toggle("hidden")
     }
@@ -153,7 +153,7 @@ function updateSeekTooltip(event) {
         seekTooltip.textContent = `${t.minutes}:${t.seconds}`;
         const rect = seek.getBoundingClientRect();
         seekTooltip.style.left = `${event.pageX - rect.left}px`;
-    }else {
+    } else {
         hideSeekTooltip()
     }
 
@@ -202,11 +202,11 @@ function updateVolumeIcon() {
 
 
 
-    if(!isMobile) volumeButton.setAttribute('data-title', 'Mute (m)');
+    if (!isMobile) volumeButton.setAttribute('data-title', 'Mute (m)');
 
     if (video.muted || video.volume === 0) {
         volumeMute.classList.remove('hidden');
-        if(!isMobile) volumeButton.setAttribute('data-title', 'Unmute (m)');
+        if (!isMobile) volumeButton.setAttribute('data-title', 'Unmute (m)');
     } else if (video.volume > 0 && video.volume <= 0.5) {
         volumeLow.classList.remove('hidden');
     } else {
@@ -221,7 +221,7 @@ function toggleMute() {
     video.muted = !video.muted;
 
     if (video.muted) {
-        if(!isMobile) volume.setAttribute('data-volume', volume.value);
+        if (!isMobile) volume.setAttribute('data-volume', volume.value);
         volume.value = 0;
         updateVolBar(0);
     } else {
@@ -269,6 +269,12 @@ function showPlayback() {
     );
 }
 
+function setupTitles() {
+    if (!isMobile) playButton.setAttribute('data-title', 'Play (k)');
+    if (!isMobile) volumeButton.setAttribute('data-title', 'Mute (m)');
+    if (!isMobile) fullscreenButton.setAttribute('data-title', 'Full screen (f)');
+}
+
 // toggleFullScreen toggles the full screen state of the video
 // If the browser is currently in fullscreen mode,
 // then it should exit and vice versa.
@@ -297,9 +303,9 @@ function updateFullscreenButton() {
 
 
     if (document.fullscreenElement) {
-        if(!isMobile) fullscreenButton.setAttribute('data-title', 'Full screen (f)');
+        if (!isMobile) fullscreenButton.setAttribute('data-title', 'Full screen (f)');
     } else {
-        if(!isMobile) fullscreenButton.setAttribute('data-title', 'Exit full screen (f)');
+        if (!isMobile) fullscreenButton.setAttribute('data-title', 'Exit full screen (f)');
     }
 }
 
@@ -341,7 +347,7 @@ function showControls() {
 }
 
 function toggleControls() {
-    if(videoControls.classList.contains('hide')) {
+    if (videoControls.classList.contains('hide')) {
         showControls()
     } else {
         hideControls()
@@ -402,18 +408,19 @@ videoContainer.addEventListener('fullscreenchange', updateFullscreenButton);
 //pipButton.addEventListener('click', togglePip);
 
 document.addEventListener('DOMContentLoaded', () => {
-    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         // true for mobile device
         isMobile = true
         video.addEventListener('click', toggleControls);
         volumeControls.classList.add("vol-hidden")
         seekTooltip.classList.add("vol-hidden")
-      }else{
+    } else {
         // false for not mobile device
         isMobile = false
         video.addEventListener('click', togglePlay);
         video.addEventListener('click', animatePlayback);
-      }
+    }
+    setupTitles()
     if (!('pictureInPictureEnabled' in document)) {
         //pipButton.classList.add('hidden');
     }
