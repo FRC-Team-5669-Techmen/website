@@ -607,11 +607,13 @@ input[type="image"] {
 #main-cont h2 {
     color: var(--yel);
     font-size: 30px;
-    margin: 0;
-    text-align: left;
-    width: 100%;
+    margin: auto;
+    text-align: center;
+    min-width: max-content;
+    padding: 0 15px;
+    width: fit-content;
     display: block;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 #main-cont p {
