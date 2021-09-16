@@ -65,12 +65,12 @@ video {
 }
 
 .control-btn {
-    background:var(--yel);
+    background: var(--yel);
     border: 2px solid var(--dark);
     outline-style: solid;
     outline-color: var(--yel);
     outline-width: 2px;
-    height:30px;
+    height: 30px;
     color: var(--dark) !important;
     font-size: 14px;
     min-width: 40px;
@@ -78,10 +78,11 @@ video {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin:5px;
+    margin: 5px;
     z-index: 2;
 }
-.control-btn i{
+
+.control-btn i {
     color: var(--dark) !important;
     font-size: 18px;
 }
@@ -116,6 +117,7 @@ video {
     color: #fff;
     background-color: rgba(0, 0, 0, 0.6);
 }
+
 /*
 .bottom-controls {
     display: flex;
@@ -170,7 +172,7 @@ video {
 
 .video-progress {
     display: table-cell;
-    height:30px;
+    height: 30px;
 }
 
 button {
@@ -206,7 +208,7 @@ button::before {
     content: '' !important;
     position: absolute;
     display: none !important;
-    background-color: transparent  !important;
+    background-color: transparent !important;
     color: transparent !important;
 }
 
@@ -327,7 +329,7 @@ button:hover::before {
 }
 
 #progress-bar, input[type=range] {
-    width:calc(100% - 4px);
+    width: calc(100% - 4px);
 }
 
 progress::-webkit-progress-bar {
@@ -398,12 +400,11 @@ input[type=range]:focus::-moz-range-track {
     outline: none;
 }
 
-
 #volume-bar {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    width:100px;
+    width: 100px;
     height: 10px;
     pointer-events: none;
     position: absolute;
@@ -421,7 +422,6 @@ input[type=range]:focus::-moz-range-track {
 }
 
 .volume-div, .volume-div * {
-    
     transition: transform .3s ease, opacity .3s ease;
     opacity: 0;
     visibility: hidden;
@@ -441,7 +441,6 @@ input[type=range]:focus::-moz-range-track {
     pointer-events: unset;
 }
 
-
 input[type=range].volume {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -450,7 +449,7 @@ input[type=range].volume {
     width: 100px;
     margin-left: 2px;
     position: absolute;
-    top:0;
+    top: 0;
 }
 
 input[type=range].volume::-webkit-slider-thumb {
@@ -496,10 +495,7 @@ i {
     color: white;
 }
 
-
-
-@media only screen and (max-width: 1000px) and (min-width: 700px)  {
-
+@media only screen and (max-width: 1000px) and (min-width: 700px) {
     .control-btn {
         min-width: 30px;
         padding: 0 10px;
@@ -507,29 +503,32 @@ i {
 }
 
 @media only screen and (max-width: 700px) and (min-width: 500px) {
-
     .volume-controls {
         width: 0;
         overflow: hidden;
         visibility: hidden;
         pointer-events: none;
     }
-
     .control-btn {
         min-width: 20px;
         padding: 0 10px;
     }
+    .playback-animation {
+        width: 70px;
+        height: 55px;
+    }
+    .playback-animation i {
+        font-size: 22px !important;
+    }
 }
 
 @media only screen and (max-width: 500px) {
-
     .volume-controls {
         width: 0;
         overflow: hidden;
         visibility: hidden;
         pointer-events: none;
     }
-
     .time {
         width: 0;
         overflow: hidden;
@@ -537,10 +536,16 @@ i {
         pointer-events: none;
         display: none;
     }
-
     .control-btn {
         min-width: 10px;
         padding: 0 10px;
+    }
+    .playback-animation {
+        width: 60px;
+        height: 50px;
+    }
+    .playback-animation i {
+        font-size: 18px !important;
     }
 }
 
@@ -549,5 +554,5 @@ i {
     overflow: hidden;
     visibility: hidden;
     pointer-events: none;
-    opacity:0;
+    opacity: 0;
 }
