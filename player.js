@@ -10,6 +10,7 @@ const progressBar = document.getElementById('progress-bar');
 const volumeBar = document.getElementById('volume-bar');
 const seek = document.getElementById('seek');
 const seekTooltip = document.getElementById('seek-tooltip');
+const volumeControls = document.getElementById('volume-controls');
 const volumeButton = document.getElementById('volume-button');
 const volumeIcons = document.querySelectorAll('.volume-button i');
 const volumeMute = document.getElementById('volume-mute-i');
@@ -405,6 +406,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // true for mobile device
         isMobile = true
         video.addEventListener('click', toggleControls);
+        volumeControls.classList.add("vol-hidden")
       }else{
         // false for not mobile device
         isMobile = false

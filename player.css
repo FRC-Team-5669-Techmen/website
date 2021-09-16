@@ -535,3 +535,11 @@ i {
         padding: 0 10px;
     }
 }
+
+.vol-hidden {
+    width: 0;
+    overflow: hidden;
+    visibility: hidden;
+    pointer-events: none;
+
+}
