@@ -2,10 +2,12 @@
 const video = document.getElementById('video');
 const videoControls = document.getElementById('video-controls');
 const playButton = document.getElementById('play');
-const playbackIcons = document.querySelectorAll('#play i');
+const playbackIcons = document.querySelectorAll('.playback-icons i');
+const popupIcons = document.querySelectorAll('.popup-icons i');
 const timeElapsed = document.getElementById('time-elapsed');
 const duration = document.getElementById('duration');
 const progressBar = document.getElementById('progress-bar');
+const volumeBar = document.getElementById('volume-bar');
 const seek = document.getElementById('seek');
 const seekTooltip = document.getElementById('seek-tooltip');
 const volumeButton = document.getElementById('volume-button');
@@ -26,12 +28,18 @@ if (videoWorks) {
     videoControls.classList.remove('hidden');
 }
 
+var initial = false
+
 // Add functions here
 
 // togglePlay toggles the playback state of the video.
 // If the video playback is paused or ended, the video is played
 // otherwise, the video is paused
 function togglePlay() {
+    if (!initial) {
+        initialClick()
+        return
+    }
     if (video.paused || video.ended) {
         video.play();
     } else {
@@ -48,9 +56,27 @@ function updatePlayButton() {
 
     if (video.paused) {
         playButton.setAttribute('data-title', 'Play (k)');
+        document.getElementById("pause-i").classList.toggle("hidden")
+        document.getElementById("play-i").classList.toggle("hidden")
     } else {
         playButton.setAttribute('data-title', 'Pause (k)');
+        document.getElementById("pause-i").classList.toggle("hidden")
+        document.getElementById("play-i").classList.toggle("hidden")
     }
+}
+
+function initialClick() {
+    initial = true;
+    playbackAnimation.style.pointerEvents = "none"
+    playbackAnimation.style.cursor = "unset"
+    playbackAnimation.style.opacity = "0"
+    document.getElementById("pause-i").style.opacity = "1"
+    document.getElementById("play-i").style.opacity = "1"
+    document.getElementById("pause-i").classList.toggle("hidden")
+    document.getElementById("play-i").classList.toggle("hidden")
+    document.getElementById("restart-i").classList.add('hidden')
+    togglePlay()
+    animatePlayback()
 }
 
 // formatTime takes a time length in seconds and returns the time in
@@ -90,19 +116,51 @@ function updateProgress() {
     progressBar.value = Math.floor(video.currentTime);
 }
 
+
+// videoEnded is called when the video ends and adds a rewind button
+function videoEnded() {
+    initial = false
+    seek.value = Math.floor(video.currentTime);
+    progressBar.value = Math.floor(video.currentTime);
+    playbackAnimation.style.pointerEvents = "unset"
+    playbackAnimation.style.cursor = "pointer"
+    playbackAnimation.style.opacity = "1"
+    document.getElementById("pause-i").classList.toggle("hidden")
+    document.getElementById("play-i").classList.toggle("hidden")
+    document.getElementById("pause-i").style.opacity = "0"
+    document.getElementById("play-i").style.opacity = "0"
+    document.getElementById("restart-i").classList.remove('hidden')
+}
+
 // updateSeekTooltip uses the position of the mouse on the progress bar to
 // roughly work out what point in the video the user will skip to if
 // the progress bar is clicked at that point
 function updateSeekTooltip(event) {
+    //console.log(event.pageX)
     const skipTo = Math.round(
         (event.offsetX / event.target.clientWidth) *
         parseInt(event.target.getAttribute('max'), 10)
     );
-    seek.setAttribute('data-seek', skipTo);
-    const t = formatTime(skipTo);
-    seekTooltip.textContent = `${t.minutes}:${t.seconds}`;
-    const rect = video.getBoundingClientRect();
-    seekTooltip.style.left = `${event.pageX - rect.left}px`;
+
+
+    if (event.offsetX > 0 && event.offsetX < Math.round(seek.getBoundingClientRect().width)) {
+        showSeekTooltip()
+        seek.setAttribute('data-seek', skipTo);
+        const t = formatTime(skipTo);
+        seekTooltip.textContent = `${t.minutes}:${t.seconds}`;
+        const rect = seek.getBoundingClientRect();
+        seekTooltip.style.left = `${event.pageX - rect.left}px`;
+    }else {
+        hideSeekTooltip()
+    }
+
+}
+
+function hideSeekTooltip() {
+    seekTooltip.style.opacity = "0"
+}
+function showSeekTooltip() {
+    seekTooltip.style.opacity = "1"
 }
 
 // skipAhead jumps to a different point in the video when the progress bar
@@ -118,12 +176,18 @@ function skipAhead(event) {
 
 // updateVolume updates the video's volume
 // and disables the muted state if active
-function updateVolume() {
+function updateVolume(e) {
     if (video.muted) {
         video.muted = false;
     }
 
     video.volume = volume.value;
+
+    updateVolBar(volume.value);
+}
+
+function updateVolBar(v) {
+    volumeBar.value = v
 }
 
 // updateVolumeIcon updates the volume icon so that it correctly reflects
@@ -132,6 +196,8 @@ function updateVolumeIcon() {
     volumeIcons.forEach((icon) => {
         icon.classList.add('hidden');
     });
+
+
 
     volumeButton.setAttribute('data-title', 'Mute (m)');
 
@@ -154,14 +220,35 @@ function toggleMute() {
     if (video.muted) {
         volume.setAttribute('data-volume', volume.value);
         volume.value = 0;
+        updateVolBar(0);
     } else {
         volume.value = volume.dataset.volume;
+        updateVolBar(volume.dataset.volume);
     }
 }
 
 // animatePlayback displays an animation when
 // the video is played or paused
 function animatePlayback() {
+    playbackAnimation.animate(
+        [
+            {
+                opacity: 1,
+                transform: 'translate(-50%, -50%)',
+            },
+            {
+                opacity: 0,
+                transform: 'translate(-50%, -50%)',
+            },
+        ],
+        {
+            duration: 500,
+        }
+    );
+}
+
+//shows playback
+function showPlayback() {
     playbackAnimation.animate(
         [
             {
@@ -232,6 +319,9 @@ async function togglePip() {
 // hideControls hides the video controls when not in use
 // if the video is paused, the controls must remain visible
 function hideControls() {
+    if (!initial) {
+        return
+    }
     if (video.paused) {
         return;
     }
@@ -241,6 +331,9 @@ function hideControls() {
 
 // showControls displays the video controls
 function showControls() {
+    if (!initial) {
+        return
+    }
     videoControls.classList.remove('hide');
 }
 
@@ -273,12 +366,15 @@ function keyboardShortcuts(event) {
 }
 
 // Add eventlisteners here
+
+playbackAnimation.addEventListener("click", initialClick)
 playButton.addEventListener('click', togglePlay);
 video.addEventListener('play', updatePlayButton);
 video.addEventListener('pause', updatePlayButton);
 video.addEventListener('loadedmetadata', initializeVideo);
 video.addEventListener('timeupdate', updateTimeElapsed);
 video.addEventListener('timeupdate', updateProgress);
+video.addEventListener('ended', videoEnded);
 video.addEventListener('volumechange', updateVolumeIcon);
 video.addEventListener('click', togglePlay);
 video.addEventListener('click', animatePlayback);
@@ -287,6 +383,8 @@ video.addEventListener('mouseleave', hideControls);
 videoControls.addEventListener('mouseenter', showControls);
 videoControls.addEventListener('mouseleave', hideControls);
 seek.addEventListener('mousemove', updateSeekTooltip);
+seek.addEventListener('mouseleave', hideSeekTooltip);
+seek.addEventListener('mouseenter', showSeekTooltip);
 seek.addEventListener('input', skipAhead);
 volume.addEventListener('input', updateVolume);
 volumeButton.addEventListener('click', toggleMute);
