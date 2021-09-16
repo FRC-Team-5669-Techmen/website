@@ -270,9 +270,19 @@ function showPlayback() {
 }
 
 function setupTitles() {
-    if (!isMobile) playButton.setAttribute('data-title', 'Play (k)');
-    if (!isMobile) volumeButton.setAttribute('data-title', 'Mute (m)');
-    if (!isMobile) fullscreenButton.setAttribute('data-title', 'Full screen (f)');
+
+    if (!isMobile) {
+        playButton.setAttribute('data-title', 'Play (k)');
+        volumeButton.setAttribute('data-title', 'Mute (m)');
+        fullscreenButton.setAttribute('data-title', 'Full screen (f)');
+
+    }
+
+    if (isMobile) {
+        playButton.classList.add("title-hide")
+        volumeButton.classList.add("title-hide")
+        fullscreenButton.classList.add("title-hide")
+    }
 }
 
 // toggleFullScreen toggles the full screen state of the video
