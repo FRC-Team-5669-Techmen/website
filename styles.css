@@ -6,7 +6,8 @@
     --dark: black;
     --yel: #ffe629;
     --light: white;
-    --mid: #747474;
+    --dgray: #646464;
+    --lgray: #9c9c9c;
 }
 
 body, html {
@@ -234,7 +235,7 @@ input[type="image"] {
         padding-right: 30px;
         overflow-wrap: break-word;
         transition: color 300ms cubic-bezier(0.385, 0.005, 0, 1), box-shadow 300ms cubic-bezier(0.385, 0.005, 0, 1);
-        border-bottom: 1px solid var(--mid);
+        border-bottom: 1px solid var(--lgray);
         box-shadow: 0px 33px inset var(--dark), 0px -10px inset var(--dark), 30px 0 inset var(--dark), 30px 0 inset var(--yel);
     }
     .drop-btn:last-child {
@@ -633,19 +634,20 @@ input[type="image"] {
     text-align: left;
     width: 100%;
     display: block;
-    margin-top: 15px;
+    margin-top: 7px;
 }
 
 #main-cont ul:not(.members):not(.officers):not(.mentors) {
     color: var(--yel);
-    font-size: 17px;
+    font-size: 24px;
     margin: 0;
     text-align: left;
     width: 100%;
     max-width: 85%;
     display: block;
     margin-top: 15px;
-    list-style: disc;
+    margin-left: 15px;
+    list-style-image: url("../small gear.svg");
 }
 
 #main-cont ul.members {
@@ -668,17 +670,15 @@ input[type="image"] {
     width: 175px;
     display: block;
     margin-top: 15px;
-    list-style: disc;
     text-align: center;
 }
 
 #main-cont ul.members li h4 {
-    color: var(--yel);
+    color: var(--lgray);
     font-size: 17px;
     margin: 0;
     width: 100%;
     display: block;
-    list-style: disc;
     text-align: center;
 }
 
@@ -702,7 +702,6 @@ input[type="image"] {
     flex-wrap: wrap;
     display: block;
     margin-top: 15px;
-    list-style: disc;
     text-align: center;
 }
 
@@ -715,7 +714,6 @@ input[type="image"] {
     max-width: 150px;
     word-wrap: break-word;
     display: block;
-    list-style: disc;
     text-align: center;
     font-weight: 900;
     margin: auto;
@@ -738,12 +736,11 @@ input[type="image"] {
 }
 
 #main-cont ul.officers li h4 {
-    color: var(--yel);
+    color: var(--lgray);
     font-size: 17px;
     margin: 0;
     width: 100%;
     display: block;
-    list-style: disc;
     text-align: center;
 }
 
@@ -751,7 +748,6 @@ input[type="image"] {
     color: var(--light);
     font-size: 17px;
     margin-top: 15px;
-    list-style: disc;
     text-align: center;
     display: flex;
     align-items: center;
@@ -772,7 +768,6 @@ input[type="image"] {
     text-align: left;
     width: fit-content;
     word-wrap: break-word;
-    list-style: disc;
     text-align: center;
     font-weight: 900;
     margin: auto;
@@ -799,7 +794,6 @@ input[type="image"] {
     margin: 0;
     width: 100%;
     display: block;
-    list-style: disc;
     text-align: center;
 }
 
@@ -836,7 +830,6 @@ input[type="image"] {
     width: 250px;
     display: block;
     margin-top: 15px;
-    list-style: disc;
     text-align: center;
 }
 
@@ -847,7 +840,6 @@ input[type="image"] {
     text-align: left;
     width: fit-content;
     display: block;
-    list-style: disc;
     text-align: center;
     font-weight: 900;
     margin: auto;
@@ -892,24 +884,11 @@ a:hover {
 }
 
 .clip-path {
-    clip-path: polygon(
-      0 15px,
-      15px 0,
-      100% 0,
-      100% calc(100% - 15px),
-      calc(100% - 15px) 100%,
-      0% 100%
-    );
+    clip-path: polygon( 0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0% 100%);
 }
+
 .clip-path-small {
-    clip-path: polygon(
-      0 7px,
-      7px 0,
-      100% 0,
-      100% calc(100% - 7px),
-      calc(100% - 7px) 100%,
-      0% 100%
-    );
+    clip-path: polygon( 0 7px, 7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0% 100%);
 }
 
 .abt-img {
@@ -1025,6 +1004,9 @@ button[type="submit"] {
         flex: 100%;
         display: inline-block;
     }
+    #main-cont ul:not(.members):not(.officers):not(.mentors) {
+        margin-left: 5px;
+    }
 }
 
 .pic-grid {
@@ -1052,4 +1034,19 @@ button[type="submit"] {
 
 .spon-grid>* {
     width: Min(350px, 100%);
+}
+
+body::-webkit-scrollbar {
+    width: 1em;
+    border: 1px solid var(--dgray);
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: var(--dgray);
+    outline: 1px solid var(--dark);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: var(--lgray);
+    outline: 1px solid var(--dark);
 }
