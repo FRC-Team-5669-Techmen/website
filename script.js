@@ -128,6 +128,7 @@ function load() {
                 <div class='nav-btn-title' onclick="openNavDrop(this)">Outreach +</div>
                 <div class="nav-dropdown" data-dropdown>
                     <div id="nav-contact" class="drop-btn" onclick="page('../outreach/contact.html')">Contact</div>
+                    <div id="nav-brand" class="drop-btn" onclick="page('../outreach/brand.html')">Brand</div>
                     <div id="nav-pictures" class="drop-btn" onclick="page('../outreach/pictures.html')">Pictures</div>
                     <div id="nav-sponsors" class="drop-btn" onclick="page('../outreach/sponsors.html')">Sponsors</div>
                 </div>
