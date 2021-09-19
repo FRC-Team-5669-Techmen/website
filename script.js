@@ -120,9 +120,9 @@ function load() {
                         <div id="nav-handbook" class="drop-btn" onclick="window.open('https://handbook.frcteam5669.com', '_blank').focus();">handbook</div>
                         <div id="nav-cad" class="drop-btn" onclick="window.open('https://drive.google.com/drive/folders/1ATOVMiWe1gzM9hSd882fIrN3rH25tqjJ?usp=sharing', '_blank').focus();">CAD</div>
                         <div id="nav-code" class="drop-btn" onclick="window.open('https://github.com/FRC-Team-5669-Techmen', '_blank').focus();">code</div>` +
-                        //<div id="nav-videos" class="drop-btn" onclick="page('../resources/videos.html')">videos</div>
-                        //<div id="nav-commentary" class="drop-btn" onclick="page('../resources/commentary.html')">commentary</div>
-                   ` </div>
+        //<div id="nav-videos" class="drop-btn" onclick="page('../resources/videos.html')">videos</div>
+        //<div id="nav-commentary" class="drop-btn" onclick="page('../resources/commentary.html')">commentary</div>
+        ` </div>
             </div>
             <div id="nav-outreach" class="nav-btn dropdown unselect">
                 <div class='nav-btn-title' onclick="openNavDrop(this)">Outreach +</div>
@@ -187,4 +187,16 @@ function openNavDrop(e) {
     } else {
         e.nextElementSibling.classList.add("nav-dropdown-vis")
     }
+}
+
+function copy(t) {
+    var input = document.getElementById("copyDummy");
+
+    input.value = t
+
+    input.select();
+    input.setSelectionRange(0, 99999); 
+
+    navigator.clipboard.writeText(input.value);
+
 }
