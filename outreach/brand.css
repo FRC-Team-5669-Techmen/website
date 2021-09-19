@@ -324,3 +324,23 @@
 .colors-indiv img {
   min-width: 100%;
 }
+
+@media screen and (max-width: 800px) {
+  .logomark-indiv {
+    --margin: 15px;
+    width: calc(100% - (var(--margin) * 2));
+  }
+  .logomark-indiv img {
+    height: 120%
+  }
+  .logotype-indiv {
+    height: 150px;
+  }
+  .logotype-indiv img {
+    min-width: 300px;
+  }
+  .colors-indiv {
+    width: calc(100% - (var(--margin) * 2));
+    height:200px;
+  }
+}
