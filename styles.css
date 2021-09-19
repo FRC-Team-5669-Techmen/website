@@ -5,6 +5,7 @@
 :root {
     --dark: black;
     --yel: #ffe629;
+    --sel: #ffe6299c;
     --light: white;
     --dgray: #646464;
     --lgray: #9c9c9c;
@@ -1061,4 +1062,15 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-thumb:hover {
     background-color: var(--lgray);
     outline: 1px solid var(--dark);
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: var(--dark);
+    background: var(--sel);
+}
+
+::selection {
+    color: var(--dark);
+    background: var(--sel);
 }
