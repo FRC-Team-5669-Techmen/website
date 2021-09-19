@@ -11,11 +11,23 @@
     --lgray: #9c9c9c;
 }
 
+a:link {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
+a:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
 body, html {
     margin: 0;
     padding: 0;
     background: var(--dark);
-    color: var(--light)
+    color: var(--light);
 }
 
 .nav-cont {
@@ -374,6 +386,7 @@ input[type="image"] {
     height: 100vh;
     max-height: 100vh;
     overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 .home-span-wrap {
@@ -403,6 +416,7 @@ input[type="image"] {
     font-size: min(70px, 9vw);
     color: var(--yel);
     margin-bottom: 0;
+    margin-top: 47px !important;
 }
 
 .home-span-content h2 {
@@ -466,10 +480,11 @@ input[type="image"] {
     width: 100%;
     height: 100vh;
     position: fixed;
-    z-index: 1000000000;
+    z-index: 10000000000000000000000000000000000000000 !important;
     opacity: 1;
     transition: 0.3s opacity;
     pointer-events: none;
+    top: 0;
 }
 
 #loader-cont {
@@ -570,7 +585,7 @@ input[type="image"] {
     width: 100vw;
     height: 100vh;
     max-height: 100vh;
-    overflow-y: hidden;
+    overflow-y: hidden !important;
 }
 
 .home-span-image video {
@@ -582,19 +597,27 @@ input[type="image"] {
     min-width: 100%;
     min-height: 100%;
     overflow: hidden;
+    overflow-y: hidden !important;
     z-index: -10000000;
 }
 
 #main {
+    top: 0;
     width: 100%;
+    height: 100%;
 }
 
 #main-cont {
+    position: relative;
     align-items: center;
+    margin: auto;
     width: 80vw;
     max-width: 800px;
-    margin: auto;
-    transform: translateY(135px);
+    min-height: calc(100vh - 135px) !important;
+}
+
+h1:first-child {
+    margin-top: 135px !important;
 }
 
 #main-cont h1 {
@@ -879,7 +902,7 @@ a:hover {
 }
 
 .a-about-imp {
-    color: var(--yel);
+    color: var(--yel) !important;
     font-size: 25px;
     display: flex;
     align-items: center;
@@ -1073,4 +1096,129 @@ body::-webkit-scrollbar-thumb:hover {
 ::selection {
     color: var(--dark);
     background: var(--sel);
+}
+
+#footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.footer-col {
+    min-height: 100%;
+    width: 25%;
+    display: inline-block;
+}
+
+.footer-logo img {
+    position: relative;
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.footer-links {
+    position: relative;
+}
+
+.footer-links * {
+    display: block;
+}
+
+.footer-links-cont {
+    padding: 30px 0;
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+}
+
+.footer-links-cont a {
+    width: fit-content;
+}
+
+.footer-links-cont strong {
+    color: var(--yel);
+}
+
+a {
+    cursor: pointer;
+}
+
+.home-span-content h1 {
+    margin-top: 47px !important;
+}
+
+@media only screen and (max-width: 800px) {
+    #footer {
+        width: 97vw;
+    }
+}
+
+.footer-left {
+    min-height: 100%;
+    width: 50%;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.footer-left .footer-col {
+    min-height: 100%;
+    width: 50%;
+    display: inline-block;
+}
+
+@media only screen and (max-width: 600px) {
+    #footer {
+        height: 150px;
+    }
+    .footer-col {
+        width: 33%;
+        min-height: 100%;
+    }
+    .footer-left {
+        min-height: 100%;
+        width: 33%;
+        display: inline-flex;
+        flex-direction: column;
+    }
+    .footer-links {
+        min-height: 100%;
+        width: 25%;
+        display: inline-block;
+        align-content: space-between;
+    }
+    .footer-left .footer-col {
+        width: 100%;
+        min-height: 0;
+        height: 40%;
+        overflow: hidden;
+    }
+    .footer-logo {
+        transform: translateY(10px);
+    }
+    .footer-left .footer-links {
+        width: 100%;
+        min-height: 0;
+        height: 30%;
+        overflow: hidden;
+        transform: translateY(-25px);
+    }
+    .footer-left .footer-links .footer-links-cont {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .footer-logo img {
+        position: relative;
+        height: 180%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -45%);
+    }
 }

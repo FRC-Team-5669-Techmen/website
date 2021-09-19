@@ -1,89 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>FRC Team 5669 - Techmen</title>
-        <link rel="icon" href="/logo.svg" type="image/x-icon">
-        <link rel="stylesheet" href="../styles.css">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link
-            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap"
-            rel="stylesheet">
-        <link
-            href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
-            rel="stylesheet">
-        <style> body {
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FRC Team 5669 - Techmen</title>
+    <link rel="icon" href="/logo.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <style>
+      body,
+      html {
         overflow: hidden;
-    }</style>
+        overflow-y: hidden !important;
+      }
+    </style>
     <meta property="og:title" content="FRC Team 5669 - Home" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://frcteam5669.com/" />
-<meta property="og:image" content="https://frcteam5669.com/embed.png" />
-<meta property="og:description" content="FRC Team 5669 is a FIRST Robotics Competition Team that aims to innovate and create amazing robots." />
-<meta name="theme-color" content="#FEE624">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://frcteam5669.com/" />
+    <meta property="og:image" content="https://frcteam5669.com/embed.png" />
+    <meta
+      property="og:description"
+      content="FRC Team 5669 is a FIRST Robotics Competition Team that aims to innovate and create amazing robots."
+    />
+    <meta name="theme-color" content="#FEE624" />
 
-<!-- Include this to make the og:image larger -->
-<meta name="twitter:card" content="summary_large_image">
-        <link
-            href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
-            rel="stylesheet">
-        <script src="../script.js"></script>
-    </head>
-    <body onload="load()">
-        <div id="loader">
-            <div id="loader-cont">
-                <iframe src="../loader.html" frameborder="0"></iframe>
+    <!-- Include this to make the og:image larger -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <script src="../script.js"></script>
+  </head>
+  <body onload="load()">
+    <div id="loader">
+      <div id="loader-cont">
+        <iframe src="../loader.html" frameborder="0"></iframe>
+      </div>
+    </div>
+    <div id="main" class="hidden">
+      <div id="navbar"></div>
+      <div id="home-span">
+        <div class="home-span-wrap">
+          <div class="home-span-content">
+            <h1>FRC Team 5669: The Techmen</h1>
+            <h2>
+              FRC Team 5669 consists of students from
+              <a target="_blank" href="https://boscotech.edu"
+                >Don Bosco Technical Institute</a
+              >, located in Rosemead, California. Our mission is to create
+              robots that can compete and inspire.
+            </h2>
+            <div
+              class="home-span-button-imp unselect"
+              onmouseover="homeUnfocusBg()"
+              onmouseout="homeFocusBg()"
+              onclick="page('../about.html')"
+            >
+              Learn about us
             </div>
+            <div
+              class="home-span-button unselect"
+              onmouseover="homeUnfocusBg()"
+              onmouseout="homeFocusBg()"
+              onclick="page('../outreach/contact.html')"
+            >
+              Contact us
+            </div>
+            <div
+              class="home-social-icon unselect"
+              onmouseover="homeUnfocusBg()"
+              onmouseout="homeFocusBg()"
+              onclick="window.open('https://www.instagram.com/frcteam5669/', '_blank').focus();"
+            >
+              <i class="ri-instagram-line"></i>
+            </div>
+            <div
+              class="home-social-icon unselect"
+              onmouseover="homeUnfocusBg()"
+              onmouseout="homeFocusBg()"
+              onclick="window.open('https://www.youtube.com/channel/UCCVYhNHXfBPgVhpCxI7M4rw', '_blank').focus();"
+            >
+              <i class="ri-youtube-line"></i>
+            </div>
+          </div>
         </div>
-        <div id="main" class="hidden">
-            <div id="navbar">
 
-            </div>
-            <div id='home-span'>
-                <div class="home-span-wrap">
-                    <div class="home-span-content">
-                        <h1>FRC Team 5669: The Techmen</h1>
-                        <h2>FRC Team 5669 consists of students from <a
-                                target="_blank" href="https://boscotech.edu">Don
-                                Bosco Technical Institute</a>, located in
-                            Rosemead, California. Our mission is to create
-                            robots that can compete and inspire.</h2>
-                        <div class="home-span-button-imp unselect"
-                            onmouseover="homeUnfocusBg()"
-                            onmouseout="homeFocusBg()"
-                            onclick="page('../about.html')">Learn about us</div>
-                        <div class="home-span-button unselect"
-                            onmouseover="homeUnfocusBg()"
-                            onmouseout="homeFocusBg()"
-                            onclick="page('../outreach/contact.html')">Contact
-                            us</div>
-                        <div class="home-social-icon unselect"
-                            onmouseover="homeUnfocusBg()"
-                            onmouseout="homeFocusBg()"
-                            onclick="window.open('https://www.instagram.com/frcteam5669/', '_blank').focus();">
-                            <i class="ri-instagram-line"></i>
-                        </div>
-                        <div class="home-social-icon unselect"
-                            onmouseover="homeUnfocusBg()"
-                            onmouseout="homeFocusBg()"
-                            onclick="window.open('https://www.youtube.com/channel/UCCVYhNHXfBPgVhpCxI7M4rw', '_blank').focus();">
-                            <i class="ri-youtube-line"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="home-span-gradient"></div>
-                <div class="home-span-image">
-
-                    <video autoplay muted loop style="pointer-events: none;">
-                        <source
-                            src="https://res.cloudinary.com/frcteam5669/video/upload/v1629757856/FRC_Team_5669_Techmen_-_Trailer_oi2ctj.mp4"
-                            type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-            </div></div>
-    </body>
+        <div class="home-span-gradient"></div>
+        <div class="home-span-image">
+          <video autoplay muted loop style="pointer-events: none">
+            <source
+              src="https://res.cloudinary.com/frcteam5669/video/upload/v1629757856/FRC_Team_5669_Techmen_-_Trailer_oi2ctj.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

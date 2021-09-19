@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FRC Team 5669 - Techmen</title>
-    <link rel="icon" href="/logo.svg" type="image/x-icon">
+    <link rel="icon" href="/logo.svg" type="image/x-icon" />
     <link rel="stylesheet" href="../styles.css" />
     <link rel="stylesheet" href="../player.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -23,8 +23,11 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://frcteam5669.com/about" />
     <meta property="og:image" content="https://frcteam5669.com/embed.png" />
-    <meta property="og:description" content="FRC Team 5669 is a FIRST Robotics Competition Team that aims to innovate and create amazing robots." />
-    <meta name="theme-color" content="#FEE624">
+    <meta
+      property="og:description"
+      content="FRC Team 5669 is a FIRST Robotics Competition Team that aims to innovate and create amazing robots."
+    />
+    <meta name="theme-color" content="#FEE624" />
   </head>
   <body onload="load()">
     <div id="loader">
@@ -36,77 +39,108 @@
       <div id="navbar"></div>
       <div id="main-cont">
         <h1>About</h1>
-        <div class="container" style="margin-top:50px">
-            <div class="video-container" id="video-container">
-              <div class="playback-animation popup-icons" id="playback-animation">
-                <i class="ri-pause-fill hidden" id="pause-i"></i>
-                <i class="ri-play-fill" id="play-i"></i>
-                <i class="ri-restart-line hidden" id="restart-i"></i>
-              </div>
-        
-              <video controls class="video" id="video" preload="metadata" poster="../thumb.jpg">
-                <source src="https://res.cloudinary.com/frcteam5669/video/upload/v1629757856/FRC_Team_5669_Techmen_-_Trailer_oi2ctj.mp4"
-                type="video/mp4"></source>
-              </video>
-        
-              <div class="video-controls hidden" id="video-controls">
-        
-                <div class="bottom-controls">
-                    <button id="play" class="playback-icons control-btn">
-                        <i class="ri-pause-fill hidden"></i>
-                        <i class="ri-play-fill"></i>
-                    </button>
-                    
-        
-                    <div class="volume-controls" id="volume-controls">
-                      <button class="volume-button control-btn" id="volume-button">
-                        <i class="ri-volume-mute-fill hidden" id="volume-mute-i"></i>
-                        <i class="ri-volume-down-fill hidden" id="volume-down-i"></i>
-                        <i class="ri-volume-up-fill" id="volume-up-i"></i>
-                      </button>
-        
-                      
-                      <div class="volume-div">
-                        <progress id="volume-bar" value="1" min="0"></progress>
-                        <input class="volume" id="volume" value="1"
-                      data-mute="0.5" type="range" max="1" min="0" step="0.01">
-                      </div>
-                    </div>
-                    
-                    <div class="video-progress">
-                      <progress id="progress-bar" value="0" min="0"></progress>
-                      <input class="seek" id="seek" value="0" min="0" type="range" step="1">
-                      <div class="seek-tooltip" id="seek-tooltip">00:00</div>
-                    </div>
-        
-                    <div class="time control-btn">
-                      <time id="time-elapsed">00:00</time>
-                      <span> / </span>
-                      <time id="duration">00:00</time>
-                    </div>
-        
-                    <!--<button data-title="PIP (p)" class="pip-button" id="pip-button">
+        <div class="container" style="margin-top: 50px">
+          <div class="video-container" id="video-container">
+            <div class="playback-animation popup-icons" id="playback-animation">
+              <i class="ri-pause-fill hidden" id="pause-i"></i>
+              <i class="ri-play-fill" id="play-i"></i>
+              <i class="ri-restart-line hidden" id="restart-i"></i>
+            </div>
+
+            <video
+              controls
+              class="video"
+              id="video"
+              preload="metadata"
+              poster="../thumb.jpg"
+            >
+              <source
+                src="https://res.cloudinary.com/frcteam5669/video/upload/v1629757856/FRC_Team_5669_Techmen_-_Trailer_oi2ctj.mp4"
+                type="video/mp4"
+              />
+            </video>
+
+            <div class="video-controls hidden" id="video-controls">
+              <div class="bottom-controls">
+                <button id="play" class="playback-icons control-btn">
+                  <i class="ri-pause-fill hidden"></i>
+                  <i class="ri-play-fill"></i>
+                </button>
+
+                <div class="volume-controls" id="volume-controls">
+                  <button class="volume-button control-btn" id="volume-button">
+                    <i
+                      class="ri-volume-mute-fill hidden"
+                      id="volume-mute-i"
+                    ></i>
+                    <i
+                      class="ri-volume-down-fill hidden"
+                      id="volume-down-i"
+                    ></i>
+                    <i class="ri-volume-up-fill" id="volume-up-i"></i>
+                  </button>
+
+                  <div class="volume-div">
+                    <progress id="volume-bar" value="1" min="0"></progress>
+                    <input
+                      class="volume"
+                      id="volume"
+                      value="1"
+                      data-mute="0.5"
+                      type="range"
+                      max="1"
+                      min="0"
+                      step="0.01"
+                    />
+                  </div>
+                </div>
+
+                <div class="video-progress">
+                  <progress id="progress-bar" value="0" min="0"></progress>
+                  <input
+                    class="seek"
+                    id="seek"
+                    value="0"
+                    min="0"
+                    type="range"
+                    step="1"
+                  />
+                  <div class="seek-tooltip" id="seek-tooltip">00:00</div>
+                </div>
+
+                <div class="time control-btn">
+                  <time id="time-elapsed">00:00</time>
+                  <span> / </span>
+                  <time id="duration">00:00</time>
+                </div>
+
+                <!--<button data-title="PIP (p)" class="pip-button" id="pip-button">
                       <svg>
                         <use href="#pip"></use>
                       </svg>
                     </button>-->
-                    <button class="fullscreen-button control-btn title-hide" id="fullscreen-button">
-                        <i class="ri-fullscreen-line"></i>
-                        <i class="ri-fullscreen-exit-line hidden"></i>
-                    </button>
-                </div>
+                <button
+                  class="fullscreen-button control-btn title-hide"
+                  id="fullscreen-button"
+                >
+                  <i class="ri-fullscreen-line"></i>
+                  <i class="ri-fullscreen-exit-line hidden"></i>
+                </button>
               </div>
             </div>
           </div>
-  
+        </div>
+
         <h3>Team History</h3>
         <p>
-          The team was founded in 2015 by Luis Garza, an alumni and former teacher at Don Bosco Technical Institute. 
-          With a group of devoted students, he formed the first iteration of the
-          team which debuted at the 2015 Los Angeles Regional and ranked 30th out
-          of 66 teams. He devised a plan that would guarantee the teams improvement 
-          over the course of 5 years, eventually leading them to participate in a Regional Final. In three years we
-          achieved this goal and a year later we went even further.
+          The team was founded in 2015 by Luis Garza, an alumni and former
+          teacher at Don Bosco Technical Institute. With a group of devoted
+          students, he formed the first iteration of the team which debuted at
+          the 2015 Los Angeles Regional and ranked 30th out of 66 teams. He
+          devised a plan that would guarantee the teams improvement over the
+          course of 5 years, eventually leading them to participate in a
+          Regional Final. In three years we achieved this goal and a year later
+          we went even further.
         </p>
         <a
           class="a-about-imp"
@@ -120,23 +154,110 @@
         />
         <h3>Achievements</h3>
         <ul>
-          <li><p>2015 Los Angeles Regional&nbsp;<i style="color: var(--yel); font-size: 5px !important; vertical-align: middle" class="ri-checkbox-blank-fill"></i>&nbsp;&nbsp;Qualification Matches 30/66</p></li>
-          <li><p>2016 Los Angeles Regional&nbsp;<i style="color: var(--yel); font-size: 5px !important; vertical-align: middle" class="ri-checkbox-blank-fill"></i>&nbsp;&nbsp;Qualification Matches 64/66</p></li>
-          <li><p>2017 Los Angeles Regional&nbsp;<i style="color: var(--yel); font-size: 5px !important; vertical-align: middle" class="ri-checkbox-blank-fill"></i>&nbsp;&nbsp;Qualification Matches 52/60</p></li>
-          <li><p>2018 Los Angeles Regional&nbsp;<i style="color: var(--yel); font-size: 5px !important; vertical-align: middle" class="ri-checkbox-blank-fill"></i>&nbsp;&nbsp;Qualification Matches 35/54</p></li>
           <li>
             <p>
-              2018 Ventura Regional&nbsp;<i style="color: var(--yel); font-size: 5px !important; vertical-align: middle" class="ri-checkbox-blank-fill"></i>&nbsp;&nbsp;Qualification Matches 11/42, Playoff Team
+              2015 Los Angeles Regional&nbsp;<i
+                style="
+                  color: var(--yel);
+                  font-size: 5px !important;
+                  vertical-align: middle;
+                "
+                class="ri-checkbox-blank-fill"
+              ></i
+              >&nbsp;&nbsp;Qualification Matches 30/66
             </p>
           </li>
-          <li><p>2019 Los Angeles Regional&nbsp;<i style="color: var(--yel); font-size: 5px !important; vertical-align: middle" class="ri-checkbox-blank-fill"></i>&nbsp;&nbsp;Qualification Matches 37/56</p></li>
           <li>
             <p>
-              2019 Orange County Regional&nbsp;<i style="color: var(--yel); font-size: 5px !important; vertical-align: middle" class="ri-checkbox-blank-fill"></i>&nbsp;&nbsp;Qualification Matches 8/49, Playoff
-              Team
+              2016 Los Angeles Regional&nbsp;<i
+                style="
+                  color: var(--yel);
+                  font-size: 5px !important;
+                  vertical-align: middle;
+                "
+                class="ri-checkbox-blank-fill"
+              ></i
+              >&nbsp;&nbsp;Qualification Matches 64/66
             </p>
           </li>
-          <li><p>2020 Los Angeles Regional&nbsp;<i style="color: var(--yel); font-size: 5px !important; vertical-align: middle" class="ri-checkbox-blank-fill"></i>&nbsp;&nbsp;Qualification Matches 36/44</p></li>
+          <li>
+            <p>
+              2017 Los Angeles Regional&nbsp;<i
+                style="
+                  color: var(--yel);
+                  font-size: 5px !important;
+                  vertical-align: middle;
+                "
+                class="ri-checkbox-blank-fill"
+              ></i
+              >&nbsp;&nbsp;Qualification Matches 52/60
+            </p>
+          </li>
+          <li>
+            <p>
+              2018 Los Angeles Regional&nbsp;<i
+                style="
+                  color: var(--yel);
+                  font-size: 5px !important;
+                  vertical-align: middle;
+                "
+                class="ri-checkbox-blank-fill"
+              ></i
+              >&nbsp;&nbsp;Qualification Matches 35/54
+            </p>
+          </li>
+          <li>
+            <p>
+              2018 Ventura Regional&nbsp;<i
+                style="
+                  color: var(--yel);
+                  font-size: 5px !important;
+                  vertical-align: middle;
+                "
+                class="ri-checkbox-blank-fill"
+              ></i
+              >&nbsp;&nbsp;Qualification Matches 11/42, Playoff Team
+            </p>
+          </li>
+          <li>
+            <p>
+              2019 Los Angeles Regional&nbsp;<i
+                style="
+                  color: var(--yel);
+                  font-size: 5px !important;
+                  vertical-align: middle;
+                "
+                class="ri-checkbox-blank-fill"
+              ></i
+              >&nbsp;&nbsp;Qualification Matches 37/56
+            </p>
+          </li>
+          <li>
+            <p>
+              2019 Orange County Regional&nbsp;<i
+                style="
+                  color: var(--yel);
+                  font-size: 5px !important;
+                  vertical-align: middle;
+                "
+                class="ri-checkbox-blank-fill"
+              ></i
+              >&nbsp;&nbsp;Qualification Matches 8/49, Playoff Team
+            </p>
+          </li>
+          <li>
+            <p>
+              2020 Los Angeles Regional&nbsp;<i
+                style="
+                  color: var(--yel);
+                  font-size: 5px !important;
+                  vertical-align: middle;
+                "
+                class="ri-checkbox-blank-fill"
+              ></i
+              >&nbsp;&nbsp;Qualification Matches 36/44
+            </p>
+          </li>
         </ul>
 
         <img
@@ -251,10 +372,43 @@
         </ul>
         <h3>School Info</h3>
         <p>
-          Don Bosco Technical Institute is an all-boys Catholic High School whose
-          goal is to create the next generation of engineers. It has six prestigious engineering courses ranging from Materials Science, Media Arts, Computer Science, Electrical Engineering, Architecture, and Biomedical Sciences.
+          Don Bosco Technical Institute is an all-boys Catholic High School
+          whose goal is to create the next generation of engineers. It has six
+          prestigious engineering courses ranging from Materials Science, Media
+          Arts, Computer Science, Electrical Engineering, Architecture, and
+          Biomedical Sciences.
         </p>
         <div style="height: 250px"></div>
+        <div id="footer">
+          <div class='footer-left'>
+            <div class="footer-col footer-logo">
+              <img src="../logos/marks/svg/Mark-Gold.svg" />
+            </div>
+            <div class="footer-col footer-links">
+              <div class="footer-links-cont">
+                <a href="../" onclick="page('../')">Home</a>
+                <a href="../about.html" onclick="page('../about.html')">About</a>
+              </div>
+            </div>
+          </div>
+          <div class="footer-col footer-links">
+            <div class="footer-links-cont">
+              <strong>Resources</strong>
+              <a href="https://handbook.frcteam5669.com" target="_blank">Handbook</a>
+              <a href="https://drive.google.com/drive/folders/1ATOVMiWe1gzM9hSd882fIrN3rH25tqjJ?usp=sharing" target="_blank">CAD</a>
+              <a href="https://github.com/FRC-Team-5669-Techmen" target="_blank">Code</a>
+            </div>
+          </div>
+          <div class="footer-col footer-links">
+            <div class="footer-links-cont">
+              <strong>Outreach</strong>
+              <a href="../outreach/contact.html" onclick="page('../outreach/contact.html')">Contact</a>
+              <a href="../outreach/brand.html" onclick="page('../outreach/brand.html')">Brand</a>
+              <a href="../outreach/pictures.html" onclick="page('../outreach/pictures.html')">Pictures</a>
+              <a href="../outreach/sponsors.html" onclick="page('../outreach/sponsors.html')">Sponsors</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </body>
