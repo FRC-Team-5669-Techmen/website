@@ -13,15 +13,30 @@
 ╚═╝░░╚══╝╚══════╝╚═╝░░╚═╝░╚════╝░
 */
 
+function checkIfDebug() {
+  fetch("../DEBUG")
+    .then(response => response.json()).catch(() => {
+      debug = false
+    })
+}
+
+var debug = true;
+
 function page(site) {
+  console.warn("cum")
   console.log(site)
   console.log(window.location.pathname.split("/").pop())
   if (site != window.location.pathname.split("/").pop()) {
     document.getElementById('loader').style.opacity = "1";
     setTimeout(() => {
-      window.location.href = site
+      if (debug && site != "../") window.location.href = site + ".html"
+      if (!debug) {
+        window.location.href = site
+        console.warn("cum")
+      }
     }, 300)
   }
+  return false
 }
 function homeUnfocusBg() {
   let yt = (document.getElementById("home-yt"))
@@ -39,6 +54,7 @@ function closeNav() {
 }
 let grid
 function load() {
+  checkIfDebug()
 
   if (document.querySelector('.pic-grid')) document.querySelector('.pic-grid').style.opacity = 1;
   else if (document.querySelector('.spon-grid')) document.querySelector('.spon-grid').style.opacity = 1;
@@ -112,8 +128,8 @@ function load() {
             <div class="footer-col footer-links">
               <div class="footer-links-cont">
               <strong>Techmen<br>Robotics</strong>
-                <a href="../" onclick="page('../')">Home</a>
-                <a href="../about.html" onclick="page('../about.html')">About</a>
+                <a href="../" onclick="page('../'); return false;" data-anchor>Home</a>
+                <a href="../about" onclick="page('../about'); return false;" data-anchor>About</a>
               </div>
             </div>
           </div>
@@ -128,10 +144,10 @@ function load() {
           <div class="footer-col footer-links">
             <div class="footer-links-cont">
               <strong>Outreach</strong>
-              <a href="../outreach/contact.html" onclick="page('../outreach/contact.html')">Contact</a>
-              <a href="../outreach/brand.html" onclick="page('../outreach/brand.html')">Brand</a>
-              <a href="../outreach/pictures.html" onclick="page('../outreach/pictures.html')">Pictures</a>
-              <a href="../outreach/sponsors.html" onclick="page('../outreach/sponsors.html')">Sponsors</a>
+              <a href="../outreach/contact" onclick="page('../outreach/contact'); return false;" data-anchor>Contact</a>
+              <a href="../outreach/branding" onclick="page('../outreach/branding'); return false;" data-anchor>Branding</a>
+              <a href="../outreach/pictures" onclick="page('../outreach/pictures'); return false;" data-anchor>Pictures</a>
+              <a href="../outreach/sponsors" onclick="page('../outreach/sponsors'); return false;" data-anchor>Sponsors</a>
             </div>
           </div>`
 
@@ -162,7 +178,7 @@ function load() {
                 <div class='nav-btn-title' onclick="openNavDrop(this)">Outreach +</div>
                 <div class="nav-dropdown" data-dropdown>
                     <div id="nav-contact" class="drop-btn" onclick="page('../outreach/contact.html')">Contact</div>
-                    <div id="nav-brand" class="drop-btn" onclick="page('../outreach/brand.html')">Brand</div>
+                    <div id="nav-branding" class="drop-btn" onclick="page('../outreach/branding.html')">Branding</div>
                     <div id="nav-pictures" class="drop-btn" onclick="page('../outreach/pictures.html')">Pictures</div>
                     <div id="nav-sponsors" class="drop-btn" onclick="page('../outreach/sponsors.html')">Sponsors</div>
                 </div>
@@ -170,6 +186,13 @@ function load() {
         </div>
         
     </div>`
+  let anchors = document.querySelectorAll("[data-anchor]").forEach(e => {
+    if(e.href.split("/").pop() != "") {
+      if(e.href.split("/").pop().endsWith(".html") == false) {
+        if(debug) e.href = e.href + ".html"
+      }
+    }
+  });
   let page = window.location.pathname.split("/")[1].replace('.html', '') || "index"
   document.getElementById("nav-" + page).classList.add('active')
   if (window.location.pathname.split("/").length > 2) {
