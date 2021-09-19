@@ -111,6 +111,7 @@ function load() {
             </div>
             <div class="footer-col footer-links">
               <div class="footer-links-cont">
+              <strong>Techmen<br>Robotics</strong>
                 <a href="../" onclick="page('../')">Home</a>
                 <a href="../about.html" onclick="page('../about.html')">About</a>
               </div>
