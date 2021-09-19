@@ -13,8 +13,8 @@
 ╚═╝░░╚══╝╚══════╝╚═╝░░╚═╝░╚════╝░
 */
 
-function checkIfDebug() {
-  fetch("../DEBUG")
+async function checkIfDebug() {
+  await fetch("../DEBUG")
     .then(response => response.json()).catch(() => {
       debug = false
     })
@@ -23,7 +23,6 @@ function checkIfDebug() {
 var debug = true;
 
 function page(site) {
-  console.warn("cum")
   console.log(site)
   console.log(window.location.pathname.split("/").pop())
   if (site != window.location.pathname.split("/").pop()) {
@@ -54,7 +53,6 @@ function closeNav() {
 }
 let grid
 function load() {
-  checkIfDebug()
 
   if (document.querySelector('.pic-grid')) document.querySelector('.pic-grid').style.opacity = 1;
   else if (document.querySelector('.spon-grid')) document.querySelector('.spon-grid').style.opacity = 1;
@@ -186,13 +184,16 @@ function load() {
         </div>
         
     </div>`
-  let anchors = document.querySelectorAll("[data-anchor]").forEach(e => {
-    if(e.href.split("/").pop() != "") {
-      if(e.href.split("/").pop().endsWith(".html") == false) {
-        if(debug) e.href = e.href + ".html"
+  checkIfDebug().then(() => {
+    let anchors = document.querySelectorAll("[data-anchor]").forEach(e => {
+      if (e.href.split("/").pop() != "") {
+        if (e.href.split("/").pop().endsWith(".html") == false) {
+          if (debug) e.href = e.href + ".html"
+        }
       }
-    }
-  });
+    });
+
+  })
   let page = window.location.pathname.split("/")[1].replace('.html', '') || "index"
   document.getElementById("nav-" + page).classList.add('active')
   if (window.location.pathname.split("/").length > 2) {
