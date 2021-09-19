@@ -331,7 +331,8 @@
     width: calc(100% - (var(--margin) * 2));
   }
   .logomark-indiv img {
-    height: 120%
+    width: 12%;
+    max-height: 300px;
   }
   .logotype-indiv {
     height: 150px;
