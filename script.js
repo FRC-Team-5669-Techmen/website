@@ -102,34 +102,37 @@ function load() {
     addEventListener('resize', layout, false) /* on resize */
   }
   //populate navbar
-  /*if(document.getElementById("footer")) document.getElementById("footer").innerHTML = `
+  if (document.getElementById("footer")) document.getElementById("footer").innerHTML = `
     
-    <div class="footer-col footer-logo">
-    <img src="../logos/marks/svg/Mark-Gold.svg" />
-  </div>
-  <div class="footer-col footer-links">
-    <div class="footer-links-cont">
-      <a>Home</a>
-      <a>About</a>
-    </div>
-  </div>
-  <div class="footer-col footer-links">
-    <div class="footer-links-cont">
-      <strong>Resources</strong>
-      <a>Handbook</a>
-      <a>CAD</a>
-      <a>Code</a>
-    </div>
-  </div>
-  <div class="footer-col footer-links">
-    <div class="footer-links-cont">
-      <strong>Outreach</strong>
-      <a>Contact</a>
-      <a>Brand</a>
-      <a>Pictures</a>
-      <a>Sponsors</a>
-    </div>
-  </div>`*/
+    
+          <div class='footer-left'>
+            <div class="footer-col footer-logo">
+              <img src="../logos/marks/svg/Mark-Gold.svg" />
+            </div>
+            <div class="footer-col footer-links">
+              <div class="footer-links-cont">
+                <a href="../" onclick="page('../')">Home</a>
+                <a href="../about.html" onclick="page('../about.html')">About</a>
+              </div>
+            </div>
+          </div>
+          <div class="footer-col footer-links">
+            <div class="footer-links-cont">
+              <strong>Resources</strong>
+              <a href="https://handbook.frcteam5669.com" target="_blank">Handbook</a>
+              <a href="https://drive.google.com/drive/folders/1ATOVMiWe1gzM9hSd882fIrN3rH25tqjJ?usp=sharing" target="_blank">CAD</a>
+              <a href="https://github.com/FRC-Team-5669-Techmen" target="_blank">Code</a>
+            </div>
+          </div>
+          <div class="footer-col footer-links">
+            <div class="footer-links-cont">
+              <strong>Outreach</strong>
+              <a href="../outreach/contact.html" onclick="page('../outreach/contact.html')">Contact</a>
+              <a href="../outreach/brand.html" onclick="page('../outreach/brand.html')">Brand</a>
+              <a href="../outreach/pictures.html" onclick="page('../outreach/pictures.html')">Pictures</a>
+              <a href="../outreach/sponsors.html" onclick="page('../outreach/sponsors.html')">Sponsors</a>
+            </div>
+          </div>`
 
   document.getElementById('navbar').innerHTML = `
     <div class='nav-logo' onclick="page('../')"><img src="../logo.svg" alt="Logo"></div>
