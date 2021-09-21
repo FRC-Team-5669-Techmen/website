@@ -1,0 +1,40 @@
+
+.pic-grid {
+    display: flex;
+    padding: 2px;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.pic-parent {
+  color: white;
+  background: #e91e63;
+  height: 150px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid white;
+  border-radius: 5px;
+}
+
+.pic-parent img {
+    margin-top:-7px;
+    padding: 0;
+    width: 100%;
+}
+
+.pic-grid>*:hover {
+    /*clip-path: polygon( 0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0% 100%);*/
+}
+/*
+.pic-grid>*:after {
+    content: '';
+    background:red;
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index: 10;
+}*/

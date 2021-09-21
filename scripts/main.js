@@ -97,14 +97,29 @@ function load() {
   }
 
   if (document.querySelector('.pic-grid')) {
-    grid = { _el: document.querySelector('.pic-grid'), ncol: 0 };
-
-    grid.items = [...grid._el.childNodes].filter(c => c.nodeType === 1).map(c => ({ _el: c }));
-    grid.gap = parseFloat(getComputedStyle(grid._el).gridRowGap);
-
-
-    layout(); /* initial load */
-    addEventListener('resize', layout, false) /* on resize */
+    //grid = { _el: document.querySelector('.pic-grid'), ncol: 0 };
+    //let tempGrid = [];
+    //for (let i = 0; i < grid._el.childNodes.length; i++) {
+    //  const element = grid._el.childNodes[i];
+    //  if(element.nodeType == 1) {
+    //    let parent = element
+    //    for (let w = 0; w < parent.childNodes.length; w++) {
+    //      //const element = grid._el.childNodes[i];
+    //      let child = parent.childNodes[w]
+    //      if(child.nodeType == 1) {
+    //        console.log(child)
+    //      }
+    //    }
+    //  }
+    //}
+    //console.log([...grid._el.childNodes].filter(c => c.nodeType === 1).childNodes)
+    //grid.items = [...grid._el.childNodes].filter(c => c.nodeType === 1).map(c => ({ _el: c }));
+    //console.log(grid.items)
+    //grid.gap = parseFloat(getComputedStyle(grid._el).gridRowGap);
+//
+//
+    //layout(); /* initial load */
+    //addEventListener('resize', layout, false) /* on resize */
   } else if (document.querySelector('.spon-grid')) {
     grid = { _el: document.querySelector('.spon-grid'), ncol: 0 };
 

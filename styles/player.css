@@ -3,10 +3,11 @@
    ========================================================================== */
 
 :root {
-    --dark: black;
-    --yel: #ffe629;
-    --light: white;
-    --mid: #747474;
+    --black: black;
+    --gold: #ffe629;
+    --white: white;
+    --ash: #9c9c9c;
+    --space: #646464;
 }
 
 html {
@@ -65,13 +66,13 @@ video {
 }
 
 .control-btn {
-    background: var(--yel);
-    border: 2px solid var(--dark);
+    background: var(--gold);
+    border: 2px solid var(--black);
     outline-style: solid;
-    outline-color: var(--yel);
+    outline-color: var(--gold);
     outline-width: 2px;
     height: 30px;
-    color: var(--dark) !important;
+    color: var(--black) !important;
     font-size: 14px;
     min-width: 40px;
     padding: 0 10px;
@@ -83,7 +84,7 @@ video {
 }
 
 .control-btn i {
-    color: var(--dark) !important;
+    color: var(--black) !important;
     font-size: 18px;
 }
 
@@ -232,7 +233,7 @@ button:hover::before {
     transform: translate(-50%, -50%);
     width: 110px;
     height: 70px;
-    background-color: var(--dark);
+    background-color: var(--black);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -249,7 +250,7 @@ button:hover::before {
     content: '';
     width: 100%;
     height: 100%;
-    background: var(--yel);
+    background: var(--gold);
     display: block;
     position: absolute;
     top: 0px;
@@ -261,7 +262,7 @@ button:hover::before {
     content: '';
     width: calc(100% - 4px);
     height: calc(100% - 4px);
-    background: var(--dark);
+    background: var(--black);
     display: block;
     position: absolute;
     top: 2px;
@@ -292,9 +293,9 @@ button:hover::before {
     height: 30px;
     pointer-events: none;
     position: absolute;
-    border: 2px solid var(--dark);
+    border: 2px solid var(--black);
     outline-style: solid;
-    outline-color: var(--yel);
+    outline-color: var(--gold);
     outline-width: 2px;
     top: 0;
     transform: translateY(3px);
@@ -314,12 +315,12 @@ progress::-webkit-progress-bar {
 }
 
 progress::-webkit-progress-value {
-    background: var(--yel);
+    background: var(--gold);
 }
 
 progress::-moz-progress-bar {
-    border: 1px solid var(--yel);
-    background: var(--yel);
+    border: 1px solid var(--gold);
+    background: var(--gold);
 }
 
 input[type=range] {
@@ -345,8 +346,8 @@ input[type=range]::-webkit-slider-thumb {
     transform: translateY(-2px);
     height: 44px;
     width: 16px;
-    background: var(--light);
-    border: 2px solid var(--dark);
+    background: var(--white);
+    border: 2px solid var(--black);
     cursor: pointer;
     -webkit-appearance: none;
 }
@@ -367,8 +368,8 @@ input[type=range]::-moz-range-thumb {
     height: 14px;
     width: 14px;
     border-radius: 50px;
-    border: 1px solid var(--yel);
-    background: var(--yel);
+    border: 1px solid var(--gold);
+    background: var(--gold);
     cursor: pointer;
     margin-top: 5px;
 }
@@ -385,9 +386,9 @@ input[type=range]:focus::-moz-range-track {
     height: 10px;
     pointer-events: none;
     position: absolute;
-    border: 2px solid var(--dark);
+    border: 2px solid var(--black);
     outline-style: solid;
-    outline-color: var(--yel);
+    outline-color: var(--gold);
     outline-width: 2px;
     top: 0;
 }
@@ -432,7 +433,7 @@ input[type=range].volume {
 input[type=range].volume::-webkit-slider-thumb {
     height: 18px;
     width: 8px;
-    background: var(--yel);
+    background: var(--gold);
     cursor: pointer;
     -webkit-appearance: none;
     transform: translateY(-2px);
