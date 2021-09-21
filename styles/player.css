@@ -225,34 +225,6 @@ button:hover::before {
     height: 26px;
 }
 
-/*
-.playback-animation {
-    pointer-events: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 120px;
-    height: 80px;
-    background-color: rgb(0, 0, 0);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform-style: preserve-3d;
-}
-
-.playback-animation:before {
-    content: '';
-    width: calc(100% + 2px);
-    height: calc(100% + 2px);
-    background: #00c000;
-    display: block;
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    transform: translateZ(-10px);
-}*/
-
 .playback-animation {
     position: absolute;
     top: 50%;
