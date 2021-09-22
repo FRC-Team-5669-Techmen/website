@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Jaldi:400,700|Roboto:400,400i,700"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/flexmasonry@0.2.3/dist/flexmasonry.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-3892196-96"
+    ></script>
+    <style>
+
+
+
+
+      .inner {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .demo-section .btn {
+        margin-bottom: 40px;
+      }
+
+      .demo-item {
+        padding: 2px;
+      }
+      .demo-item-inner {
+        width: 100%;
+        height: 100px;
+        background: #8677dd;
+        border-radius: 3px;
+        opacity: 0;
+        transition: opacity 0.3s ease-out;
+      }
+      .demo-item-inner.appear {
+        opacity: 1;
+      }
+
+
+
+    </style>
+  </head>
+  <body>
+
+    <section class="content">
+      <div class="inner">
+        <div id="demo" class="section demo-section">
+          <button class="btn btn-secondary" id="randomize">
+            Randomize Layout
+          </button>
+
+          <div class="demo-wrapper">
+            <div id="demo-grid">
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+              <div>
+                <div class="demo-item"><div class="demo-item-inner"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+
+    <script src="https://unpkg.com/flexmasonry@0.2.3/dist/flexmasonry.js"></script>
+    <script>
+      function demoLayout() {
+        const demoItems = document.querySelectorAll(".demo-item-inner");
+
+        let timer = 100;
+        demoItems.forEach(function (item) {
+          const min = 80;
+          const max = 250;
+          const height = Math.floor(Math.random() * (max - min + 1) + min);
+          item.style.height = height + "px";
+
+          item.classList.remove("appear");
+          setTimeout(function () {
+            item.classList.add("appear");
+          }, timer);
+
+          timer += 25;
+        });
+      }
+
+      demoLayout();
+      const fm = FlexMasonry.init("#demo-grid", {
+        breakpointCols: {
+          "min-width: 960px": 2,
+          "min-width: 768px": 4,
+          "min-width: 576px": 3,
+          "min-width: 450px": 2,
+        },
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        document
+          .getElementById("randomize")
+          .addEventListener("click", function () {
+            demoLayout();
+            fm.refreshAll();
+          });
+      });
+    </script>
+  </body>
+</html>

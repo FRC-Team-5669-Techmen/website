@@ -1,5 +1,4 @@
-
-.pic-grid {
+/*.pic-grid {
     display: flex;
     padding: 2px;
     flex-direction: column;
@@ -9,7 +8,7 @@
 .pic-parent {
   color: white;
   background: #e91e63;
-  height: 150px;
+  height: 70px;
   width: 100px;
   display: flex;
   justify-content: center;
@@ -25,9 +24,9 @@
 }
 
 .pic-grid>*:hover {
-    /*clip-path: polygon( 0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0% 100%);*/
+    /*clip-path: polygon( 0 7px, 7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0% 100%);
 }
-/*
+
 .pic-grid>*:after {
     content: '';
     background:red;
@@ -38,3 +37,44 @@
     height:100%;
     z-index: 10;
 }*/
+
+#pic-grid {
+    position: relative;
+    width: inherit;
+    max-width: inherit;
+}
+
+.pic-parent {
+    position: relative;
+    padding: 5px;
+    overflow: hidden;
+}
+
+.pic-parent img {
+    padding: 0;
+    margin-bottom: -5px;
+    width: 100%;
+    cursor: pointer;
+    transition: clip-path 0.3s ease;
+    clip-path: polygon( 0 7px, 7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0% 100%);
+}
+
+.pic-parent:hover img {
+    clip-path: polygon( 0 15px, 15px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%);
+}
+
+.bottom-triangle {
+    width: 0px;
+    height: 0px;
+    background: yellow;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    transition: width 0.3s ease, height 0.3s ease;
+    clip-path: polygon( 0 100%, 100% 0, 100% 100%);
+}
+
+.pic-parent:hover .bottom-triangle {
+    width: 10px;
+    height: 10px;
+}

@@ -171,10 +171,10 @@ function load() {
         <div id="nav-close" onclick="closeNav()"><i class="ri-close-fill"></i></div>
         <div class='nav-logo-text' onclick="page('../')">Techmen Robotics</div>
         <div class="nav-buttons">
-            <div id="nav-index" class="nav-btn unselect" onclick="page('../index.html')">
+            <div id="nav-index" class="nav-btn unselect" onclick="page('../index')">
                 <div class='nav-btn-title'>home</div>
             </div>
-            <div id="nav-about" class="nav-btn unselect" onclick="page('../about.html')">
+            <div id="nav-about" class="nav-btn unselect" onclick="page('../about')">
                 <div class='nav-btn-title'>about</div>
             </div>
             <div id="nav-resources" class="nav-btn dropdown unselect">
@@ -190,10 +190,10 @@ function load() {
             <div id="nav-outreach" class="nav-btn dropdown unselect">
                 <div class='nav-btn-title' onclick="openNavDrop(this)">Outreach +</div>
                 <div class="nav-dropdown" data-dropdown>
-                    <div id="nav-contact" class="drop-btn" onclick="page('../outreach/contact.html')">Contact</div>
-                    <div id="nav-branding" class="drop-btn" onclick="page('../outreach/branding.html')">Branding</div>
-                    <div id="nav-pictures" class="drop-btn" onclick="page('../outreach/pictures.html')">Pictures</div>
-                    <div id="nav-sponsors" class="drop-btn" onclick="page('../outreach/sponsors.html')">Sponsors</div>
+                    <div id="nav-contact" class="drop-btn" onclick="page('../outreach/contact')">Contact</div>
+                    <div id="nav-branding" class="drop-btn" onclick="page('../outreach/branding')">Branding</div>
+                    <div id="nav-pictures" class="drop-btn" onclick="page('../outreach/pictures')">Pictures</div>
+                    <div id="nav-sponsors" class="drop-btn" onclick="page('../outreach/sponsors')">Sponsors</div>
                 </div>
             </div>
         </div>
@@ -232,7 +232,8 @@ function load() {
     })
     setTimeout(() => {
       document.getElementById('loader-cont').style.opacity = "0";
-      layout()
+      //layout()
+      if(FlexMasonry) FlexMasonry.refreshAll();
       if (document.querySelector('.pic-grid')) document.querySelector('.pic-grid').style.opacity = 1;
       else if (document.querySelector('.spon-grid')) document.querySelector('.spon-grid').style.opacity = 1;
       if (AOS) AOS.init()
