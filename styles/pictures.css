@@ -26,6 +26,12 @@
     cursor: pointer;
     transition: clip-path 0.3s ease;
     clip-path: polygon( 0 7px, 7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0% 100%);
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .pic-parent:hover img {

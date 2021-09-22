@@ -27,8 +27,10 @@
     />
     <script src="../scripts/flexmasonry.js"></script>
     <script defer src="../scripts/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/prcptn-dsgn/qwik/dist/min.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
     <meta property="og:title" content="FRC Team 5669 - Pictures" />
     <meta property="og:type" content="website" />
     <meta
@@ -43,6 +45,15 @@
     <meta name="theme-color" content="#FEE624" />
   </head>
   <body onload="load()">
+    <div id="imgModal" class="modalClosed">
+      <div id="modalImgParent">
+        <img
+          src="https://photos.smugmug.com/photos/i-6Q7bfJC/0/X3/i-6Q7bfJC-X3.jpg"
+          alt="photo"
+          id="modalImg"
+        />
+      </div>
+    </div>
     <div id="loader">
       <div id="loader-cont">
         <iframe src="../loader.html" frameborder="0"></iframe>
@@ -57,9 +68,9 @@
           <div class="pic-parent" data-aos="fade-in">
             <div class="bottom-triangle"></div>
             <img
-              
               src="https://photos.smugmug.com/photos/i-6Q7bfJC/0/X3/i-6Q7bfJC-X3.jpg"
               alt="photo"
+              data-modal-img
             />
           </div>
           <!--
@@ -67,9 +78,9 @@
           <div class="pic-parent" data-aos="fade-in">
             <div class="bottom-triangle"></div>
             <img
-              
               src="https://photos.smugmug.com/photos/i-hzCcjnT/0/X3/i-hzCcjnT-X3.jpg"
               alt="photo"
+              data-modal-img
             />
           </div>
           <!--
@@ -77,9 +88,9 @@
           <div class="pic-parent" data-aos="fade-in">
             <div class="bottom-triangle"></div>
             <img
-              
               src="https://photos.smugmug.com/photos/i-FDFgP6z/0/X3/i-FDFgP6z-X3.jpg"
               alt="photo"
+              data-modal-img
             />
           </div>
           <!--
@@ -87,7 +98,6 @@
           <div class="pic-parent" data-aos="fade-in">
             <div class="bottom-triangle"></div>
             <img
-              
               src="https://photos.smugmug.com/photos/i-PWWpXvt/0/X3/i-PWWpXvt-X3.jpg"
               alt="photo"
             />
@@ -97,7 +107,6 @@
           <div class="pic-parent" data-aos="fade-in">
             <div class="bottom-triangle"></div>
             <img
-              
               src="https://photos.smugmug.com/photos/i-dPC3L9t/0/X3/i-dPC3L9t-X3.jpg"
               alt="photo"
             />
@@ -107,7 +116,6 @@
           <div class="pic-parent" data-aos="fade-in">
             <div class="bottom-triangle"></div>
             <img
-              
               src="https://photos.smugmug.com/photos/i-Ldd9Jc8/0/X3/i-Ldd9Jc8-X3.jpg"
               alt="photo"
             />
@@ -117,7 +125,6 @@
           <div class="pic-parent" data-aos="fade-in">
             <div class="bottom-triangle"></div>
             <img
-              
               src="https://photos.smugmug.com/photos/i-54JSL7h/0/X3/i-54JSL7h-X3.jpg"
               alt="photo"
             />
@@ -127,7 +134,6 @@
           <div class="pic-parent" data-aos="fade-in">
             <div class="bottom-triangle"></div>
             <img
-              
               src="https://photos.smugmug.com/photos/i-56NS28K/0/X3/i-56NS28K-X3.jpg"
               alt="photo"
             />
@@ -137,7 +143,6 @@
           <div class="pic-parent" data-aos="fade-in">
             <div class="bottom-triangle"></div>
             <img
-              
               src="https://photos.smugmug.com/photos/i-W3D9hrD/0/X3/i-W3D9hrD-X3.jpg"
               alt="photo"
             />
@@ -147,7 +152,6 @@
           <div class="pic-parent" data-aos="fade-in">
             <div class="bottom-triangle"></div>
             <img
-              
               src="https://photos.smugmug.com/photos/i-HVpHvTT/0/X3/i-HVpHvTT-X3.jpg"
               alt="photo"
             />
@@ -157,7 +161,6 @@
           <div class="pic-parent" data-aos="fade-in">
             <div class="bottom-triangle"></div>
             <img
-              
               src="https://photos.smugmug.com/photos/i-CcSkqFM/0/X3/i-CcSkqFM-X3.jpg"
               alt="photo"
             />
@@ -167,7 +170,6 @@
           <div class="pic-parent" data-aos="fade-in">
             <div class="bottom-triangle"></div>
             <img
-              
               src="https://photos.smugmug.com/photos/i-5jtgrjJ/0/X3/i-5jtgrjJ-X3.jpg"
               alt="photo"
             />
@@ -177,7 +179,6 @@
           <div class="pic-parent" data-aos="fade-in">
             <div class="bottom-triangle"></div>
             <img
-              
               src="https://photos.smugmug.com/photos/i-bvHtdf4/0/X3/i-bvHtdf4-X3.jpg"
               alt="photo"
             />
@@ -187,7 +188,6 @@
           <div class="pic-parent" data-aos="fade-in">
             <div class="bottom-triangle"></div>
             <img
-              
               src="https://photos.smugmug.com/photos/i-r8KR8VR/0/X3/i-r8KR8VR-X3.jpg"
               alt="photo"
             />
@@ -197,7 +197,6 @@
           <div class="pic-parent" data-aos="fade-in">
             <div class="bottom-triangle"></div>
             <img
-              
               src="https://photos.smugmug.com/photos/i-6S8VDJK/0/X3/i-6S8VDJK-X3.jpg"
               alt="photo"
             />
@@ -207,7 +206,6 @@
           <div class="pic-parent" data-aos="fade-in">
             <div class="bottom-triangle"></div>
             <img
-              
               src="https://photos.smugmug.com/photos/i-JWmtzVk/0/X3/i-JWmtzVk-X3.jpg"
               alt="photo"
             />
@@ -217,7 +215,6 @@
           <div class="pic-parent" data-aos="fade-in">
             <div class="bottom-triangle"></div>
             <img
-              
               src="https://photos.smugmug.com/photos/i-tKKNBwd/0/X3/i-tKKNBwd-X3.jpg"
               alt="photo"
             />
@@ -230,23 +227,6 @@
     <script>
       AOS.init();
     </script>
-    <script>
-      const fm = FlexMasonry.init("#pic-grid", {
-        responsive: true,
-        breakpointCols: {
-          "min-width: 960px": 2,
-          "min-width: 768px": 2,
-          "min-width: 576px": 1,
-          "min-width: 450px": 1,
-        },
-      });
-
-      document.addEventListener("DOMContentLoaded", function () {
-        fm.refreshAll();
-      });
-      window.addEventListener("resize", function () {
-        FlexMasonry.refreshAll();
-      });
-    </script>
+    <script src="../scripts/pictures.js"></script>
   </body>
 </html>

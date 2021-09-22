@@ -119,7 +119,6 @@ var FlexMasonry = function(e) {
               , r = t.getPropertyValue("order")
               , o = t.getPropertyValue("height")
               , p = t.getPropertyValue("padding");
-              console.log(parseInt(p) * 2)
             n[r - 1] || (n[r - 1] = 0),
             n[r - 1] += Math.ceil(parseFloat(o))
             n[r - 1] += parseInt(p) * 4

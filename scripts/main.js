@@ -31,7 +31,6 @@ function page(site) {
       if (debug && site != "../") window.location.href = site + ".html"
       if (!debug) {
         window.location.href = site
-        console.warn("cum")
       }
     }, 300)
   }
@@ -116,8 +115,8 @@ function load() {
     //grid.items = [...grid._el.childNodes].filter(c => c.nodeType === 1).map(c => ({ _el: c }));
     //console.log(grid.items)
     //grid.gap = parseFloat(getComputedStyle(grid._el).gridRowGap);
-//
-//
+    //
+    //
     //layout(); /* initial load */
     //addEventListener('resize', layout, false) /* on resize */
   } else if (document.querySelector('.spon-grid')) {
@@ -215,6 +214,14 @@ function load() {
     document.getElementById("nav-" + window.location.pathname.split("/")[2].replace('.html', '')).classList.add('active')
   }
 
+  if(q.get('[data-modal-img')) {
+    dynamicallyLoadScript("../scripts/modal.js")
+    dynamicallyLoadStyle("../styles/modal.css")
+    setTimeout(() => {
+      PicModal.init()
+    }, 100);
+  }
+
 
 
   //clearInterval(interv)
@@ -233,7 +240,7 @@ function load() {
     setTimeout(() => {
       document.getElementById('loader-cont').style.opacity = "0";
       //layout()
-      if(FlexMasonry) FlexMasonry.refreshAll();
+      if (FlexMasonry) FlexMasonry.refreshAll();
       if (document.querySelector('.pic-grid')) document.querySelector('.pic-grid').style.opacity = 1;
       else if (document.querySelector('.spon-grid')) document.querySelector('.spon-grid').style.opacity = 1;
       if (AOS) AOS.init()
@@ -370,4 +377,21 @@ function copy(text, options) {
   }
 
   return success;
+}
+
+
+function dynamicallyLoadScript(url) {
+  var script = document.createElement("script");  // create a script DOM node
+  script.src = url;  // set its src to the provided URL
+
+  document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
+}
+
+function dynamicallyLoadStyle(url) {
+  var link = document.createElement("link");  // create a script DOM node
+  link.href = url;
+  link.rel  = 'stylesheet';
+  link.type = 'text/css';  // set its src to the provided URL
+
+  document.head.appendChild(link);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
 }

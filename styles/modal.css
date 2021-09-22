@@ -1,0 +1,41 @@
+#imgModal {
+    background: rgba(0, 0, 0, 0.192);
+    z-index: 1000000000;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: 0.3s opacity;
+}
+
+#modalImgParent {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 90vw;
+    max-width: 800px;
+    height: 90vh;
+    display: flex;
+}
+
+#imgModal * {
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#modalImg {
+    object-fit: contain;
+    width: 100%;
+    max-height: 100%;
+}
+
+.modalClosed {
+    pointer-events: none;
+    opacity: 0;
+}
