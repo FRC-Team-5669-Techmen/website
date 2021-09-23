@@ -11,6 +11,7 @@
     position: relative;
     width: inherit;
     max-width: inherit;
+    margin-left: -5px;
 }
 
 .pic-parent {
