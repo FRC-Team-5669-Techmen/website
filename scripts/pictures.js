@@ -1,5 +1,5 @@
 
-const fm = FlexMasonry.init("#pic-grid", {
+const fm = FlexMasonry.init(".pic-grid", {
     responsive: true,
     breakpointCols: {
         "min-width: 960px": 2,

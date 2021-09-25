@@ -376,11 +376,11 @@ function copy(text, options) {
 }
 
 
-function dynamicallyLoadScript(url) {
+async function dynamicallyLoadScript(url) {
   var script = document.createElement("script");  // create a script DOM node
   script.src = url;  // set its src to the provided URL
 
-  document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
+  await document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
 }
 
 function dynamicallyLoadStyle(url) {
@@ -390,4 +390,11 @@ function dynamicallyLoadStyle(url) {
   link.type = 'text/css';  // set its src to the provided URL
 
   document.head.appendChild(link);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
+}
+function scroll(el) {
+    el.scrollIntoView({
+        behavior: 'smooth',
+        block: "center"
+    });
+    return false
 }

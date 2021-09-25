@@ -7,12 +7,29 @@
     --ash: #94989c;
 }
 
-#pic-grid {
+.pic-grid {
     position: relative;
-    width: inherit;
-    max-width: inherit;
+    margin-left: -5px;
+    margin-bottom: -25px;
+    width: 100%;
+    animation: 1s fadeIn linear;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.pic-grid.flexmasonry-cols-2{
+    position: relative;
+    width: calc(100% - 10px);
     margin-left: -5px;
 }
+
 
 .pic-parent {
     position: relative;
@@ -53,4 +70,24 @@
 .pic-parent:hover .bottom-triangle {
     width: 10px;
     height: 10px;
+}
+
+#year-selector {
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+#year-selector a {
+    background-image: linear-gradient(var(--gold), var(--gold));
+    margin: 0 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+.img-title {
+    display: flex;
+    align-items: center;
 }
