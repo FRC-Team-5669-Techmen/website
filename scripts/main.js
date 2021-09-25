@@ -214,12 +214,8 @@ function load() {
     document.getElementById("nav-" + window.location.pathname.split("/")[2].replace('.html', '')).classList.add('active')
   }
 
-  if(q.get('[data-modal-img')) {
-    dynamicallyLoadScript("../scripts/modal.js")
-    dynamicallyLoadStyle("../styles/modal.css")
-    setTimeout(() => {
-      PicModal.init()
-    }, 100);
+  if (q.get('[data-modal-img')) {
+    PicModal.init()
   }
 
 
@@ -240,7 +236,7 @@ function load() {
     setTimeout(() => {
       document.getElementById('loader-cont').style.opacity = "0";
       //layout()
-      if (FlexMasonry) FlexMasonry.refreshAll();
+      if (FlexMasonry) { FlexMasonry.refreshAll(); }
       if (document.querySelector('.pic-grid')) document.querySelector('.pic-grid').style.opacity = 1;
       else if (document.querySelector('.spon-grid')) document.querySelector('.spon-grid').style.opacity = 1;
       if (AOS) AOS.init()
@@ -390,7 +386,7 @@ function dynamicallyLoadScript(url) {
 function dynamicallyLoadStyle(url) {
   var link = document.createElement("link");  // create a script DOM node
   link.href = url;
-  link.rel  = 'stylesheet';
+  link.rel = 'stylesheet';
   link.type = 'text/css';  // set its src to the provided URL
 
   document.head.appendChild(link);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
