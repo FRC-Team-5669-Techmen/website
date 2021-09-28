@@ -214,10 +214,6 @@ function load() {
     document.getElementById("nav-" + window.location.pathname.split("/")[2].replace('.html', '')).classList.add('active')
   }
 
-  if (q.get('[data-modal-img')) {
-    PicModal.init()
-  }
-
 
 
   //clearInterval(interv)
@@ -392,9 +388,9 @@ function dynamicallyLoadStyle(url) {
   document.head.appendChild(link);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
 }
 function scroll(el) {
-    el.scrollIntoView({
-        behavior: 'smooth',
-        block: "center"
-    });
-    return false
+  q.get(el).scrollIntoView({
+    behavior: 'smooth',
+    block: "center"
+  });
+  return false
 }
