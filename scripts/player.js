@@ -1,31 +1,30 @@
 // Select elements here
-const video = document.getElementById('video');
-const videoControls = document.getElementById('video-controls');
-const playButton = document.getElementById('play');
-const playbackIcons = document.querySelectorAll('.playback-icons i');
-const popupIcons = document.querySelectorAll('.popup-icons i');
-const timeElapsed = document.getElementById('time-elapsed');
-const duration = document.getElementById('duration');
-const progressBar = document.getElementById('progress-bar');
-const volumeBar = document.getElementById('volume-bar');
-const seek = document.getElementById('seek');
-const seekTooltip = document.getElementById('seek-tooltip');
-const volumeControls = document.getElementById('volume-controls');
-const volumeButton = document.getElementById('volume-button');
-const volumeIcons = document.querySelectorAll('.volume-button i');
-const volumeMute = document.getElementById('volume-mute-i');
-const volumeLow = document.getElementById('volume-down-i');
-const volumeHigh = document.getElementById('volume-up-i');
-const volume = document.getElementById('volume');
-const playbackAnimation = document.getElementById('playback-animation');
-const fullscreenButton = document.getElementById('fullscreen-button');
-const videoContainer = document.getElementById('video-container');
-const fullscreenIcons = fullscreenButton.querySelectorAll('i');
-//const pipButton = document.getElementById('pip-button');
+var video = document.getElementById('video');
+var videoControls = document.getElementById('video-controls');
+var playButton = document.getElementById('play');
+var playbackIcons = document.querySelectorAll('.playback-icons i');
+var popupIcons = document.querySelectorAll('.popup-icons i');
+var timeElapsed = document.getElementById('time-elapsed');
+var duration = document.getElementById('duration');
+var volumeBar = document.getElementById('volume-bar');
+var seek = document.getElementById('seek');
+var seekTooltip = document.getElementById('seek-tooltip');
+var volumeControls = document.getElementById('volume-controls');
+var volumeButton = document.getElementById('volume-button');
+var volumeIcons = document.querySelectorAll('.volume-button i');
+var volumeMute = document.getElementById('volume-mute-i');
+var volumeLow = document.getElementById('volume-down-i');
+var volumeHigh = document.getElementById('volume-up-i');
+var volume = document.getElementById('volume-bar');
+var playbackAnimation = document.getElementById('playback-animation');
+var fullscreenButton = document.getElementById('fullscreen-button');
+var videoContainer = document.getElementById('video-container');
+var fullscreenIcons = fullscreenButton.querySelectorAll('i');
+//var pipButton = document.getElementById('pip-button');
 
 var isMobile = false
 
-const videoWorks = !!document.createElement('video').canPlayType;
+var videoWorks = !!document.createElement('video').canPlayType;
 if (videoWorks) {
     video.controls = false;
     videoControls.classList.remove('hidden');
@@ -85,7 +84,7 @@ function initialClick() {
 // formatTime takes a time length in seconds and returns the time in
 // minutes and seconds
 function formatTime(timeInSeconds) {
-    const result = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
+    var result = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
 
     return {
         minutes: result.substr(3, 2),
@@ -93,13 +92,14 @@ function formatTime(timeInSeconds) {
     };
 }
 
-// initializeVideo sets the video duration, and maximum value of the
-// progressBar
+// initializeVideo sets the video duration
+var videoDuration;
 function initializeVideo() {
-    const videoDuration = Math.round(video.duration);
+    videoDuration = Math.round(video.duration);
     seek.setAttribute('max', videoDuration);
-    progressBar.setAttribute('max', videoDuration);
-    const time = formatTime(videoDuration);
+    seek.style.setProperty("--percent", "0%")
+    seek.style.setProperty("--percHandle", 0)
+    var time = formatTime(videoDuration);
     duration.innerText = `${time.minutes}:${time.seconds}`;
     duration.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`);
 }
@@ -107,7 +107,7 @@ function initializeVideo() {
 // updateTimeElapsed indicates how far through the video
 // the current playback is by updating the timeElapsed element
 function updateTimeElapsed() {
-    const time = formatTime(Math.round(video.currentTime));
+    var time = formatTime(Math.round(video.currentTime));
     timeElapsed.innerText = `${time.minutes}:${time.seconds}`;
     timeElapsed.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`);
 }
@@ -116,7 +116,8 @@ function updateTimeElapsed() {
 // the current playback is by updating the progress bar
 function updateProgress() {
     seek.value = Math.floor(video.currentTime);
-    progressBar.value = Math.floor(video.currentTime);
+    seek.style.setProperty("--percent", Math.floor(video.currentTime / videoDuration * 100) + "%")
+    seek.style.setProperty("--percHandle", (video.currentTime / videoDuration))
 }
 
 
@@ -124,7 +125,8 @@ function updateProgress() {
 function videoEnded() {
     initial = false
     seek.value = Math.floor(video.currentTime);
-    progressBar.value = Math.floor(video.currentTime);
+    seek.style.setProperty("--percent", Math.floor(video.currentTime / videoDuration * 100) + "%")
+    seek.style.setProperty("--percHandle", (video.currentTime / videoDuration))
     playbackAnimation.style.pointerEvents = "unset"
     playbackAnimation.style.cursor = "pointer"
     playbackAnimation.style.opacity = "1"
@@ -140,7 +142,7 @@ function videoEnded() {
 // the progress bar is clicked at that point
 function updateSeekTooltip(event) {
     //console.log(event.pageX)
-    const skipTo = Math.round(
+    var skipTo = Math.round(
         (event.offsetX / event.target.clientWidth) *
         parseInt(event.target.getAttribute('max'), 10)
     );
@@ -149,9 +151,9 @@ function updateSeekTooltip(event) {
     if (event.offsetX > 0 && event.offsetX < Math.round(seek.getBoundingClientRect().width)) {
         showSeekTooltip()
         seek.setAttribute('data-seek', skipTo);
-        const t = formatTime(skipTo);
+        var t = formatTime(skipTo);
         seekTooltip.textContent = `${t.minutes}:${t.seconds}`;
-        const rect = seek.getBoundingClientRect();
+        var rect = seek.getBoundingClientRect();
         seekTooltip.style.left = `${event.pageX - rect.left}px`;
     } else {
         hideSeekTooltip()
@@ -169,11 +171,12 @@ function showSeekTooltip() {
 // skipAhead jumps to a different point in the video when the progress bar
 // is clicked
 function skipAhead(event) {
-    const skipTo = event.target.dataset.seek
+    var skipTo = event.target.dataset.seek
         ? event.target.dataset.seek
         : event.target.value;
     video.currentTime = skipTo;
-    progressBar.value = skipTo;
+    seek.style.setProperty("--percent", Math.floor(skipTo / videoDuration * 100) + "%")
+    seek.style.setProperty("--percHandle", (skipTo / videoDuration))
     seek.value = skipTo;
 }
 
@@ -291,34 +294,22 @@ function setupTitles() {
 function toggleFullScreen() {
     if (document.fullscreenElement) {
         document.exitFullscreen();
-        updateFullscreenButton()
     } else if (document.webkitFullscreenElement) {
         // Need this to support Safari
         document.webkitExitFullscreen();
-        updateFullscreenButton()
     } else if (videoContainer.webkitRequestFullscreen) {
         // Need this to support Safari
         videoContainer.webkitRequestFullscreen();
-        updateFullscreenButton()
     } else {
         videoContainer.requestFullscreen();
-        updateFullscreenButton()
     }
+    updateFullscreenButton()
 }
 
 // updateFullscreenButton changes the icon of the full screen button
 // and tooltip to reflect the current full screen state of the video
 function updateFullscreenButton() {
     fullscreenIcons.forEach((icon) => icon.classList.toggle('hidden'));
-
-
-    if (document.fullscreenElement) {
-        if (!isMobile) fullscreenButton.setAttribute('data-title', 'Full screen (f)');
-        progressBar.classList.remove("fix-progress-fullscreen")
-    } else {
-        if (!isMobile) fullscreenButton.setAttribute('data-title', 'Exit full screen (f)');
-        progressBar.classList.add("fix-progress-fullscreen")
-    }
 }
 
 // togglePip toggles Picture-in-Picture mode on the video
@@ -369,7 +360,7 @@ function toggleControls() {
 // keyboardShortcuts executes the relevant functions for
 // each supported shortcut key
 function keyboardShortcuts(event) {
-    const { key } = event;
+    var { key } = event;
     switch (key) {
         case 'k':
             togglePlay();
