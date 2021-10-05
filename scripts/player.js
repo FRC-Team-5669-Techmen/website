@@ -1,431 +1,424 @@
-// Select elements here
-var video = document.getElementById('video');
-var videoControls = document.getElementById('video-controls');
-var playButton = document.getElementById('play');
-var playbackIcons = document.querySelectorAll('.playback-icons i');
-var popupIcons = document.querySelectorAll('.popup-icons i');
-var timeElapsed = document.getElementById('time-elapsed');
-var duration = document.getElementById('duration');
-var volumeBar = document.getElementById('volume-bar');
-var seek = document.getElementById('seek');
-var seekTooltip = document.getElementById('seek-tooltip');
-var volumeControls = document.getElementById('volume-controls');
-var volumeButton = document.getElementById('volume-button');
-var volumeIcons = document.querySelectorAll('.volume-button i');
-var volumeMute = document.getElementById('volume-mute-i');
-var volumeLow = document.getElementById('volume-down-i');
-var volumeHigh = document.getElementById('volume-up-i');
-var volume = document.getElementById('volume-bar');
-var playbackAnimation = document.getElementById('playback-animation');
-var fullscreenButton = document.getElementById('fullscreen-button');
-var videoContainer = document.getElementById('video-container');
-var fullscreenIcons = fullscreenButton.querySelectorAll('i');
-//var pipButton = document.getElementById('pip-button');
 
-var isMobile = false
+class VideoPlayer {
+    constructor(el) {
+        this.el = el
+        this.videoSrc = this.el.getAttribute("data-video-src")
+        this.videoThumb = this.el.getAttribute("data-video-thumb")
+        this.el.classList.add("video-main-container")
+        this.fillContent()
 
-var videoWorks = !!document.createElement('video').canPlayType;
-if (videoWorks) {
-    video.controls = false;
-    videoControls.classList.remove('hidden');
-}
+        // ! begin setting all elements
+        this.video = this.el.querySelector("[data-video]")
+        this.video.poster = this.videoThumb
+        this.video.firstElementChild.src = this.videoSrc
+        this.videoDuration
 
-var initial = false
+        this.videoControls = this.el.querySelector("[data-video-controls]")
+        this.playButton = this.el.querySelector("[data-play]")
+        this.playbackIcons = this.el.querySelectorAll(".playback-icons i")
+        this.popupIcons = this.el.querySelectorAll(".popup-icons i")
+        this.timeElapsed = this.el.querySelector("[data-time-elapsed]")
+        this.duration = this.el.querySelector("[data-duration]")
+        this.volumeBar = this.el.querySelector("[data-volume-bar]")
+        this.seek = this.el.querySelector("[data-seek]")
+        this.seekTooltip = this.el.querySelector("[data-seek-tooltip]")
+        this.volumeControls = this.el.querySelector("[data-volume-controls]")
+        this.volumeButton = this.el.querySelector("[data-volume-button]")
+        this.volumeIcons = this.el.querySelectorAll('.volume-button i')
+        this.volumeMute = this.el.querySelector("[data-volume-mute-i]")
+        this.volumeDown = this.el.querySelector("[data-volume-down-i]")
+        this.volumeUp = this.el.querySelector("[data-volume-up-i]")
+        this.volume = this.el.querySelector("[data-volume-bar]")
+        this.playbackAnimation = this.el.querySelector("[data-playback-animation]")
+        this.fullscreenButton = this.el.querySelector("[data-fullscreen-button]")
+        this.videoContainer = this.el.querySelector("[data-video-container]")
+        this.fullscreenIcons = this.fullscreenButton.querySelectorAll('i')
 
-// Add functions here
+        this.isMobile = false
 
-// togglePlay toggles the playback state of the video.
-// If the video playback is paused or ended, the video is played
-// otherwise, the video is paused
-function togglePlay() {
-    if (!initial) {
-        initialClick()
-        return
-    }
-    if (video.paused || video.ended) {
-        video.play();
-    } else {
-        video.pause();
-    }
-}
-
-// updatePlayButton updates the playback icon and tooltip
-// depending on the playback state
-function updatePlayButton() {
-    playbackIcons.forEach((icon) => {
-        icon.classList.toggle('hidden')
-    });
-
-    if (video.paused) {
-        if (!isMobile) playButton.setAttribute('data-title', 'Play (k)');
-        document.getElementById("pause-i").classList.toggle("hidden")
-        document.getElementById("play-i").classList.toggle("hidden")
-    } else {
-        if (!isMobile) playButton.setAttribute('data-title', 'Pause (k)');
-        document.getElementById("pause-i").classList.toggle("hidden")
-        document.getElementById("play-i").classList.toggle("hidden")
-    }
-}
-
-function initialClick() {
-    initial = true;
-    playbackAnimation.style.pointerEvents = "none"
-    playbackAnimation.style.cursor = "unset"
-    playbackAnimation.style.opacity = "0"
-    document.getElementById("pause-i").style.opacity = "1"
-    document.getElementById("play-i").style.opacity = "1"
-    document.getElementById("pause-i").classList.toggle("hidden")
-    document.getElementById("play-i").classList.toggle("hidden")
-    document.getElementById("restart-i").classList.add('hidden')
-    togglePlay()
-    animatePlayback()
-}
-
-// formatTime takes a time length in seconds and returns the time in
-// minutes and seconds
-function formatTime(timeInSeconds) {
-    var result = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
-
-    return {
-        minutes: result.substr(3, 2),
-        seconds: result.substr(6, 2),
-    };
-}
-
-// initializeVideo sets the video duration
-var videoDuration;
-function initializeVideo() {
-    videoDuration = Math.round(video.duration);
-    seek.setAttribute('max', videoDuration);
-    seek.style.setProperty("--percent", "0%")
-    seek.style.setProperty("--percHandle", 0)
-    var time = formatTime(videoDuration);
-    duration.innerText = `${time.minutes}:${time.seconds}`;
-    duration.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`);
-}
-
-// updateTimeElapsed indicates how far through the video
-// the current playback is by updating the timeElapsed element
-function updateTimeElapsed() {
-    var time = formatTime(Math.round(video.currentTime));
-    timeElapsed.innerText = `${time.minutes}:${time.seconds}`;
-    timeElapsed.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`);
-}
-
-// updateProgress indicates how far through the video
-// the current playback is by updating the progress bar
-function updateProgress() {
-    seek.value = Math.floor(video.currentTime);
-    seek.style.setProperty("--percent", Math.floor(video.currentTime / videoDuration * 100) + "%")
-    seek.style.setProperty("--percHandle", (video.currentTime / videoDuration))
-}
-
-
-// videoEnded is called when the video ends and adds a rewind button
-function videoEnded() {
-    initial = false
-    seek.value = Math.floor(video.currentTime);
-    seek.style.setProperty("--percent", Math.floor(video.currentTime / videoDuration * 100) + "%")
-    seek.style.setProperty("--percHandle", (video.currentTime / videoDuration))
-    playbackAnimation.style.pointerEvents = "unset"
-    playbackAnimation.style.cursor = "pointer"
-    playbackAnimation.style.opacity = "1"
-    document.getElementById("pause-i").classList.toggle("hidden")
-    document.getElementById("play-i").classList.toggle("hidden")
-    document.getElementById("pause-i").style.opacity = "0"
-    document.getElementById("play-i").style.opacity = "0"
-    document.getElementById("restart-i").classList.remove('hidden')
-}
-
-// updateSeekTooltip uses the position of the mouse on the progress bar to
-// roughly work out what point in the video the user will skip to if
-// the progress bar is clicked at that point
-function updateSeekTooltip(event) {
-    //console.log(event.pageX)
-    var skipTo = Math.round(
-        (event.offsetX / event.target.clientWidth) *
-        parseInt(event.target.getAttribute('max'), 10)
-    );
-
-
-    if (event.offsetX > 0 && event.offsetX < Math.round(seek.getBoundingClientRect().width)) {
-        showSeekTooltip()
-        seek.setAttribute('data-seek', skipTo);
-        var t = formatTime(skipTo);
-        seekTooltip.textContent = `${t.minutes}:${t.seconds}`;
-        var rect = seek.getBoundingClientRect();
-        seekTooltip.style.left = `${event.pageX - rect.left}px`;
-    } else {
-        hideSeekTooltip()
-    }
-
-}
-
-function hideSeekTooltip() {
-    seekTooltip.style.opacity = "0"
-}
-function showSeekTooltip() {
-    seekTooltip.style.opacity = "1"
-}
-
-// skipAhead jumps to a different point in the video when the progress bar
-// is clicked
-function skipAhead(event) {
-    var skipTo = event.target.dataset.seek
-        ? event.target.dataset.seek
-        : event.target.value;
-    video.currentTime = skipTo;
-    seek.style.setProperty("--percent", Math.floor(skipTo / videoDuration * 100) + "%")
-    seek.style.setProperty("--percHandle", (skipTo / videoDuration))
-    seek.value = skipTo;
-}
-
-// updateVolume updates the video's volume
-// and disables the muted state if active
-function updateVolume(e) {
-    if (video.muted) {
-        video.muted = false;
-    }
-
-    video.volume = volume.value;
-
-    updateVolBar(volume.value);
-}
-
-function updateVolBar(v) {
-    volumeBar.value = v
-}
-
-// updateVolumeIcon updates the volume icon so that it correctly reflects
-// the volume of the video
-function updateVolumeIcon() {
-    volumeIcons.forEach((icon) => {
-        icon.classList.add('hidden');
-    });
-
-
-
-    if (!isMobile) volumeButton.setAttribute('data-title', 'Mute (m)');
-
-    if (video.muted || video.volume === 0) {
-        volumeMute.classList.remove('hidden');
-        if (!isMobile) volumeButton.setAttribute('data-title', 'Unmute (m)');
-    } else if (video.volume > 0 && video.volume <= 0.5) {
-        volumeLow.classList.remove('hidden');
-    } else {
-        volumeHigh.classList.remove('hidden');
-    }
-}
-
-// toggleMute mutes or unmutes the video when executed
-// When the video is unmuted, the volume is returned to the value
-// it was set to before the video was muted
-function toggleMute() {
-    video.muted = !video.muted;
-
-    if (video.muted) {
-        if (!isMobile) volume.setAttribute('data-volume', volume.value);
-        volume.value = 0;
-        updateVolBar(0);
-    } else {
-        volume.value = volume.dataset.volume;
-        updateVolBar(volume.dataset.volume);
-    }
-}
-
-// animatePlayback displays an animation when
-// the video is played or paused
-function animatePlayback() {
-    playbackAnimation.animate(
-        [
-            {
-                opacity: 1,
-                transform: 'translate(-50%, -50%)',
-            },
-            {
-                opacity: 0,
-                transform: 'translate(-50%, -50%)',
-            },
-        ],
-        {
-            duration: 500,
+        var videoWorks = !!document.createElement('video').canPlayType;
+        if (videoWorks) {
+            this.video.controls = false;
+            this.videoControls.classList.remove('hidden');
         }
-    );
-}
 
-//shows playback
-function showPlayback() {
-    playbackAnimation.animate(
-        [
-            {
-                opacity: 1,
-                transform: 'scale(1)',
-            },
-            {
-                opacity: 0,
-                transform: 'scale(1.3)',
-            },
-        ],
-        {
-            duration: 500,
-        }
-    );
-}
+        this.initial = false
 
-function setupTitles() {
-
-    if (!isMobile) {
-        playButton.setAttribute('data-title', 'Play (k)');
-        volumeButton.setAttribute('data-title', 'Mute (m)');
-        fullscreenButton.setAttribute('data-title', 'Full screen (f)');
-
-    }
-
-    if (!isMobile) {
-        playButton.classList.add("title-hide")
-        volumeButton.classList.add("title-hide")
-        fullscreenButton.classList.add("title-hide")
-    }
-}
-
-// toggleFullScreen toggles the full screen state of the video
-// If the browser is currently in fullscreen mode,
-// then it should exit and vice versa.
-function toggleFullScreen() {
-    if (document.fullscreenElement) {
-        document.exitFullscreen();
-    } else if (document.webkitFullscreenElement) {
-        // Need this to support Safari
-        document.webkitExitFullscreen();
-    } else if (videoContainer.webkitRequestFullscreen) {
-        // Need this to support Safari
-        videoContainer.webkitRequestFullscreen();
-    } else {
-        videoContainer.requestFullscreen();
-    }
-    updateFullscreenButton()
-}
-
-// updateFullscreenButton changes the icon of the full screen button
-// and tooltip to reflect the current full screen state of the video
-function updateFullscreenButton() {
-    fullscreenIcons.forEach((icon) => icon.classList.toggle('hidden'));
-}
-
-// togglePip toggles Picture-in-Picture mode on the video
-async function togglePip() {
-    try {
-        if (video !== document.pictureInPictureElement) {
-            pipButton.disabled = true;
-            await video.requestPictureInPicture();
+        var _self = this
+        this.setUpListeners(this)
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            // true for mobile device
+            this.isMobile = true
+            this.video.addEventListener('click', (e) => { this.toggleControls(e, _self) });
+            this.volumeControls.classList.add("vol-hidden")
+            this.seekTooltip.classList.add("vol-hidden")
         } else {
-            await document.exitPictureInPicture();
+            // false for not mobile device
+            this.isMobile = false
+            this.video.addEventListener('click', (e) => { this.togglePlay(e, _self) });
+            this.video.addEventListener('click', (e) => { this.animatePlayback(e, _self) });
         }
-    } catch (error) {
-        console.error(error);
-    } finally {
-        pipButton.disabled = false;
+        this.setupTitles()
     }
-}
-
-// hideControls hides the video controls when not in use
-// if the video is paused, the controls must remain visible
-function hideControls() {
-    if (!initial) {
-        return
-    }
-    if (video.paused) {
-        return;
+    exampleEvent(e, _self) {
+        _self = _self || this
     }
 
-    videoControls.classList.add('hide');
-}
+    setupTitles() {
 
-// showControls displays the video controls
-function showControls() {
-    if (!initial) {
-        return
+        if (!this.isMobile) {
+            this.playButton.setAttribute('data-title', 'Play (k)');
+            this.volumeButton.setAttribute('data-title', 'Mute (m)');
+            this.fullscreenButton.setAttribute('data-title', 'Full screen (f)');
+
+        }
+
+        if (!this.isMobile) {
+            this.playButton.classList.add("title-hide")
+            this.volumeButton.classList.add("title-hide")
+            this.fullscreenButton.classList.add("title-hide")
+        }
     }
-    videoControls.classList.remove('hide');
-}
 
-function toggleControls() {
-    if (videoControls.classList.contains('hide')) {
-        showControls()
-    } else {
-        hideControls()
+    setUpListeners(_self) {
+        this.playbackAnimation.addEventListener("click", (e) => { this.initialClick(e, _self) })//! done
+        this.playButton.addEventListener('click', (e) => { this.togglePlay(e, _self) });//! done
+        this.video.addEventListener('play', (e) => { this.updatePlayButton(e, _self) });//! done
+        this.video.addEventListener('pause', (e) => { this.updatePlayButton(e, _self) });//! done
+        this.video.addEventListener('loadedmetadata', (e) => { this.initializeVideo(e, _self) });//! done
+        this.video.addEventListener('timeupdate', (e) => { this.updateTimeElapsed(e, _self) });//! done
+        this.video.addEventListener('timeupdate', (e) => { this.updateProgress(e, _self) });//! done
+        this.video.addEventListener('ended', (e) => { this.videoEnded(e, _self) });//! done
+        this.video.addEventListener('volumechange', (e) => { this.updateVolumeIcon(e, _self) });//! done
+        this.video.addEventListener('mouseenter', (e) => { this.showControls(e, _self) });//! done
+        this.video.addEventListener('mouseleave', (e) => { this.hideControls(e, _self) });//! done
+        this.videoControls.addEventListener('mouseenter', (e) => { this.showControls(e, _self) });//! done
+        this.videoControls.addEventListener('mouseleave', (e) => { this.hideControls(e, _self) });//! done
+        this.seek.addEventListener('mousemove', (e) => { this.updateSeekTooltip(e, _self) });//! done
+        this.seek.addEventListener('mouseleave', (e) => { this.hideSeekTooltip(e, _self) });//! done
+        this.seek.addEventListener('mouseenter', (e) => { this.showSeekTooltip(e, _self) });//! done
+        this.seek.addEventListener('input', (e) => { this.skipAhead(e, _self) });//! done
+        this.volume.addEventListener('input', (e) => { this.updateVolume(e, _self) });//! done
+        this.volumeButton.addEventListener('click', (e) => { this.toggleMute(e, _self) });//! done
+        this.fullscreenButton.addEventListener('click', (e) => { this.toggleFullScreen(e, _self) });//! done
+        this.videoContainer.addEventListener('fullscreenchange', (e) => { this.updateFullscreenButton(e, _self) });//! done
     }
-}
 
-// keyboardShortcuts executes the relevant functions for
-// each supported shortcut key
-function keyboardShortcuts(event) {
-    var { key } = event;
-    switch (key) {
-        case 'k':
-            togglePlay();
-            animatePlayback();
-            if (video.paused) {
-                showControls();
-            } else {
-                setTimeout(() => {
-                    hideControls();
-                }, 2000);
+    initializeVideo(e) {
+        this.videoDuration = Math.round(this.video.duration)
+        this.seek.setAttribute("max", this.videoDuration)
+        this.seek.style.setProperty("--percent", "0%")
+        this.seek.style.setProperty("--percHandle", 0)
+
+        var time = this.formatTime(this.videoDuration)
+        this.duration.innerText = `${time.minutes}:${time.seconds}`
+        this.duration.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`)
+    }
+
+    formatTime(timeInSeconds) {
+        var result = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
+
+        return {
+            minutes: result.substr(3, 2),
+            seconds: result.substr(6, 2),
+        };
+    }
+
+    initialClick() {
+        this.initial = true;
+        this.playbackAnimation.style.pointerEvents = "none"
+        this.playbackAnimation.style.cursor = "unset"
+        this.playbackAnimation.style.opacity = "0"
+        this.el.querySelector("[data-pause-i]").style.opacity = "1"
+        this.el.querySelector("[data-play-i]").style.opacity = "1"
+        this.el.querySelector("[data-pause-i]").classList.toggle("hidden")
+        this.el.querySelector("[data-play-i]").classList.toggle("hidden")
+        this.el.querySelector("[data-restart-i]").classList.add('hidden')
+        this.togglePlay()
+        this.animatePlayback()
+    }
+
+    togglePlay() {
+        if (!this.initial) {
+            this.initialClick()
+            return
+        }
+        if (this.video.paused || this.video.ended) {
+            this.video.play();
+        } else {
+            this.video.pause();
+        }
+    }
+
+    animatePlayback() {
+        this.playbackAnimation.animate(
+            [
+                {
+                    opacity: 1,
+                    transform: 'translate(-50%, -50%)',
+                },
+                {
+                    opacity: 0,
+                    transform: 'translate(-50%, -50%)',
+                },
+            ],
+            {
+                duration: 500,
             }
-            break;
-        case 'm':
-            toggleMute();
-            break;
-        case 'f':
-            toggleFullScreen();
-            break;
-        //case 'p':
-        //    togglePip();
-        //    break;
+        );
+    }
+
+    updatePlayButton() {
+        this.playbackIcons.forEach((icon) => {
+            icon.classList.toggle('hidden')
+        });
+
+        if (this.video.paused) {
+            if (!this.isMobile) this.playButton.setAttribute('data-title', 'Play (k)');
+            this.el.querySelector("[data-pause-i]").classList.toggle("hidden")
+            this.el.querySelector("[data-play-i]").classList.toggle("hidden")
+        } else {
+            if (!this.isMobile) this.playButton.setAttribute('data-title', 'Pause (k)');
+            this.el.querySelector("[data-pause-i]").classList.toggle("hidden")
+            this.el.querySelector("[data-play-i]").classList.toggle("hidden")
+        }
+    }
+
+    updateTimeElapsed() {
+        var time = this.formatTime(Math.round(this.video.currentTime));
+        this.timeElapsed.innerText = `${time.minutes}:${time.seconds}`;
+        this.timeElapsed.setAttribute('datetime', `${time.minutes}m ${time.seconds}s`);
+    }
+
+    updateProgress() {
+        this.seek.value = Math.floor(this.video.currentTime);
+        this.seek.style.setProperty("--percent", Math.floor(this.video.currentTime / this.videoDuration * 100) + "%")
+        this.seek.style.setProperty("--percHandle", (this.video.currentTime / this.videoDuration))
+    }
+
+    videoEnded() {
+        this.initial = false
+        this.seek.value = Math.floor(this.video.currentTime);
+        this.seek.style.setProperty("--percent", Math.floor(this.video.currentTime / this.videoDuration * 100) + "%")
+        this.seek.style.setProperty("--percHandle", (this.video.currentTime / this.videoDuration))
+        this.playbackAnimation.style.pointerEvents = "unset"
+        this.playbackAnimation.style.cursor = "pointer"
+        this.playbackAnimation.style.opacity = "1"
+        this.el.querySelector("[data-pause-i]").classList.toggle("hidden")
+        this.el.querySelector("[data-play-i]").classList.toggle("hidden")
+        this.el.querySelector("[data-pause-i]").style.opacity = "0"
+        this.el.querySelector("[data-play-i]").style.opacity = "0"
+        this.el.querySelector("[data-restart-i]").classList.remove('hidden')
+    }
+
+    updateVolumeIcon() {
+        this.volumeIcons.forEach((icon) => {
+            icon.classList.add('hidden');
+        });
+
+        if (!this.isMobile) this.volumeButton.setAttribute('data-title', 'Mute (m)');
+
+        if (this.video.muted || this.video.volume === 0) {
+            this.volumeMute.classList.remove('hidden');
+            if (!this.isMobile) this.volumeButton.setAttribute('data-title', 'Unmute (m)');
+        } else if (this.video.volume > 0 && this.video.volume <= 0.5) {
+            this.volumeDown.classList.remove('hidden');
+        } else {
+            this.volumeUp.classList.remove('hidden');
+        }
+    }
+
+    showControls() {
+        if (!this.initial) {
+            return
+        }
+        this.videoControls.classList.remove('hide');
+    }
+
+    hideControls() {
+        if (!this.initial) {
+            return
+        }
+        if (this.video.paused) {
+            return;
+        }
+
+        this.videoControls.classList.add('hide');
+    }
+
+    toggleControls() {
+        if (this.videoControls.classList.contains('hide')) {
+            this.showControls()
+        } else {
+            this.hideControls()
+        }
+    }
+
+    updateSeekTooltip(e) {
+        var skipTo = Math.round(
+            (e.offsetX / e.target.clientWidth) *
+            parseInt(e.target.getAttribute('max'), 10)
+        );
+
+
+        if (e.offsetX > 0 && e.offsetX < Math.round(this.seek.getBoundingClientRect().width)) {
+            this.showSeekTooltip()
+            this.seek.setAttribute('data-seek', skipTo);
+            var t = this.formatTime(skipTo);
+            this.seekTooltip.textContent = `${t.minutes}:${t.seconds}`;
+            var rect = this.seek.getBoundingClientRect();
+            this.seekTooltip.style.left = `${e.pageX - rect.left}px`;
+        } else {
+            this.hideSeekTooltip()
+        }
+
+    }
+
+    showSeekTooltip() {
+        this.seekTooltip.style.opacity = "1"
+    }
+
+    hideSeekTooltip() {
+        this.seekTooltip.style.opacity = "0"
+    }
+
+    skipAhead(e) {
+        var skipTo = e.target.dataset.seek
+            ? e.target.dataset.seek
+            : e.target.value;
+        this.video.currentTime = skipTo;
+        this.seek.style.setProperty("--percent", Math.floor(skipTo / this.videoDuration * 100) + "%")
+        this.seek.style.setProperty("--percHandle", (skipTo / this.videoDuration))
+        this.seek.value = skipTo;
+    }
+
+    updateVolume(e) {
+        if (this.video.muted) {
+            this.video.muted = false;
+        }
+
+        this.video.volume = this.volume.value;
+
+        this.updateVolBar(this.volume.value);
+    }
+
+    updateVolBar(v) {
+        this.volumeBar.value = v
+    }
+
+    toggleMute() {
+        this.video.muted = !this.video.muted;
+
+        if (this.video.muted) {
+            if (!this.isMobile) this.volume.setAttribute('data-volume', this.volume.value);
+            this.volume.value = 0;
+            this.updateVolBar(0);
+        } else {
+            this.volume.value = this.volume.dataset.volume;
+            this.updateVolBar(this.volume.dataset.volume);
+        }
+    }
+
+    toggleFullScreen() {
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        } else if (document.webkitFullscreenElement) {
+            // Need this to support Safari
+            document.webkitExitFullscreen();
+        } else if (this.videoContainer.webkitRequestFullscreen) {
+            // Need this to support Safari
+            this.videoContainer.webkitRequestFullscreen();
+        } else {
+            this.videoContainer.requestFullscreen();
+        }
+        this.updateFullscreenButton()
+    }
+
+    updateFullscreenButton() {
+        this.fullscreenIcons.forEach((icon) => icon.classList.toggle('hidden'));
+    }
+
+
+    fillContent() {
+        this.el.innerHTML = `<div class="video-container" data-video-container>
+        <div class="playback-animation popup-icons"
+            data-playback-animation>
+            <i class="ri-pause-fill hidden" data-pause-i></i>
+            <i class="ri-play-fill" data-play-i></i>
+            <i class="ri-restart-line hidden" data-restart-i></i>
+        </div>
+
+        <video
+            controls
+            class="video"
+            data-video
+            preload="metadata"
+            poster="">
+            <source
+                src=""
+                type="video/mp4"
+                />
+        </video>
+        <div class="video-controls hidden" data-video-controls>
+            <div class="video-progress">
+                <input class="seek" data-seek value="0" min="0"
+                    type="range"
+                    step="1" data-percent="50%">
+                <div class="seek-tooltip" data-seek-tooltip>00:00</div>
+            </div>
+
+            <div class="bottom-controls">
+                <div class="left-controls">
+                    <button data-play class="playback-icons
+                        control-btn">
+                        <i class="ri-pause-fill hidden"></i>
+                        <i class="ri-play-fill"></i>
+                    </button>
+
+                    <div class="volume-controls">
+                        <button class="volume-button
+                            control-btn"
+                            data-volume-button>
+                            <i class="ri-volume-mute-fill
+                                hidden" data-volume-mute-i></i>
+                            <i class="ri-volume-down-fill
+                                hidden" data-volume-down-i></i>
+                            <i class="ri-volume-up-fill"
+                                data-volume-up-i></i>
+                        </button>
+
+                        <input class="volume" data-volume-bar
+                            value="1"
+                            data-mute="0.5" type="range" max="1"
+                            min="0" step="0.01">
+                    </div>
+
+
+                    <div class="time">
+                        <time data-time-elapsed>00:00</time>
+                        <span> / </span>
+                        <time data-duration>00:00</time>
+                    </div>
+                </div>
+
+
+
+                <div class="right-controls">
+                    <button
+                        class="fullscreen-button control-btn
+                        title-hide"
+                        data-fullscreen-button>
+                        <i class="ri-fullscreen-line"></i>
+                        <i class="ri-fullscreen-exit-line
+                            hidden"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>`
     }
 }
 
-// Add eventlisteners here
-
-playbackAnimation.addEventListener("click", initialClick)
-playButton.addEventListener('click', togglePlay);
-video.addEventListener('play', updatePlayButton);
-video.addEventListener('pause', updatePlayButton);
-video.addEventListener('loadedmetadata', initializeVideo);
-video.addEventListener('timeupdate', updateTimeElapsed);
-video.addEventListener('timeupdate', updateProgress);
-video.addEventListener('ended', videoEnded);
-video.addEventListener('volumechange', updateVolumeIcon);
-video.addEventListener('mouseenter', showControls);
-video.addEventListener('mouseleave', hideControls);
-videoControls.addEventListener('mouseenter', showControls);
-videoControls.addEventListener('mouseleave', hideControls);
-seek.addEventListener('mousemove', updateSeekTooltip);
-seek.addEventListener('mouseleave', hideSeekTooltip);
-seek.addEventListener('mouseenter', showSeekTooltip);
-seek.addEventListener('input', skipAhead);
-volume.addEventListener('input', updateVolume);
-volumeButton.addEventListener('click', toggleMute);
-fullscreenButton.addEventListener('click', toggleFullScreen);
-videoContainer.addEventListener('fullscreenchange', updateFullscreenButton);
-//pipButton.addEventListener('click', togglePip);
-
-document.addEventListener('DOMContentLoaded', () => {
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        // true for mobile device
-        isMobile = true
-        video.addEventListener('click', toggleControls);
-        volumeControls.classList.add("vol-hidden")
-        seekTooltip.classList.add("vol-hidden")
-    } else {
-        // false for not mobile device
-        isMobile = false
-        video.addEventListener('click', togglePlay);
-        video.addEventListener('click', animatePlayback);
-    }
-    setupTitles()
-    if (!('pictureInPictureEnabled' in document)) {
-        //pipButton.classList.add('hidden');
-    }
+document.querySelectorAll("[data-video]").forEach(e => {
+    new VideoPlayer(e)
 });
-document.addEventListener('keyup', keyboardShortcuts);
