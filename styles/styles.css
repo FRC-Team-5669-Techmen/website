@@ -630,15 +630,22 @@ h1:first-child {
 }
 
 #main-cont h3 {
+    display: inline-block;
     color: var(--gold);
     font-size: 30px;
     margin: auto;
     text-align: center;
     min-width: max-content;
+    max-width: 100%;
+    width: 100%;
     padding: 0 15px;
-    width: fit-content;
     display: block;
     margin-top: 50px;
+    overflow:hidden;
+}
+h3 {
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
 }
 
 #main-cont h2 {
