@@ -1212,3 +1212,38 @@ a {
         transform: translate(-50%, -45%);
     }
 }
+
+
+
+button {
+    text-transform: capitalize;
+    font-weight: 200;
+    font-size: 20px;
+    font-size: min(20px, 5vw);
+    width: fit-content;
+    padding: 10px 20px;
+    padding: min(10px, 2vw) min(20px, 4vw);
+    border-radius: 5px;
+    margin-top: 20px;
+    display: inline-block;
+    margin-right: 15px;
+    transition: color 300ms cubic-bezier(0.385, 0.005, 0, 1), background 300ms cubic-bezier(0.385, 0.005, 0, 1);
+    cursor: pointer;
+    border:none;
+    color: var(--gold);
+    border: 2px solid var(--gold);
+    background: none;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+button:hover {
+    background: var(--gold);
+    color: var(--black);
+}
+
+h4 {
+    color: var(--ash);
+    margin-top: 50px;
+}
