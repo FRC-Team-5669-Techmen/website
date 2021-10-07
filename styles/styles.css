@@ -1222,7 +1222,7 @@ a {
 
 
 
-button {
+button.btn {
     text-transform: capitalize;
     font-weight: 200;
     font-size: 20px;
@@ -1245,7 +1245,7 @@ button {
     transform: translate(-50%);
 }
 
-button:hover {
+button.btn:hover {
     background: var(--gold);
     color: var(--black);
 }
@@ -1254,3 +1254,4 @@ h4 {
     color: var(--ash);
     margin-top: 50px;
 }
+
