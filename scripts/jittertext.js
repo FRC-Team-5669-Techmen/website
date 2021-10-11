@@ -34,15 +34,6 @@ class GlitchHandler {
             el.style.display = `inline-block`
             setInterval(() => {
                 let child = this.el.childNodes[0]
-                if (child.nodeType == 3) {
-                    this.processContentShake()
-                }
-                if (child.nodeType == 1) {
-                    el.childNodes.forEach(e => {
-                        e.style.display = "inline-block"
-                        e.style.transform = `translate(${Math.floor((Math.random() - .5) * this.sAmount)}px, ${Math.floor((Math.random() - .5) * this.sAmount)}px)`
-                    })
-                }
             }, this.sSpeed);
         }
     }

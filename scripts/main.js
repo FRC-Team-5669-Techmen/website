@@ -16,6 +16,7 @@
 async function checkIfDebug() {
   await fetch("../DEBUG")
     .then(response => response.json()).catch(() => {
+      console.log('a')
       debug = false
     })
 }
@@ -164,11 +165,11 @@ function load() {
           </div>`
 
   document.getElementById('navbar').innerHTML = `
-    <div class='nav-logo' onclick="page('../')"><img src="../assets/logos/logo-border.svg" alt="Logo"></div>
+    <div class='nav-logo' onclick="page('../index')"><img src="../assets/logos/logo-border.svg" alt="Logo"></div>
     <div id="nav-open" onclick="openNav()"><i class="ri-menu-line"></i></div>
     <div id="nav-cont" class="nav-cont closed">
         <div id="nav-close" onclick="closeNav()"><i class="ri-close-fill"></i></div>
-        <div class='nav-logo-text' onclick="page('../')">Techmen Robotics</div>
+        <div class='nav-logo-text' onclick="page('../index')">Techmen Robotics</div>
         <div class="nav-buttons">
             <div id="nav-index" class="nav-btn unselect" onclick="page('../index')">
                 <div class='nav-btn-title'>home</div>
