@@ -635,17 +635,15 @@ h1:first-child {
     font-size: 30px;
     margin: auto;
     text-align: center;
-    min-width: max-content;
-    max-width: 100%;
-    width: 100%;
+    max-width: inherit;
+    width: fit-content;
     padding: 0 15px;
     display: block;
     margin-top: 50px;
     overflow:hidden;
 }
 h3 {
-    word-break: break-all !important;
-    overflow-wrap: break-word !important;
+    word-break: keep-all;
 }
 
 #main-cont h2 {
