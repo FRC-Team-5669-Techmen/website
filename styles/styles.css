@@ -688,7 +688,7 @@ h3 {
     display: block;
     margin-top: 15px;
     margin-left: 15px;
-    list-style-image: url("../assets/bulletGear.svg");
+    list-style-image: url("./assets/bulletGear.svg");
 }
 
 #main-cont ul.members {
