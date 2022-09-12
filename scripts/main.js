@@ -141,13 +141,13 @@ function load() {
     
           <div class='footer-left'>
             <div class="footer-col footer-logo">
-              <img src="../assets/logos/marks/svg/Mark-Gold.svg" />
+              <img src="./assets/logos/marks/svg/Mark-Gold.svg" />
             </div>
             <div class="footer-col footer-links">
               <div class="footer-links-cont">
               <strong>Techmen<br>Robotics</strong>
-                <a href="../" onclick="page('../'); return false;" data-anchor>Home</a>
-                <a href="../about" onclick="page('../about'); return false;" data-anchor>About</a>
+                <a href="./" onclick="page('./'); return false;" data-anchor>Home</a>
+                <a href="./about" onclick="page('./about'); return false;" data-anchor>About</a>
               </div>
             </div>
           </div>
@@ -162,24 +162,24 @@ function load() {
           <div class="footer-col footer-links">
             <div class="footer-links-cont">
               <strong>Outreach</strong>
-              <a href="../outreach/contact" onclick="page('../outreach/contact'); return false;" data-anchor>Contact</a>
-              <a href="../outreach/branding" onclick="page('../outreach/branding'); return false;" data-anchor>Branding</a>
-              <a href="../outreach/pictures" onclick="page('../outreach/pictures'); return false;" data-anchor>Pictures</a>
-              <a href="../outreach/sponsors" onclick="page('../outreach/sponsors'); return false;" data-anchor>Sponsors</a>
+              <a href="./outreach/contact" onclick="page('./outreach/contact'); return false;" data-anchor>Contact</a>
+              <a href="./outreach/branding" onclick="page('./outreach/branding'); return false;" data-anchor>Branding</a>
+              <a href="./outreach/pictures" onclick="page('./outreach/pictures'); return false;" data-anchor>Pictures</a>
+              <a href="./outreach/sponsors" onclick="page('./outreach/sponsors'); return false;" data-anchor>Sponsors</a>
             </div>
           </div>`
 
     document.getElementById('navbar').innerHTML = `
-    <div class='nav-logo' onclick="page('../index')"><img src="../assets/logos/logo-border.svg" alt="Logo"></div>
+    <div class='nav-logo' onclick="page('./index')"><img src="./assets/logos/logo-border.svg" alt="Logo"></div>
     <div id="nav-open" onclick="openNav()"><i class="ri-menu-line"></i></div>
     <div id="nav-cont" class="nav-cont closed">
         <div id="nav-close" onclick="closeNav()"><i class="ri-close-fill"></i></div>
-        <div class='nav-logo-text' onclick="page('../index')">Techmen Robotics</div>
+        <div class='nav-logo-text' onclick="page('./index')">Techmen Robotics</div>
         <div class="nav-buttons">
-            <div id="nav-index" class="nav-btn unselect" onclick="page('../index')">
+            <div id="nav-index" class="nav-btn unselect" onclick="page('./index')">
                 <div class='nav-btn-title'>home</div>
             </div>
-            <div id="nav-about" class="nav-btn unselect" onclick="page('../about')">
+            <div id="nav-about" class="nav-btn unselect" onclick="page('./about')">
                 <div class='nav-btn-title'>about</div>
             </div>
             <div id="nav-resources" class="nav-btn dropdown unselect">
@@ -195,10 +195,10 @@ function load() {
             <div id="nav-outreach" class="nav-btn dropdown unselect">
                 <div class='nav-btn-title' onclick="openNavDrop(this)">Outreach +</div>
                 <div class="nav-dropdown" data-dropdown>
-                    <div id="nav-contact" class="drop-btn" onclick="page('../outreach/contact')">Contact</div>
-                    <div id="nav-branding" class="drop-btn" onclick="page('../outreach/branding')">Branding</div>
-                    <div id="nav-pictures" class="drop-btn" onclick="page('../outreach/pictures')">Pictures</div>
-                    <div id="nav-sponsors" class="drop-btn" onclick="page('../outreach/sponsors')">Sponsors</div>
+                    <div id="nav-contact" class="drop-btn" onclick="page('./outreach/contact')">Contact</div>
+                    <div id="nav-branding" class="drop-btn" onclick="page('./outreach/branding')">Branding</div>
+                    <div id="nav-pictures" class="drop-btn" onclick="page('./outreach/pictures')">Pictures</div>
+                    <div id="nav-sponsors" class="drop-btn" onclick="page('./outreach/sponsors')">Sponsors</div>
                 </div>
             </div>
         </div>
