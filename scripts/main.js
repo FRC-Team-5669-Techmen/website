@@ -216,8 +216,8 @@ function load() {
     })
     let page = window.location.pathname.split("/")[2].replace('.html', '') || "index"
     if (document.getElementById("nav-" + page)) document.getElementById("nav-" + page).classList.add('active')
-    if (window.location.pathname.split("/").length > 2) {
-       // document.getElementById("nav-" + window.location.pathname.split("/")[2].replace('.html', '')).classList.add('active')
+    if (window.location.pathname.split("/").length > 3) {
+        document.getElementById("nav-" + window.location.pathname.split("/")[3].replace('.html', '')).classList.add('active')
     }
 
 
