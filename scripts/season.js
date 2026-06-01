@@ -1,12 +1,14 @@
 (function () {
-  const BASE = "https://www.thebluealliance.com/api/v3";
-  const TEAM = "frc5669";
-  const TBA_KEY = "REPLACE_WITH_YOUR_TBA_READ_KEY";
+  var BASE = "https://www.thebluealliance.com/api/v3";
+  var TEAM = "frc5669";
+  var TBA_KEY = "hkV4s4MDUHWnN0WbRuE2DCOY1LXCklQx5XlCopUULhorwW8YLDwSTQXeLSrQgSnu";
 
   function tbaFetch(path) {
     return fetch(BASE + path, { headers: { "X-TBA-Auth-Key": TBA_KEY } })
       .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); });
   }
+
+  // ── Current Season ────────────────────────────────────────────
 
   function formatDate(str) {
     if (!str) return "";
@@ -45,9 +47,9 @@
             (recStr ? " &nbsp;·&nbsp; " + recStr : "") + "</span>";
         }
         if (st.playoff) {
-          var lvl    = st.playoff.level  || "";
-          var pStat  = st.playoff.status || "";
-          var pStr   = [lvl, pStat].filter(Boolean).join(" · ");
+          var lvl   = st.playoff.level  || "";
+          var pStat = st.playoff.status || "";
+          var pStr  = [lvl, pStat].filter(Boolean).join(" · ");
           if (pStr) statusHtml += '<span class="season-playoff">Playoffs: ' + pStr + "</span>";
         }
       }
@@ -90,9 +92,88 @@
     tryYear();
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", loadSeason);
-  } else {
+  // ── Team Stats ────────────────────────────────────────────────
+
+  function renderStats(container, seasons, eventsCount, playoffCount, districtName) {
+    var items = [
+      { number: seasons,     label: "Seasons" },
+      { number: eventsCount, label: "Events" }
+    ];
+    if (playoffCount !== null) {
+      items.push({ number: playoffCount, label: "Playoff Appearances" });
+    }
+
+    var stripHtml = items.map(function (s) {
+      return '<div class="stat-item">' +
+        '<span class="stat-number">' + s.number + '</span>' +
+        '<span class="stat-label">'  + s.label  + '</span>' +
+        '</div>';
+    }).join("");
+
+    var districtHtml = districtName
+      ? '<p class="stat-district">' + districtName + '</p>'
+      : "";
+
+    container.innerHTML = '<div class="stats-strip">' + stripHtml + '</div>' + districtHtml;
+  }
+
+  function loadStats() {
+    var container = document.getElementById("team-stats");
+    if (!container) return;
+    container.innerHTML = '<p class="season-loading">Loading stats…</p>';
+
+    Promise.all([
+      tbaFetch("/team/" + TEAM + "/years_participated"),
+      tbaFetch("/team/" + TEAM + "/events/simple"),
+      tbaFetch("/team/" + TEAM + "/districts")
+    ]).then(function (results) {
+      var yearsList  = Array.isArray(results[0]) ? results[0] : [];
+      var allEvents  = Array.isArray(results[1]) ? results[1] : [];
+      var districts  = Array.isArray(results[2]) ? results[2] : [];
+
+      var seasons     = yearsList.length;
+      var eventsCount = allEvents.length;
+
+      var districtName = "";
+      if (districts.length > 0) {
+        var latest = districts.reduce(function (a, b) { return b.year > a.year ? b : a; });
+        districtName = latest.display_name || "";
+      }
+
+      var playoffPromise = yearsList.length > 0
+        ? Promise.all(yearsList.map(function (y) {
+            return tbaFetch("/team/" + TEAM + "/events/" + y + "/statuses")
+              .then(function (statuses) {
+                if (!statuses || typeof statuses !== "object") return 0;
+                return Object.keys(statuses).filter(function (k) {
+                  return statuses[k] != null && statuses[k].playoff != null;
+                }).length;
+              })
+              .catch(function () { return 0; });
+          })).then(function (counts) {
+            return counts.reduce(function (a, b) { return a + b; }, 0);
+          })
+        : Promise.resolve(null);
+
+      playoffPromise.then(function (playoffCount) {
+        renderStats(container, seasons, eventsCount, playoffCount, districtName);
+      });
+
+    }).catch(function () {
+      container.innerHTML = "";
+    });
+  }
+
+  // ── Init ──────────────────────────────────────────────────────
+
+  function init() {
     loadSeason();
+    loadStats();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
   }
 })();
