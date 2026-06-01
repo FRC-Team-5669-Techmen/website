@@ -94,6 +94,50 @@
 
   // ── Team Stats ────────────────────────────────────────────────
 
+  function animateCount(el, target, duration) {
+    var start = performance.now();
+    function step(now) {
+      var progress = Math.min((now - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(eased * target);
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+  }
+
+  function initCountUp(container) {
+    try {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (typeof IntersectionObserver === 'undefined') return;
+
+      var strip = container.querySelector('.stats-strip');
+      if (!strip) return;
+
+      var done = false;
+      var observer = new IntersectionObserver(function (entries) {
+        try {
+          if (done || !entries[0].isIntersecting) return;
+          done = true;
+          observer.disconnect();
+          Array.from(container.querySelectorAll('.stat-number[data-target]')).forEach(function (el) {
+            var target = parseInt(el.getAttribute('data-target'), 10) || 0;
+            el.textContent = '0';
+            animateCount(el, target, 900);
+          });
+        } catch (e) {
+          Array.from(container.querySelectorAll('.stat-number[data-target]')).forEach(function (el) {
+            el.textContent = el.getAttribute('data-target') || el.textContent;
+          });
+        }
+      }, { threshold: 0.3 });
+
+      observer.observe(strip);
+    } catch (e) {
+      // Numbers stay at final value
+    }
+  }
+
   function renderStats(container, seasons, eventsCount, playoffCount, districtName) {
     var items = [
       { number: seasons,     label: "Seasons" },
@@ -105,7 +149,7 @@
 
     var stripHtml = items.map(function (s) {
       return '<div class="stat-item">' +
-        '<span class="stat-number">' + s.number + '</span>' +
+        '<span class="stat-number" data-target="' + s.number + '">' + s.number + '</span>' +
         '<span class="stat-label">'  + s.label  + '</span>' +
         '</div>';
     }).join("");
@@ -115,6 +159,7 @@
       : "";
 
     container.innerHTML = '<div class="stats-strip">' + stripHtml + '</div>' + districtHtml;
+    initCountUp(container);
   }
 
   function loadStats() {

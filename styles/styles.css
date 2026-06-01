@@ -933,12 +933,12 @@ a:hover {
 }
 
 .abt-img {
-    position: relative;
+    display: block;
     width: 100%;
-    left: 50%;
-    transform: translate(-50%);
     max-width: 750px;
     margin-top: 35px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .kwes-form * {
@@ -1344,5 +1344,77 @@ h4 {
     font-size: 17px;
     font-style: italic;
     margin-top: 15px;
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    margin-top: 20px;
+    padding-left: 36px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 6px;
+    bottom: 0;
+    width: 2px;
+    background: var(--space);
+}
+
+.timeline-entry {
+    position: relative;
+    margin-bottom: 28px;
+}
+
+.timeline-entry:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -30px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--gold);
+}
+
+.timeline-year {
+    display: block;
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.timeline-title {
+    display: block;
+    color: var(--white);
+    font-size: 17px;
+    font-weight: 700;
+    margin-top: 2px;
+}
+
+#main-cont .timeline-body {
+    color: var(--ash);
+    font-size: 16px;
+    margin-top: 6px;
+    line-height: 1.65;
+}
+
+/* Scroll reveal */
+html.reveal-on .reveal {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+html.reveal-on .reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
 }
 
