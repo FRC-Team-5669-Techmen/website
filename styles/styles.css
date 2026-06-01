@@ -678,7 +678,7 @@ h3 {
     margin-top: 7px;
 }
 
-#main-cont ul:not(.members):not(.officers):not(.mentors) {
+#main-cont ul:not(.members):not(.officers):not(.mentors):not(.season-list) {
     color: var(--gold);
     font-size: 24px;
     margin: 0;
@@ -1045,7 +1045,7 @@ button[type="submit"] {
         flex: 100%;
         display: inline-block;
     }
-    #main-cont ul:not(.members):not(.officers):not(.mentors) {
+    #main-cont ul:not(.members):not(.officers):not(.mentors):not(.season-list) {
         margin-left: 5px;
     }
 }
@@ -1251,5 +1251,58 @@ button.btn:hover {
 h4 {
     color: var(--ash);
     margin-top: 50px;
+}
+
+/* Current Season section */
+.season-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 0 0;
+    width: 100%;
+}
+
+.season-event {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--space);
+}
+
+.season-event:last-child {
+    border-bottom: none;
+}
+
+.season-name {
+    color: var(--gold);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.season-meta {
+    color: var(--ash);
+    font-size: 15px;
+    margin-top: 3px;
+}
+
+.season-qual {
+    color: var(--white);
+    font-size: 15px;
+    margin-top: 4px;
+    display: block;
+}
+
+.season-playoff {
+    color: var(--gold);
+    font-size: 15px;
+    margin-top: 2px;
+    display: block;
+}
+
+.season-loading,
+.season-empty {
+    color: var(--ash);
+    font-size: 17px;
+    font-style: italic;
+    margin-top: 15px;
 }
 
